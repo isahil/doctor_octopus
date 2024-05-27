@@ -1,7 +1,7 @@
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import React from "react";
-import cardsData from "./data/cards_data.json";
+import cardsData from "./data/cards.json";
 
 function App() {
   // const [name, setName] = React.useState("Hello World!");
