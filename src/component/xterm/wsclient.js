@@ -13,8 +13,8 @@ export const socket_client = async (input, terminal) => {
 
     socket.on("suite", (msg) => {
       console.log("FASTAPI WSocket server sent: ", msg);
-      terminal.write(`\r\n\x1B[1;3;32mwss > ${msg}\x1B[0m\r\n`);
-      terminal.write(`\x1B[1;3;31mterminal\x1B[0m $ `);
+      terminal.write(`\r\n\x1B[1;3;32mserver > ${msg}\x1B[0m\r\n`);
+      terminal.write(`\x1B[1;3;31mYou\x1B[0m $ `);
     });
 
     socket.on("disconnect", () => console.log("disconnected from WS server!"));

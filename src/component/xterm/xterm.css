@@ -4,7 +4,16 @@
     user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+    border-radius: 6px;
+    border: 1.5px solid #30363d;
+    margin: 20px;
+    margin-left: 100px;
+    padding: 0px;
 }
+
+/* #terminal {
+    background-color: #000000 !important;
+} */
 
 .xterm.focus,
 .xterm:focus {
@@ -22,7 +31,6 @@
 }
 
 .xterm .xterm-helper-textarea {
-    padding: 0;
     border: 0;
     margin: 0;
     /* Move textarea out of the screen to the far left, so that the cursor is not visible */

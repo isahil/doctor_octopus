@@ -10,8 +10,12 @@ const XTerm = ({ name }) => {
 
   const xterm = () => {
     const terminal = new Terminal();
+    terminal.options.theme.foreground = `cyan`;
+    terminal.options.cursorStyle = "underline";
+    terminal.options.cursorBlink = true;
+    
     terminal.open(terminalRef.current);
-    terminal.write(`\x1B[1;3;31mterminal\x1B[0m $ `);
+    terminal.write(`\x1B[1;3;31mYou\x1B[0m $ `);
 
     let input = "",
       cursor = 0;
@@ -42,7 +46,7 @@ const XTerm = ({ name }) => {
           // Enter
           await handleHelp(input, terminal);
 
-          terminal.write(`\r\n\x1B[1;3;31mterminal\x1B[0m $ `);
+          terminal.write(`\r\n\x1B[1;3;31mYou\x1B[0m $ `);
           input = "";
           break;
         case ascii_code < 32 || ascii_code === 127:

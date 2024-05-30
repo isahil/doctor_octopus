@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import socketio
 import time
+import os
+import json
 
 origins = [
     "http://localhost:3000",
@@ -40,10 +42,16 @@ async def suite(sid, suite_name):
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
 
-@app.get("/")
-def root():
-    print("\tIn root")
-    return ["Hello, World!"]
+@app.get("/cards")
+def cards():
+    test_results_dir = "./playwright-report"
+    test_results = []
+    for file in os.listdir(test_results_dir):
+        if file.endswith(".json"):
+            with open(f"{test_results_dir}/{file}", "r") as f:
+                test_results.append(json.load(f))
+    print(f"\tSending {len(test_results)} test results...")
+    return test_results
 
 @app.get("/help")
 def get_help():
