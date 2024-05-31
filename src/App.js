@@ -1,7 +1,6 @@
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import React, { useEffect } from "react";
-// import cardsData from "./data/cards.json";
 
 function App() {
   const [cards, setCards] = React.useState([]);

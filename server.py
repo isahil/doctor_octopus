@@ -44,12 +44,16 @@ async def suite(sid, suite_name):
 
 @app.get("/cards")
 def cards():
-    test_results_dir = "./playwright-report"
+    test_results_dir = "./playwright-report/"
     test_results = []
-    for file in os.listdir(test_results_dir):
-        if file.endswith(".json"):
-            with open(f"{test_results_dir}/{file}", "r") as f:
-                test_results.append(json.load(f))
+    for folder in os.listdir(test_results_dir):
+        folder_path = os.path.join(test_results_dir, folder)
+        if os.path.isdir(folder_path):
+            for file in os.listdir(folder_path):
+                if file.endswith(".json"):
+                    file_path = os.path.join(folder_path, file)
+                    with open(file_path, "r") as f:
+                        test_results.append(json.load(f))
     print(f"\tSending {len(test_results)} test results...")
     return test_results
 

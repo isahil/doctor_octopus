@@ -9,27 +9,28 @@ function Card({ card }) {
     <div className="card">
       {/* <img src={image} alt={name} /> */}
       <div className="card-content">
-        <h4>Test Result</h4>
-        <div className="header-view-status-container ml-2 pl-2 d-flex"> 
-        <a className="subnav-item">
+        {/* <a className="card-title">Report Card</a> */}
+        {/* <h3 className="card-title">Report Card</h3> */}
+        <div className="score-board-container"> 
+        <a className="score-board">
           All
-          <span className="d-inline counter"> 1 </span>
+          <span className="d-inline score"> 1 </span>
         </a>
-        <a className="subnav-item">
+        <a className="score-board">
           Passed
-          <span className="d-inline counter"> {expected} </span>
+          <span className="d-inline score"> {expected} </span>
         </a>
-        <a className="subnav-item">
+        <a className="score-board">
           Failed
-          <span className="d-inline counter"> {unexpected} </span>
+          <span className="d-inline score"> {unexpected} </span>
         </a>
-        <a className="subnav-item">
+        <a className="score-board">
           Skipped
-          <span className="d-inline counter"> {skipped} </span>
+          <span className="d-inline score"> {skipped} </span>
         </a>
-        <a className="subnav-item">
+        <a className="score-board">
           Flaky
-          <span className="d-inline counter"> {flaky} </span>
+          <span className="d-inline score"> {flaky} </span>
         </a>
         </div>
         <button>View Report</button>

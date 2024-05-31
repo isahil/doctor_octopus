@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # secrets
 .env
-
 # cache
 *.pyc
 # dependencies
@@ -12,6 +11,9 @@
 
 # testing
 /coverage
+# test reports
+playwright-report/*
+test-results/*
 
 # production
 /build

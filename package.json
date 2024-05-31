@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@xterm/xterm": "^5.5.0",
+    "path": "^0.12.7",
+    "playwright": "^1.44.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -13,7 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "google": "npx playwright test --project=google"
   },
   "eslintConfig": {
     "extends": [
@@ -31,5 +33,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@playwright/test": "^1.44.1"
   }
 }
