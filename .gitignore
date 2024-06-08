@@ -12,8 +12,8 @@ server/venv/
 # testing
 /coverage
 # test reports
-test_report/*
-test-results/*
+client/test_report/*
+client/test-results/*
 
 # production
 /build
