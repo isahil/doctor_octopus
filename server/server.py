@@ -44,7 +44,7 @@ async def suite(sid, suite_name):
 
 @app.get("/cards")
 def cards():
-    test_results_dir = "../playwright-report/"
+    test_results_dir = "../test_report/"
     test_results = []
     for folder in os.listdir(test_results_dir):
         folder_path = os.path.join(test_results_dir, folder)

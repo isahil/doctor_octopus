@@ -12,7 +12,7 @@ server/venv/
 # testing
 /coverage
 # test reports
-playwright-report/*
+test_report/*
 test-results/*
 
 # production
