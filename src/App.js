@@ -1,6 +1,7 @@
+import React, { useEffect } from "react";
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
-import React, { useEffect } from "react";
+import FixMe from "./component/fixme/fixme";
 
 function App() {
   const [cards, setCards] = React.useState([]);
@@ -25,8 +26,13 @@ function App() {
         <h1>Doctor Octopus</h1>
       </header>
       <div className="grid">
-        <Cards data={cards} />
-        <XTerm name="Imran"/>
+        <div className="cards" >
+          <Cards data={cards} />
+        </div>
+        <div className="tech">
+          <XTerm />
+          <FixMe />
+        </div>
       </div>
     </div>
   );

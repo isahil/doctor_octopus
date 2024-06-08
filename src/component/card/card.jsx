@@ -1,5 +1,6 @@
 import React from "react";
 import "./card.css";
+
 function Card({ card }) {
   const { stats } = card;
   console.log(`Stats: ${JSON.stringify(stats)}`);
@@ -7,10 +8,8 @@ function Card({ card }) {
 
   return (
     <div className="card">
-      {/* <img src={image} alt={name} /> */}
       <div className="card-content">
         {/* <a className="card-title">Report Card</a> */}
-        {/* <h3 className="card-title">Report Card</h3> */}
         <div className="score-board-container"> 
         <a className="score-board">
           All
