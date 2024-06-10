@@ -1,12 +1,13 @@
 import { Terminal } from "@xterm/xterm";
 import React, { useEffect, useRef } from "react";
 import "./xterm.css";
-import handleHelp from "./helpme.js";
+import handleCommand from "./commands.js";
+import FixMe from "../fixme/fixme";
 
-const XTerm = ({ name }) => {
+const XTerm = ({ }) => {
   const terminalRef = useRef(null);
   const [num, setNum] = React.useState(1);
-  //   const [input, setInput] = React.useState("");
+  const [showFixMe, setShowFixMe] = React.useState(false);
 
   const xterm = () => {
     const terminal = new Terminal();
@@ -15,7 +16,8 @@ const XTerm = ({ name }) => {
     terminal.options.cursorBlink = true;
     
     terminal.open(terminalRef.current);
-    terminal.write(`\x1B[1;3;31mYou\x1B[0m $ `);
+    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. What can I help you with?\x1B[0m\r\n");
+    terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
     let input = "",
       cursor = 0;
@@ -44,9 +46,9 @@ const XTerm = ({ name }) => {
           break;
         case 13:
           // Enter
-          await handleHelp(input, terminal);
+          await handleCommand(input, terminal, setShowFixMe);
 
-          terminal.write(`\r\n\x1B[1;3;31mYou\x1B[0m $ `);
+          terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
           input = "";
           break;
         case ascii_code < 32 || ascii_code === 127:
@@ -72,7 +74,9 @@ const XTerm = ({ name }) => {
     console.log("xterm click #", num);
   };
 
-  return <div ref={terminalRef} id="terminal" onClick={incrementNum}></div>;
+  return <div ref={terminalRef} id="terminal" onClick={incrementNum}>
+    { showFixMe && <FixMe /> }
+  </div>;
 };
 
 export default XTerm;

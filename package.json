@@ -1,41 +1,23 @@
 {
   "name": "doctor_octopus",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@xterm/xterm": "^5.5.0",
-    "path": "^0.12.7",
-    "playwright": "^1.44.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "socket.io-client": "^4.7.5"
-  },
+  "version": "1.0.0",
+  "description": "doctor octopus app",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "google": "npx playwright test --project=google"
+    "start": "cd client && npm run build && cd .. && concurrently \"cd client && npm start\" \"cd server && sh start.sh\"",
+    "test": "cd client && npm run test"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isahil/doctor_octopus.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "Imran Sahil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isahil/doctor_octopus/issues"
   },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@playwright/test": "^1.44.1"
+  "homepage": "https://github.com/isahil/doctor_octopus#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
   }
 }

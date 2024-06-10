@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './card';
-import '../../index.css';
+import './cards.css';
 
 const Cards = ({ data }) => {
     console.log(`There are total of ${data.length} cards in the grid.`);

@@ -4,16 +4,18 @@
 # cache
 *.pyc
 # dependencies
-/node_modules
-/venv
+node_modules/
+client/node_modules/
+client/build/
+server/venv/
 /.pnp
 .pnp.js
 
 # testing
 /coverage
 # test reports
-playwright-report/*
-test-results/*
+client/test_report/*
+client/test-results/*
 
 # production
 /build

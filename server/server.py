@@ -23,6 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+test_results_dir = "../client/test_report/" # Path to test results directory
+
 @sio.on('connect')
 async def connect(sid, environ):
     print(f"\tconnected to socket client... [{sid}]")
@@ -44,7 +46,6 @@ async def suite(sid, suite_name):
 
 @app.get("/cards")
 def cards():
-    test_results_dir = "./playwright-report/"
     test_results = []
     for folder in os.listdir(test_results_dir):
         folder_path = os.path.join(test_results_dir, folder)

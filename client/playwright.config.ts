@@ -1,5 +1,5 @@
 import { PlaywrightTestConfig } from '@playwright/test';
-const reporter_folder = `playwright-report/results_${Math.ceil(Math.random() * 100)}/`
+const reporter_folder = `test_report/results_${Math.ceil(Math.random() * 100)}/`
 const config: PlaywrightTestConfig = {
   testDir: 'tests', // Specify the directory where your test files are.
   timeout: 30000, // Specify a timeout of 30 seconds.

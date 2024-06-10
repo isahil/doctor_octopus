@@ -1,0 +1,8 @@
+.fixme {
+    border: 1px solid var(--background-color);
+    color: cyan;
+    /* background-color: rgb(38, 36, 36); */
+    text-align: center;
+    padding: 10px;
+    margin-top: 130px;
+}
