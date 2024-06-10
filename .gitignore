@@ -4,7 +4,9 @@
 # cache
 *.pyc
 # dependencies
+node_modules/
 client/node_modules/
+client/build/
 server/venv/
 /.pnp
 .pnp.js

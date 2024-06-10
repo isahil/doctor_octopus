@@ -21,20 +21,15 @@ function App() {
   },[]);
 
   return (
-    <div>
-      <header className="app-header">
-        <h1>Doctor Octopus</h1>
-      </header>
       <div className="grid">
         <div className="cards" >
           <Cards data={cards} />
         </div>
         <div className="tech">
           <XTerm />
-          <FixMe />
+          {/* <FixMe /> */}
         </div>
       </div>
-    </div>
   );
 }
 

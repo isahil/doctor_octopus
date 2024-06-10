@@ -1,0 +1,18 @@
+.cards {
+    overflow: auto;
+    height: 730px;
+    scrollbar-color: #30363d #12161d;
+    scroll-behavior: smooth;
+}
+ /* suppose to make the scrollbar always visible */
+.cards::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+    background-color: #30363d;
+}
+
+.cards::-webkit-scrollbar-track {
+    background-color: #12161d;
+}

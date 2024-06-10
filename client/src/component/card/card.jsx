@@ -11,28 +11,28 @@ function Card({ card }) {
       <div className="card-content">
         {/* <a className="card-title">Report Card</a> */}
         <div className="score-board-container"> 
-        <a className="score-board">
+        <a className="score-board all">
           All
-          <span className="d-inline score"> 1 </span>
+          <span className="score"> 1 </span>
         </a>
-        <a className="score-board">
+        <a className="score-board pass">
           Passed
-          <span className="d-inline score"> {expected} </span>
+          <span className="score"> {expected} </span>
         </a>
-        <a className="score-board">
+        <a className="score-board fail">
           Failed
-          <span className="d-inline score"> {unexpected} </span>
+          <span className="score"> {unexpected} </span>
         </a>
-        <a className="score-board">
+        <a className="score-board skipped">
           Skipped
-          <span className="d-inline score"> {skipped} </span>
+          <span className="score"> {skipped} </span>
         </a>
-        <a className="score-board">
+        <a className="score-board flaky">
           Flaky
-          <span className="d-inline score"> {flaky} </span>
+          <span className="score"> {flaky} </span>
         </a>
         </div>
-        <button>View Report</button>
+        <button className="viewReport">View Report</button>
       </div>
     </div>
   );
