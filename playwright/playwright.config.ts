@@ -1,5 +1,5 @@
-import { PlaywrightTestConfig } from '@playwright/test';
-const reporter_folder = `test_report/results_${Math.ceil(Math.random() * 100)}/`
+import { PlaywrightTestConfig } from "playwright/test";
+const test_results_dir = `test_report/results_${Math.ceil(Math.random() * 100)}/`
 const config: PlaywrightTestConfig = {
   testDir: 'tests', // Specify the directory where your test files are.
   timeout: 30000, // Specify a timeout of 30 seconds.
@@ -10,8 +10,8 @@ const config: PlaywrightTestConfig = {
   },
   reporter: [
     ['list'],
-    ['html', { outputFolder: reporter_folder }],
-    ['json', { outputFile: `${reporter_folder}report_card.json` }],
+    ['html', { outputFolder: test_results_dir }],
+    ['json', { outputFile: `${test_results_dir}report_card.json` }],
   ],
   projects: [
     // Run tests on both Firefox and WebKit.

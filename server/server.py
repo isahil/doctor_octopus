@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-test_results_dir = "../client/test_report/" # Path to test results directory
+test_results_dir = "../playwright/test_report/" # Path to test results directory
 
 @sio.on('connect')
 async def connect(sid, environ):
@@ -51,11 +51,20 @@ def cards():
         folder_path = os.path.join(test_results_dir, folder)
         if os.path.isdir(folder_path):
             for file in os.listdir(folder_path):
+                report_card = {}
                 if file.endswith(".json"):
                     file_path = os.path.join(folder_path, file)
                     with open(file_path, "r") as f:
-                        test_results.append(json.load(f))
-    print(f"\tSending {len(test_results)} test results...")
+                        # test_results.append(json.load(f))
+                        report_card["json_report"] = json.load(f)
+                if file.endswith(".html"):
+                    file_path = os.path.join(folder_path, file)
+                    
+                    print(f"html file path: {file_path}")
+                    with open(file_path, "r") as f:
+                        report_card["html_report"] = f.read()
+            test_results.append(report_card)
+    print(f"\tSending {len(test_results)} test results...\n{test_results[0]}")
     return test_results
 
 @app.get("/help")

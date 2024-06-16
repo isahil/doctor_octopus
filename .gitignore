@@ -11,11 +11,9 @@ server/venv/
 /.pnp
 .pnp.js
 
-# testing
-/coverage
 # test reports
-client/test_report/*
-client/test-results/*
+playwright/test_report/*
+playwright/test-results/*
 
 # production
 /build

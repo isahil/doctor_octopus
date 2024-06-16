@@ -12,10 +12,10 @@ function App() {
   useEffect( () => {
     const getCards = async () => {
       const response = await fetch("http://localhost:8000/cards");
-      const data = await response.json();
-      console.log(`Cards from server: ${JSON.stringify(data[0])}`)
-      console.log(`Total cards from server mounted: ${data.length}`);
-      setCards(data);
+      const cards_data = await response.json();
+      // console.log(`A Card from server: ${JSON.stringify(cards_data[0])}`)
+      console.log(`Total cards from server mounted: ${cards_data.length}`);
+      setCards(cards_data);
     }
     getCards()
   },[]);

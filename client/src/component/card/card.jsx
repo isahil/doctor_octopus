@@ -2,14 +2,23 @@ import React from "react";
 import "./card.css";
 
 function Card({ card }) {
-  const { stats } = card;
-  console.log(`Stats: ${JSON.stringify(stats)}`);
+  // console.log(`Card: ${JSON.stringify(card)}`);
+  const { json_report, html_report } = card;
+  const { stats } = json_report;
+  console.log(`Stats: ${JSON.stringify(stats)} 
+  \n${html_report === undefined ? "No HTML Report" : "Yes HTML Report"}`);
   const { expected, flaky, skipped, unexpected } = stats;
+
+  const handleViewReportClick = () => {
+    console.log(`Viewing html report`);
+    const blob = new Blob([`${html_report}`], { type: 'text/html' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, "_blank");
+  }
 
   return (
     <div className="card">
       <div className="card-content">
-        {/* <a className="card-title">Report Card</a> */}
         <div className="score-board-container"> 
         <a className="score-board all">
           All
@@ -32,7 +41,7 @@ function Card({ card }) {
           <span className="score"> {flaky} </span>
         </a>
         </div>
-        <button className="viewReport">View Report</button>
+        <button className="viewReport" onClick={handleViewReportClick}>View Report</button>
       </div>
     </div>
   );
