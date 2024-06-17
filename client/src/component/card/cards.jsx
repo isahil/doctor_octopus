@@ -6,7 +6,7 @@ const Cards = ({ data }) => {
     console.log(`There are total of ${data.length} cards in the grid.`);
     return (
         <div>
-            {data.map((card, index) => (
+            {data.reverse().map((card, index) => (
                 <Card key={index} card={card} />
             ))}
         </div>

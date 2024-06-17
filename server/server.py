@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 import uvicorn
 import socketio
 import time
@@ -43,33 +44,43 @@ async def suite(sid, suite_name):
     time.sleep(3)
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
-
 @app.get("/cards")
 def cards():
     test_results = []
     for folder in os.listdir(test_results_dir):
         folder_path = os.path.join(test_results_dir, folder)
+        print(f"folder path: {folder_path}")
+        report_card = {"json_report": {}, "html_report": ""}
+
         if os.path.isdir(folder_path):
             for file in os.listdir(folder_path):
-                report_card = {}
+                file_path = os.path.join(folder_path, file)
+
                 if file.endswith(".json"):
-                    file_path = os.path.join(folder_path, file)
                     with open(file_path, "r") as f:
                         # test_results.append(json.load(f))
                         report_card["json_report"] = json.load(f)
-                if file.endswith(".html"):
-                    file_path = os.path.join(folder_path, file)
-                    
-                    print(f"html file path: {file_path}")
-                    with open(file_path, "r") as f:
-                        report_card["html_report"] = f.read()
-            test_results.append(report_card)
-    print(f"\tSending {len(test_results)} test results...\n{test_results[0]}")
+                if file.endswith(".html"):       
+                    html_file_path = os.path.join(folder, file)             
+                    print(f"html file path: {html_file_path}")
+                    report_card["html_report"] = str(html_file_path)
+                
+        test_results.append(report_card)
+
     return test_results
+
+@app.get("/reports", response_class=HTMLResponse)
+async def get_report(html: str = Query(..., title="HTML Report Name", description="Name of the html report file to be retrieved", example="index.html")):
+    print(f"Sending {html} report...")
+    html_file_path = os.path.join(test_results_dir, html)
+    with open(html_file_path, "r") as f:
+        html_file_content = f.read()
+        return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
+
 
 @app.get("/help")
 def get_help():
-    print("\tSending help...")
+    print("Sending help...")
     return [ "api", "fix", "perf", "ui", "ws"]
 
 # @app.get("/ws/socket.io/help/{test}")

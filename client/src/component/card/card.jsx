@@ -6,14 +6,23 @@ function Card({ card }) {
   const { json_report, html_report } = card;
   const { stats } = json_report;
   console.log(`Stats: ${JSON.stringify(stats)} 
-  \n${html_report === undefined ? "No HTML Report" : "Yes HTML Report"}`);
+  \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
   const { expected, flaky, skipped, unexpected } = stats;
+  const total = expected + flaky + skipped + unexpected;
 
-  const handleViewReportClick = () => {
-    console.log(`Viewing html report`);
-    const blob = new Blob([`${html_report}`], { type: 'text/html' })
-    const url = URL.createObjectURL(blob)
-    window.open(url, "_blank");
+  const handleViewReportClick = async () => {
+    console.log(`Viewing html report: ${html_report}`);
+    const response = await fetch(`http://localhost:8000/reports?html=${html_report}`);
+    const html_report_text = await response.text();
+
+    const newWindow = window.open("", "_blank");
+    if(newWindow){
+      newWindow.document.open();
+      newWindow.document.write(html_report_text);
+      newWindow.document.close();
+    } else {
+      alert('Please allow popups for this website');
+    }
   }
 
   return (
@@ -22,21 +31,21 @@ function Card({ card }) {
         <div className="score-board-container"> 
         <a className="score-board all">
           All
-          <span className="score"> 1 </span>
+          <span className="score"> {total} </span>
         </a>
-        <a className="score-board pass">
+        <a className="score-board pass" style={{ color: expected > 0 ? "green" : "inherit" }}>
           Passed
           <span className="score"> {expected} </span>
         </a>
-        <a className="score-board fail">
+        <a className="score-board fail" style={{ color: unexpected > 0 ? "red" : "inherit" }}>
           Failed
           <span className="score"> {unexpected} </span>
         </a>
-        <a className="score-board skipped">
+        <a className="score-board skipped" style={{ color: skipped > 0 ? "purple" : "inherit" }}>
           Skipped
           <span className="score"> {skipped} </span>
         </a>
-        <a className="score-board flaky">
+        <a className="score-board flaky" style={{ color: flaky > 0 ? "yellow" : "inherit" }}>
           Flaky
           <span className="score"> {flaky} </span>
         </a>
