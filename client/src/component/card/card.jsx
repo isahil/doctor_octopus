@@ -33,7 +33,7 @@ function Card({ card }) {
           All
           <span className="score"> {total} </span>
         </a>
-        <a className="score-board pass" style={{ color: expected > 0 ? "green" : "inherit" }}>
+        <a className="score-board pass" style={{ color: expected > 0 ? "#2fd711" : "inherit" }}>
           Passed
           <span className="score"> {expected} </span>
         </a>
@@ -41,7 +41,7 @@ function Card({ card }) {
           Failed
           <span className="score"> {unexpected} </span>
         </a>
-        <a className="score-board skipped" style={{ color: skipped > 0 ? "purple" : "inherit" }}>
+        <a className="score-board skipped" style={{ color: skipped > 0 ? "#e8bb04" : "inherit" }}>
           Skipped
           <span className="score"> {skipped} </span>
         </a>

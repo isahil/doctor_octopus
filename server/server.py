@@ -69,46 +69,58 @@ def cards():
 
     return test_results
 
+@app.get("/help")
+def get_help():
+    print("Sending help...")
+    return [ "api", "fix", "perf", "ui", "ws"]
+
+@app.get("/reports")
+def reports():
+    html_reports = []
+    for folder in os.listdir(test_results_dir):
+        folder_path = os.path.join(test_results_dir, folder)
+        print(f"folder path: {folder_path}")
+
+        if os.path.isdir(folder_path):
+            for file in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, file)
+
+                if file.endswith(".html"):
+                    html_reports.append(file_path)
+                
+    return html_reports
+
 @app.get("/reports", response_class=HTMLResponse)
 async def get_report(html: str = Query(..., title="HTML Report Name", description="Name of the html report file to be retrieved", example="index.html")):
-    print(f"Sending {html} report...")
+    # print(f"Sending {html} report...")
     html_file_path = os.path.join(test_results_dir, html)
     with open(html_file_path, "r") as f:
         html_file_content = f.read()
         return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
 
+@app.get("logs")
+async def get_logs():
+    logs = []
+    for folder in os.listdir(test_results_dir):
+        folder_path = os.path.join(test_results_dir, folder)
+        print(f"folder path: {folder_path}")
 
-@app.get("/help")
-def get_help():
-    print("Sending help...")
-    return [ "api", "fix", "perf", "ui", "ws"]
+        if os.path.isdir(folder_path):
+            for file in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, file)
+
+                if file.endswith(".log"):
+                    with open(file_path, "r") as f:
+                        logs.append(f.read())
+                
+    return logs
+
 
 # @app.get("/ws/socket.io/help/{test}")
 # def get_help_test():
 #     print("\tRunning {test} Test...")
 #     print("\t{test} Test Passed!")
 #     return ["{test} Test Trigger Request Receive."]
-
-# @app.get("/api")
-# def get_api():
-#     print("\tRunning API Test...")
-#     print("\tAPI Test Passed!")
-#     return ["API Test Result: Passed"]
-
-# def get_fix():
-#     print("\tRunning FIX Test...")
-#     print("\tFIX Test Passed!")
-#     return ["FIX Test Result: Passed"]
-
-# def get_perf():
-#     print("\tRunning Performance Test...")
-#     print("\tPerformance Test Passed!")
-#     return ["Performance Test Result: Passed"]
-
-# def get_ui():
-#     print("\tRunning UI Test...")
-#     print("\tUI Test Passed!")
-#     return ["UI Test Result: Passed"]
 
 if __name__ == "__main__":
     uvicorn.run(socket_app, host="0.0.0.0", port=8000, lifespan="on", reload=True)
