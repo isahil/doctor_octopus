@@ -1,10 +1,12 @@
+import os
+from dotenv import load_dotenv
+load_dotenv('.env')
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 import uvicorn
 import socketio
 import time
-import os
 import json
 
 origins = [
@@ -24,7 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-test_results_dir = "../playwright/test_report/" # Path to test results directory
+local_test_reports_dir = os.environ.get('LOCAL_REPORTS_DIR') # Path to test results directory
+remote_test_reports_dir = os.environ.get('AWS_REPORTS_DIR') # Path to test results directory
+
 
 @sio.on('connect')
 async def connect(sid, environ):
@@ -44,11 +48,22 @@ async def suite(sid, suite_name):
     time.sleep(3)
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
+@app.get("/help")
+def get_help():
+    print("Sending help...")
+    return [ "api", "fix", "perf", "ui", "ws"]
+
+# get test results summary "json_report" and "html_report" path from the test_report directory 
+# for the card component to display on the portal
 @app.get("/cards")
-def cards():
+def cards(source: str):
     test_results = []
-    for folder in os.listdir(test_results_dir):
-        folder_path = os.path.join(test_results_dir, folder)
+    test_reports_directory = ""
+    if source == "local": test_reports_directory = local_test_reports_dir
+    else: test_reports_directory = remote_test_reports_dir
+
+    for folder in os.listdir(test_reports_directory):
+        folder_path = os.path.join(test_reports_directory, folder)
         print(f"folder path: {folder_path}")
         report_card = {"json_report": {}, "html_report": ""}
 
@@ -69,31 +84,25 @@ def cards():
 
     return test_results
 
-@app.get("/help")
-def get_help():
-    print("Sending help...")
-    return [ "api", "fix", "perf", "ui", "ws"]
 
-@app.get("/reports")
-def reports():
-    html_reports = []
-    for folder in os.listdir(test_results_dir):
-        folder_path = os.path.join(test_results_dir, folder)
-        print(f"folder path: {folder_path}")
+# get all the test reports in the test_report directory
+# @app.get("/reports")
+# def reports():
+#     html_reports = []
+#     for folder in os.listdir(local_test_reports_dir):
+#         folder_path = os.path.join(local_test_reports_dir, folder)
+#         print(f"folder path: {folder_path}")
+#         if os.path.isdir(folder_path):
+#             for file in os.listdir(folder_path):
+#                 file_path = os.path.join(folder_path, file)
+#                 if file.endswith(".html"):
+#                     html_reports.append(file_path)
+#     return html_reports
 
-        if os.path.isdir(folder_path):
-            for file in os.listdir(folder_path):
-                file_path = os.path.join(folder_path, file)
-
-                if file.endswith(".html"):
-                    html_reports.append(file_path)
-                
-    return html_reports
-
-@app.get("/reports", response_class=HTMLResponse)
+# get the specific html report content when 'View Report' button is clicked
+@app.get("/report", response_class=HTMLResponse)
 async def get_report(html: str = Query(..., title="HTML Report Name", description="Name of the html report file to be retrieved", example="index.html")):
-    # print(f"Sending {html} report...")
-    html_file_path = os.path.join(test_results_dir, html)
+    html_file_path = os.path.join(local_test_reports_dir, html)
     with open(html_file_path, "r") as f:
         html_file_content = f.read()
         return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
@@ -101,8 +110,8 @@ async def get_report(html: str = Query(..., title="HTML Report Name", descriptio
 @app.get("logs")
 async def get_logs():
     logs = []
-    for folder in os.listdir(test_results_dir):
-        folder_path = os.path.join(test_results_dir, folder)
+    for folder in os.listdir(local_test_reports_dir):
+        folder_path = os.path.join(local_test_reports_dir, folder)
         print(f"folder path: {folder_path}")
 
         if os.path.isdir(folder_path):

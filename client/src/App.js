@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
-import FixMe from "./component/fixme/fixme";
+// import FixMe from "./component/fixme/fixme";
 
 function App() {
   const [cards, setCards] = React.useState([]);
@@ -11,9 +11,8 @@ function App() {
 
   useEffect( () => {
     const getCards = async () => {
-      const response = await fetch("http://localhost:8000/cards");
+      const response = await fetch("http://localhost:8000/cards?source=local"); // 'remote' or 'local'
       const cards_data = await response.json();
-      // console.log(`A Card from server: ${JSON.stringify(cards_data[0])}`)
       console.log(`Total cards from server mounted: ${cards_data.length}`);
       setCards(cards_data);
     }

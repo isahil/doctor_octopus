@@ -1,3 +1,5 @@
 fastapi-slim
 python-socketio
 uvicorn
+boto3
+python-dotenv

@@ -12,8 +12,9 @@ server/venv/
 .pnp.js
 
 # test reports
-playwright/test_report/*
+playwright/test_reports/*
 playwright/test-results/*
+server/test_reports/*
 
 # production
 /build

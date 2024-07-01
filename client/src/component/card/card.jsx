@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css";
 
 function Card({ card }) {
-  // console.log(`Card: ${JSON.stringify(card)}`);
+  console.log(`Card: ${JSON.stringify(card)}`);
   const { json_report, html_report } = card;
   const { stats } = json_report;
   console.log(`Stats: ${JSON.stringify(stats)} 
@@ -12,7 +12,7 @@ function Card({ card }) {
 
   const handleViewReportClick = async () => {
     console.log(`Viewing html report: ${html_report}`);
-    const response = await fetch(`http://localhost:8000/reports?html=${html_report}`);
+    const response = await fetch(`http://localhost:8000/report?html=${html_report}`);
     const html_report_text = await response.text();
 
     const newWindow = window.open("", "_blank");
