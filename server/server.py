@@ -1,6 +1,6 @@
-import os
 from dotenv import load_dotenv
 load_dotenv('.env')
+import os
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -8,6 +8,9 @@ import uvicorn
 import socketio
 import time
 import json
+from S3 import download_s3_objects
+
+aws_bucket_name = os.environ.get('AWS_BUCKET_NAME')
 
 origins = [
     "http://localhost:3000",
@@ -27,7 +30,7 @@ app.add_middleware(
 )
 
 local_test_reports_dir = os.environ.get('LOCAL_REPORTS_DIR') # Path to test results directory
-remote_test_reports_dir = os.environ.get('AWS_REPORTS_DIR') # Path to test results directory
+remote_test_reports_dir = os.environ.get('REPORTS_DIR') # Path to test results directory
 
 
 @sio.on('connect')
@@ -58,9 +61,13 @@ def get_help():
 @app.get("/cards")
 def cards(source: str):
     test_results = []
+    print(f"source: {source}")
     test_reports_directory = ""
-    if source == "local": test_reports_directory = local_test_reports_dir
-    else: test_reports_directory = remote_test_reports_dir
+    if source == "local": 
+        test_reports_directory = local_test_reports_dir
+    else: 
+        test_reports_directory = remote_test_reports_dir
+        download_s3_objects(aws_bucket_name)
 
     for folder in os.listdir(test_reports_directory):
         folder_path = os.path.join(test_reports_directory, folder)

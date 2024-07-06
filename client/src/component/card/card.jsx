@@ -51,6 +51,7 @@ function Card({ card }) {
         </a>
         </div>
         <button className="viewReport" onClick={handleViewReportClick}>View Report</button>
+        <span className="branch">branch: {stats.git_branch}</span>
       </div>
     </div>
   );

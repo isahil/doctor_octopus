@@ -14,6 +14,7 @@ h3 {
     margin: 20px;
     padding: 20px;
     width: 500px;
+    height: 150px;
     overflow: hidden;
     box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -59,7 +60,7 @@ h3 {
     line-height: 25px;
     color: white;
     border: 0.5px solid var(--border-color);
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 .score-board:hover {
@@ -70,6 +71,21 @@ h3 {
     display: inline-block;
     min-width: 20px;
     margin: 1px 0 0 5px;
+    padding: 0 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #c9d1d9;
+    background-color: rgba(175, 184, 193, .2);
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 2em;
+}
+
+.branch {
+    display: inline-block;
+    min-width: 20px;
+    margin: 1px 0 0 275px;
     padding: 0 6px;
     font-size: 12px;
     font-weight: 500;

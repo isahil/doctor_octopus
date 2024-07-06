@@ -62,7 +62,7 @@ export async function upload_file(bucket_name, key, file_content) {
 }
 
 export const upload_directory = async (bucket_name, directory_path) => {
-  console.log(`Uploading directory ${directory_path} to S3 bucket ${bucket_name}`);
+  console.log(`Uploading directory ::: '${directory_path}' to S3 bucket ::: ${bucket_name}`);
   const files = fs.readdirSync(directory_path);
 
   for (const file of files) {
