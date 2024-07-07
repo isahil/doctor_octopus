@@ -10,7 +10,6 @@
     box-shadow: inset 1px 1px 1px 1px rgba(58, 56, 56, 0.2);
 }
 
-
 .card-content button {
     background-color: #40454e;
     color: white;
@@ -32,7 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Monaspace Neon', 'Monaspace Krypton', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family: 'Roboto', 'Monaspace Neon', 'Monaspace Krypton', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 15px;
     /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); */
     color: white
@@ -68,16 +67,14 @@
 }
 
 .branch, .time-stamp {
-    /* Remove margin-left from .branch and margin-right from .time-stamp if using flex-start in justify-content */
-    margin: 3px; /* Adjust or remove specific margins if necessary */
+    margin: 3px;
 }
 
 .footer {
     display: flex;
     justify-content: right;
     align-items: center;
-    font-family: 'Monaspace Neon', 'Monaspace Krypton', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-    font-size: 8px;
+    font-size: 11px;
     margin-top: 1px;
     border-top: 0.5px solid #a3a9a2;
     color:var(--border-color)
@@ -87,8 +84,8 @@
     display: inline-block;
     min-width: 20px;
     padding: 0 6px;
-    /* font-size: 12px; */
-    font-weight: 500;
+    font-style:oblique;
+    font-weight: bolder;
     line-height: 18px;
     color: #c9d1d9;
     text-align: center;

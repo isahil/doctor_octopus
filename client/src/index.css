@@ -3,14 +3,12 @@
   padding: 10;
   box-sizing: border-box;
   /* font-family: 'Roboto', sans-serif; */
-  /* --border-color:#30363d; */
   --border-color: white;
-  --background-color: #12161d;
+  --background-color: #15151f;
 }
 
 .app-header {
-  /* background-color:  rgba(175,184,193,.2); */
-  background-color: #30363d;
+  background-color: rgba(175,184,193,.2);
   position: fixed;
   top: 0;
   border-bottom: 1px solid var(--border-color);
