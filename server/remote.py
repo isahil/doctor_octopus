@@ -4,15 +4,14 @@ import json
 import os
 import S3
 
-def get_a_s3_card(card_name):
-    card = S3.get_a_s3_object(card_name)
+def get_a_s3_html_report(html):
+    card = S3.get_a_s3_object(html)
     return card
 
-def get_all_s3_cards(bucket_name):
+def get_all_s3_cards():
     # Call S3 to list current objects
     objects = S3.list_s3_objects()
-    print(f"objects: {objects}")
-
+    # print(f"objects: {objects}")
     reports_dir = [] # list that will be sent to the client
 
     # temporary dict to store the reports
@@ -34,7 +33,7 @@ def get_all_s3_cards(bucket_name):
     print(f"report_cards length: {len(report_cards)}")
 
     for folder_name in report_cards.values():
-            j_report = S3.get_a_s3_object(bucket_name, folder_name["json_report"]["object_name"])
+            j_report = S3.get_a_s3_object(folder_name["json_report"]["object_name"])
             folder_name["json_report"] = json.loads(j_report)
             reports_dir.append(folder_name)
     

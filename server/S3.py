@@ -25,7 +25,7 @@ def list_s3_objects(bucket_name = aws_bucket_name):
     #     print(f"Key: {obj['Key']}, Size: {obj['Size']}")
     return objects
 
-def get_a_s3_object(bucket_name, object_name):
+def get_a_s3_object(object_name, bucket_name = aws_bucket_name):
     # Call S3 to get the object
     response = S3.get_object(Bucket=bucket_name, Key=object_name)
     # print(response['Body'].read())

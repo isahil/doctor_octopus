@@ -6,6 +6,12 @@ import os
 local_dir = os.environ.get('LOCAL_DIRECTORY') # Path to test results directory
 local_test_reports_dir = os.path.join(local_dir, 'test_reports')
 
+def get_a_local_html_report(html):
+    html_file_path = os.path.join(local_test_reports_dir, html)
+    with open(html_file_path, "r") as f:
+        html_file_content = f.read()
+        return html_file_content
+
 def get_all_local_cards():
     test_results = []
 

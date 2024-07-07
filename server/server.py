@@ -7,11 +7,8 @@ from fastapi.responses import HTMLResponse
 import uvicorn
 import socketio
 import time
-from local import get_all_local_cards
-from S3 import get_a_s3_object
-from remote import get_all_s3_cards
-
-aws_bucket_name = os.environ.get('AWS_BUCKET_NAME')
+from local import get_all_local_cards, get_a_local_html_report
+from remote import get_all_s3_cards, get_a_s3_html_report
 
 origins = [
     "http://localhost:3000",
@@ -60,9 +57,8 @@ def get_help():
 async def cards(source: str):
     print(f"source: {source}")
     if source == "remote":
-        return get_all_s3_cards(aws_bucket_name)
-    else:
-        return get_all_local_cards()
+        return get_all_s3_cards()
+    else: return get_all_local_cards()
 
 # get the specific html report content when 'View Report' button is clicked
 @app.get("/report", response_class=HTMLResponse)
@@ -70,13 +66,11 @@ async def get_report(
     source: str = Query(..., title="Source Name", description="Source of the html report file to be retrieved", example="local"),
     html: str = Query(..., title="HTML Report Name", description="Name of the html report file to be retrieved", example="index.html")):
     if source == "remote":
-        html_file_content = get_a_s3_object(aws_bucket_name, html)
+        html_file_content = get_a_s3_html_report(html)
         return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
     else:
-        html_file_path = os.path.join(local_test_reports_dir, html)
-        with open(html_file_path, "r") as f:
-            html_file_content = f.read()
-            return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
+        html_file_content = get_a_local_html_report(html)
+        return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
 
 
 if __name__ == "__main__":
