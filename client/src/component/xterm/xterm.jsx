@@ -4,10 +4,9 @@ import "./xterm.css";
 import handleCommand from "./commands.js";
 import FixMe from "../fixme/fixme";
 
-const XTerm = ({ }) => {
+const XTerm = ({ setShowFixMe }) => {
   const terminalRef = useRef(null);
   const [num, setNum] = React.useState(1);
-  const [showFixMe, setShowFixMe] = React.useState(false);
 
   const xterm = () => {
     const terminal = new Terminal();
@@ -75,7 +74,7 @@ const XTerm = ({ }) => {
   };
 
   return <div ref={terminalRef} id="terminal" onClick={incrementNum}>
-    { showFixMe && <FixMe /> }
+    {/* { showFixMe && <FixMe /> } */}
   </div>;
 };
 

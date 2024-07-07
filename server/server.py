@@ -48,7 +48,7 @@ async def suite(sid, suite_name):
     time.sleep(3)
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
-@app.get("/run")
+@app.get("/help")
 def get_help():
     print("Sending run commands...")
     return [ "api", "fix", "perf", "ui", "ws"]

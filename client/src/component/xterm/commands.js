@@ -40,8 +40,8 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       terminal.clear();
       break;
     case input === "fixme":
-      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m FixMe...\x1B[0m\r\n");
       setShowFixMe(true);
+      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m FixMe...\x1B[0m\r\n");
       break;
     case test_suites.includes(input):
       terminal.write(
