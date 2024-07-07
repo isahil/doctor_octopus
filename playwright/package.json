@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npx playwright test --project=google"
+    "test": "node run.js"
   },
   "author": "Imran Sahil",
   "license": "ISC",

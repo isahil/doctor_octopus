@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'google',
-      testMatch: 's3.spec.ts',
+      testMatch: 'google.spec.ts',
       use: { browserName: 'chromium'}
     }
   ]

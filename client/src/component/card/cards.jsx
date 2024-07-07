@@ -2,12 +2,12 @@ import React from 'react';
 import Card from './card';
 import './cards.css';
 
-const Cards = ({ data }) => {
+const Cards = ({ source, data }) => {
     console.log(`There are total of ${data.length} cards in the grid.`);
     return (
         <div>
-            {data.reverse().map((card, index) => (
-                <Card key={index} card={card} />
+            {data.map((card, index) => (
+                <Card key={index} source={source} card={card} />
             ))}
         </div>
     );

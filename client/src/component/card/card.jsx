@@ -1,18 +1,19 @@
 import React from "react";
 import "./card.css";
 
-function Card({ card }) {
-  console.log(`Card: ${JSON.stringify(card)}`);
+function Card({ source, card }) {
   const { json_report, html_report } = card;
   const { stats } = json_report;
-  console.log(`Stats: ${JSON.stringify(stats)} 
-  \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
-  const { expected, flaky, skipped, unexpected } = stats;
-  const total = expected + flaky + skipped + unexpected;
+  // console.log(`Stats: ${JSON.stringify(stats)} \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
+  const { expected, flaky, skipped, unexpected, startTime } = stats;
+  const total = expected + flaky + unexpected;
+
+  const date = new Date(startTime); // Convert startTime to a Date object
+  const formattedDateTime = date.toLocaleString(); // Adjust formatting as needed
 
   const handleViewReportClick = async () => {
     console.log(`Viewing html report: ${html_report}`);
-    const response = await fetch(`http://localhost:8000/report?html=${html_report}`);
+    const response = await fetch(`http://localhost:8000/report?source=${source}&html=${html_report}`);
     const html_report_text = await response.text();
 
     const newWindow = window.open("", "_blank");
@@ -20,9 +21,7 @@ function Card({ card }) {
       newWindow.document.open();
       newWindow.document.write(html_report_text);
       newWindow.document.close();
-    } else {
-      alert('Please allow popups for this website');
-    }
+    } else alert('Please allow popups for this website');
   }
 
   return (
@@ -51,7 +50,10 @@ function Card({ card }) {
         </a>
         </div>
         <button className="viewReport" onClick={handleViewReportClick}>View Report</button>
-        <span className="branch">branch: {stats.git_branch}</span>
+        <div className="footer">
+          <p className="branch">{stats.git_branch}</p>
+          <p className="time-stamp">at {formattedDateTime}</p>
+        </div>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@
   font-size: calc(8px + 1vmin);
   font-size: small;
   color: rgb(250, 248, 248);
-  height: 80px;
+  height: 50px;
   z-index: 2;
 }
 
@@ -34,9 +34,33 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 85px;
+  margin-top: 50px;
 }
 
 .tech {
   /* border: 1px solid salmon; */
+}
+
+.source-toggle {
+  position: absolute;
+  left: 0;
+  margin-left: 55px;
+  top: 50%; /* Adjust this value as needed to position it vertically as you like */
+  transform: translateY(-50%); /* Centers the button vertically */
+  
+  background-color: gray;
+  color: cyan;
+  border: 1px solid white;
+  
+  padding: 5px;
+  font-weight: bold;
+  font-size: 10px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.source-toggle:hover {
+  background-color: cyan;;
+  color: gray;
 }

@@ -33,7 +33,7 @@ export async function list_objects() {
 
   const command = new ListObjectsCommand(params);
   const response = await S3_Client.send(command);
-  console.log(`List S3 response ::: ${JSON.stringify(response.Contents)}`);
+  // console.log(`List S3 response ::: ${JSON.stringify(response.Contents)}`);
 
   return response;
 }
@@ -46,7 +46,7 @@ export async function get_object(imageName) {
 
   const command = new GetObjectCommand(params);
   const response = await S3_Client.send(command);
-  console.log(`Get S3 response ::: ${JSON.stringify(response)}`);
+  // console.log(`Get S3 response ::: ${JSON.stringify(response)}`);
   return response;
 }
 

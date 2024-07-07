@@ -14,7 +14,13 @@ describe("Google", () => {
     expect(await page.title()).toBe("Apple");
   });
 
-  test.skip("google test skip", async ({ page }) => {
+  test.skip("google test skip 1", async ({ page }) => {
+    await page.goto("https://www.google.com/");
+    setTimeout(() => {}, 3000);
+    expect(await page.title()).toBe("Apple");
+  });
+
+  test.skip("google test skip 2", async ({ page }) => {
     await page.goto("https://www.google.com/");
     setTimeout(() => {}, 3000);
     expect(await page.title()).toBe("Apple");
