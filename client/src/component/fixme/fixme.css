@@ -1,8 +1,11 @@
 .fixme {
-    border: 1px solid var(--background-color);
     color: cyan;
+    /* border-radius: 6px; */
+    border: 7px solid #30363d;
     /* background-color: rgb(38, 36, 36); */
     text-align: center;
     padding: 10px;
     margin-top: 130px;
+    margin: 25px;
+    height: 320px;
 }

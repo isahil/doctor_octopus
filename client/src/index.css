@@ -33,11 +33,12 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 50px;
+  /* border: 1px solid cyan; */
 }
 
-.tech {
-  /* border: 1px solid salmon; */
-}
+/* .tech {
+  border: 1px solid salmon;
+} */
 
 .source-toggle {
   position: absolute;

@@ -1,6 +1,6 @@
-import { socket_client } from "./wsclient.js";
-import { reports } from "./commands/reports.js";
-import { logs } from "./commands/logs.js";
+import { socket_client } from "../wsclient.js";
+import { reports } from "./reports.js";
+import { logs } from "./logs.js";
 
 const handleCommand = async (input, terminal, setShowFixMe) => {
   const test_suites = ["api", "fix", "perf", "ui", "ws"];

@@ -1,9 +1,12 @@
 .cards {
     overflow: auto;
-    height: 760px;
+    height: 800px;
+    width: 600px;
     scrollbar-color: #30363d #12161d;
     scroll-behavior: smooth;
-    /* border-right: 0.5px solid var(--border-color); */
+    margin-right: 50px;
+    /* margin-left: 45px; */
+    /* border: 1px solid var(--border-color); */
 }
  /* suppose to make the scrollbar always visible */
 .cards::-webkit-scrollbar {
