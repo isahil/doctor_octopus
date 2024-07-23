@@ -35,7 +35,8 @@ function App() {
       </div>
       <div className="tech">
         <XTerm setShowFixMe={setShowFixMe}/>
-        { showFixMe && <FixMe /> }
+        {/* { showFixMe && <FixMe /> } */}
+        <FixMe />
       </div>
     </div>
   </div>

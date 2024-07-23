@@ -17,7 +17,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can help you with the following commands:"
       );
       data.forEach((suite) => {
-        terminal.write(`\r\n\x1B[1;3;37m  - ${suite}\x1B[0m\r\n`);
+        terminal.write(`\r\n\x1B[1;3;37m  - ${suite}\x1B[0m\r`);
       });
       break;
     case input === "ls":
@@ -33,7 +33,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       break;
     case input === "pwd":
       terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in the root directory.\x1B[0m\r\n"
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in the root directory.\x1B[0m\r"
       );
       break;
     case input === "clear":
@@ -41,19 +41,19 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       break;
     case input === "fixme":
       setShowFixMe(true);
-      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m FixMe...\x1B[0m\r\n");
+      terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m FixMe...\x1B[0m\r");
       break;
     case test_suites.includes(input):
       terminal.write(
-        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Requesting ${input} Tests... \x1B[0m\r\n`
+        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Requesting ${input} Tests... \x1B[0m\r`
       );
       await socket_client(input, terminal); // Call the WebSocket server to trigger the test suite
       break;
     default:
       terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can't help you with that.\x1B[0m\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Choose one from below.\x1B[0m\r\n"
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can't help you with that.\x1B[0m\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Choose one from below.\x1B[0m\r"
       );
-      terminal.write(`\r\n\x1B[1;3;30m ${test_suites}\x1B[0m\r\n`);
+      terminal.write(`\r\n\x1B[1;3;30m ${test_suites}\x1B[0m\r`);
       break;
   }
 };

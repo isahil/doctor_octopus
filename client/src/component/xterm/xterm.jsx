@@ -2,7 +2,7 @@ import { Terminal } from "@xterm/xterm";
 import React, { useEffect, useRef } from "react";
 import "./xterm.css";
 import handleCommand from "./commands/commands.js";
-import FixMe from "../fixme/fixme";
+import FixMe from "../fixme/fixme.jsx";
 
 const XTerm = ({ setShowFixMe }) => {
   const terminalRef = useRef(null);

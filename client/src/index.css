@@ -2,9 +2,11 @@
   margin: 0;
   padding: 10;
   box-sizing: border-box;
-  /* font-family: 'Roboto', sans-serif; */
+  font-family: 'Roboto', sans-serif;
   --border-color: white;
   --background-color: #15151f;
+  --octopus-gray: #30363d;
+  --border-radius: 0px;
 }
 
 .app-header {
@@ -43,14 +45,14 @@ body {
 .source-toggle {
   position: absolute;
   left: 0;
-  margin-left: 55px;
+  margin-left: 75px;
   top: 50%; /* Adjust this value as needed to position it vertically as you like */
   transform: translateY(-50%); /* Centers the button vertically */
   
-  background-color: gray;
+  background-color: var(--octopus-gray);
   color: cyan;
   border: 1px solid white;
-  
+  border-radius: var(--border-radius);
   padding: 5px;
   font-weight: bold;
   font-size: 10px;
@@ -61,5 +63,5 @@ body {
 
 .source-toggle:hover {
   background-color: cyan;;
-  color: gray;
+  color: white;
 }

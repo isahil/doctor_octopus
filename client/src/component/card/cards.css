@@ -1,10 +1,11 @@
 .cards {
     overflow: auto;
-    height: 800px;
+    height: 100vh;
     width: 600px;
     scrollbar-color: #30363d #12161d;
     scroll-behavior: smooth;
     margin-right: 50px;
+    overflow: auto;
     /* margin-left: 45px; */
     /* border: 1px solid var(--border-color); */
 }

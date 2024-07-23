@@ -4,9 +4,10 @@
     user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
-    border: 7px solid #30363d;
+    border: 7px solid var(--octopus-gray);
+    border-radius: var(--border-radius);
     width: 650px;
-    height: 400px;
+    height: 410px;
     margin: 25px;
     padding: 0px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);

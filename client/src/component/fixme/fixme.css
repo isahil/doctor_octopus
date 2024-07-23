@@ -1,11 +1,135 @@
 .fixme {
+    /* display: flex; */
+    flex-wrap: wrap;
+    justify-content: space-around;
     color: cyan;
-    /* border-radius: 6px; */
-    border: 7px solid #30363d;
-    /* background-color: rgb(38, 36, 36); */
+    border: 7px solid var(--octopus-gray);
+    border-radius: var(--border-radius);
     text-align: center;
     padding: 10px;
-    margin-top: 130px;
     margin: 25px;
-    height: 320px;
+    max-width: 650px;
+    height: auto;
+    position: relative;
+}
+
+.fixme-title {
+    margin-bottom: 5px;
+    padding: 0;
+    color: cyan;
+    width: 650px;
+}
+
+.order-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    /* background-color: #4CAF50; */
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    /* border-bottom-right-radius: 8px; */
+    margin: 10px 5px 0px 35px;
+}
+
+.order-type button {
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.types {
+    display: none;
+    position: absolute;
+    height: 40px;
+    left: 100%;
+    /* Position the options to the right of the button */
+    top: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.types a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.types a:hover {
+    background-color: cyan;
+    /* color: cyan; */
+}
+
+.types a:active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.order-type:hover .types {
+    display: flex;
+    /* Show options on hover */
+}
+
+.fix-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 10px 10px 20px;
+}
+
+.fix-tag {
+    position: relative;
+    display: inline-block;
+}
+
+.tag-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 2px;
+    margin-bottom: 7px;
+    /* Adding depth effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    /* Smooth transition for click and hover effects */
+}
+
+.tag-button:hover,
+.tag-button:focus {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 24px 0 rgba(0, 0, 0, 0.19);
+    /* Optional: Slightly reduce the size on hover/focus to enhance the depth effect */
+    transform: translateY(2.5px);
+}
+
+.tag-content {
+    display: none;
+    position: absolute;
+    background-color: var(--octopus-gray);
+    min-width: 100%;
+    /* Take up the width of .fixme */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.tag-content a {
+    color: cyan;
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.tag-content a:hover {
+    background-color: #161b22;
+}
+
+.fix-tag:hover .tag-content {
+    display: block;
 }

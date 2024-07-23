@@ -9,7 +9,7 @@ const test_results_dir = `test_reports/results_${Math.ceil(Math.random() * 100)}
 process.env.TEST_RESULTS_DIR = test_results_dir;
 
 try {
-    execSync(`npx playwright test --project=google`, { stdio: 'inherit' }); // Added stdio option to inherit
+    execSync(`npx playwright test --project=ui:regression`, { stdio: 'inherit' }); // Added stdio option to inherit
   } catch (error) {
     console.error(`Error executing npm test: ${error}`);
     process.exit(1); // Exit if the command fails

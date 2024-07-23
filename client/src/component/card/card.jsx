@@ -3,10 +3,11 @@ import "./card.css";
 
 function Card({ source, card }) {
   const { json_report, html_report } = card;
-  const { stats } = json_report;
+  const { stats, config } = json_report;
   // console.log(`Stats: ${JSON.stringify(stats)} \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
   const { expected, flaky, skipped, unexpected, startTime } = stats;
-  const total = expected + flaky + unexpected;
+  const project_name = config.projects[0].id; // Get the project name for the report
+  const total_tests = expected + flaky + unexpected;
 
   const date = new Date(startTime); // Convert startTime to a Date object
   const formattedDateTime = date.toLocaleString(); // Adjust formatting as needed
@@ -27,10 +28,11 @@ function Card({ source, card }) {
   return (
     <div className="card">
       <div className="card-content">
+        {/* <a className="project-name">{ project_name }</a> */}
         <div className="score-board-container"> 
         <a className="score-board all">
           All
-          <span className="score"> {total} </span>
+          <span className="score"> {total_tests} </span>
         </a>
         <a className="score-board pass" style={{ color: expected > 0 ? "#2fd711" : "inherit" }}>
           Passed
@@ -50,6 +52,7 @@ function Card({ source, card }) {
         </a>
         </div>
         <button className="viewReport" onClick={handleViewReportClick}>View Report</button>
+        <a className="project-name">{ project_name }</a>
         <div className="footer">
           <p className="branch">{stats.git_branch}</p>
           <p className="time-stamp">at {formattedDateTime}</p>

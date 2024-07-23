@@ -18,7 +18,7 @@ const config: PlaywrightTestConfig = {
   ],
   projects: [
     {
-      name: 'google',
+      name: 'ui:regression',
       testMatch: 'google.spec.ts',
       use: { browserName: 'chromium'}
     }

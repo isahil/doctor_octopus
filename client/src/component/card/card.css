@@ -1,13 +1,32 @@
 .card {
-    background-color: rgba(175,184,193,.2);
-    border-radius: 6px;
+    background-color: var(--octopus-gray);
+    border-radius: var(--border-radius);
     border: 1.5px solid #30363d;
     margin: 20px;
-    padding: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
     width: 500px;
     height: 150px;
     overflow: hidden;
     box-shadow: inset 1px 1px 1px 1px rgba(58, 56, 56, 0.2);
+}
+
+.card:hover, .card:focus {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 24px 0 rgba(0, 0, 0, 0.19);
+    /* Optional: Slightly reduce the size on hover/focus to enhance the depth effect */
+    transform: translateY(2.5px);
+}
+
+.project-name {
+    font-size: 14px;
+    font-weight: bold;
+    font-weight: 500;
+    margin-left: 80px;
+    /* align-content: center; */
+    color: white;
+    /* text-align: center; */
+    /* border: 1px solid var(--border-color); */
 }
 
 .card-content button {
@@ -44,7 +63,7 @@
     line-height: 25px;
     color: white;
     border: 0.5px solid var(--border-color);
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .score-board:hover {
@@ -54,7 +73,7 @@
 .score {
     display: inline-block;
     min-width: 20px;
-    margin: 1px 0 0 5px;
+    margin: 5px 5px;
     padding: 0 6px;
     font-size: 12px;
     font-weight: 500;
