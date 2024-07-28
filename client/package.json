@@ -1,7 +1,7 @@
 {
   "name": "doctor_octopus",
   "version": "0.1.0",
-  "module": "es6",
+  "type": "module",
   "private": true,
   "dependencies": {
     "@xterm/xterm": "^5.5.0",
@@ -10,6 +10,7 @@
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "redis": "^4.6.15",
+    "redis-om": "^0.4.6",
     "socket.io-client": "^4.7.5"
   },
   "scripts": {
