@@ -31,7 +31,7 @@ class Redis {
       const list = [data]
       new_list = await client.hSet(key, field, JSON.stringify(list));
     }
-    console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
+    // console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
     return new_list;
   }
 
@@ -43,7 +43,7 @@ class Redis {
       await client.hSet(key, field, JSON.stringify(list));
       return data;
     } else {
-      console.log(`Field ${field} does not exist in key ${key}`);
+      // console.log(`Field ${field} does not exist in key ${key}`);
       return null;
     }
   }
@@ -56,7 +56,7 @@ class Redis {
       await client.hSet(key, field, JSON.stringify(list));
       return data;
     } else {
-      console.log(`Field ${field} does not exist in key ${key}`);
+      // console.log(`Field ${field} does not exist in key ${key}`);
       return null;
     }
   }
@@ -72,7 +72,7 @@ class Redis {
       const list = [data]
       new_list = await client.hSet(key, field, JSON.stringify(list));
     }
-    console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
+    // console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
     return new_list;
   }
 }
