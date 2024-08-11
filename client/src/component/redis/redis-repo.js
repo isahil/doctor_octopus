@@ -1,10 +1,6 @@
-import { redis } from "./redis-client.js";
 import { Schema, Repository } from "redis-om";
 
-await redis.connect();
-// const ping = await redis.ping()
-// console.log(ping)
-
+// JSON schema for the redis-stack-server
 const reportSchema = new Schema(
   "report",
   {
@@ -19,4 +15,6 @@ const reportSchema = new Schema(
   }
 );
 
-export const report_repo = new Repository(reportSchema, redis);
+export const report_repo = (redis_client) => {
+  return new Repository(reportSchema, redis_client);
+}
