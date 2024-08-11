@@ -24,20 +24,57 @@ class Redis {
     const res = await client.hGet(key, field);
     let new_list;
     if (res) {
-      console.log(`Field ${field} already exists in key ${key}`);
       const list = JSON.parse(res);
       list.push(data);
       new_list = await client.hSet(key, field, JSON.stringify(list));
     } else {
-      console.log(`Field ${field} does not exist in key ${key}`);
       const list = [data]
       new_list = await client.hSet(key, field, JSON.stringify(list));
     }
-    console.log(`Field ${field} added to key ${key} --- ${new_list}`);
+    console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
     return new_list;
   }
 
-  async hlPop(key, field) {}
+  async hlPop(key, field) {
+    const res = await client.hGet(key, field);
+    if (res) {
+      const list = JSON.parse(res);
+      const data = list.pop();
+      await client.hSet(key, field, JSON.stringify(list));
+      return data;
+    } else {
+      console.log(`Field ${field} does not exist in key ${key}`);
+      return null;
+    }
+  }
+
+  async hlShift(key, field) {
+    const res = await client.hGet(key, field);
+    if (res) {
+      const list = JSON.parse(res);
+      const data = list.shift();
+      await client.hSet(key, field, JSON.stringify(list));
+      return data;
+    } else {
+      console.log(`Field ${field} does not exist in key ${key}`);
+      return null;
+    }
+  }
+
+  async hlUnshift(key, field, data) {
+    const res = await client.hGet(key, field);
+    let new_list;
+    if (res) {
+      const list = JSON.parse(res);
+      list.unshift(data);
+      new_list = await client.hSet(key, field, JSON.stringify(list));
+    } else {
+      const list = [data]
+      new_list = await client.hSet(key, field, JSON.stringify(list));
+    }
+    console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
+    return new_list;
+  }
 }
 
 export default Redis;
