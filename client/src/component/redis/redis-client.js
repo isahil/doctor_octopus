@@ -12,8 +12,6 @@ class Redis {
 
   async connect() {
     await client.connect();
-    client.on("connect", () => console.log("Redis Client Connected"));
-    client.on("error", (err) => console.log("Redis Client Error", err));
   }
 
   async disconnect() {
@@ -21,59 +19,39 @@ class Redis {
   }
 
   async hlPush(key, field, data) {
-    const res = await client.hGet(key, field);
-    let new_list;
-    if (res) {
-      const list = JSON.parse(res);
-      list.push(data);
-      new_list = await client.hSet(key, field, JSON.stringify(list));
-    } else {
-      const list = [data]
-      new_list = await client.hSet(key, field, JSON.stringify(list));
-    }
-    // console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
-    return new_list;
+    const response = await client.hGet(key, field);
+    if (response) {
+      const existing_list = JSON.parse(response);
+      existing_list.push(data);
+      return await client.hSet(key, field, JSON.stringify(existing_list));
+    } else return await client.hSet(key, field, JSON.stringify([data]));
   }
 
   async hlPop(key, field) {
-    const res = await client.hGet(key, field);
-    if (res) {
-      const list = JSON.parse(res);
-      const data = list.pop();
-      await client.hSet(key, field, JSON.stringify(list));
-      return data;
-    } else {
-      // console.log(`Field ${field} does not exist in key ${key}`);
-      return null;
-    }
+    const response = await client.hGet(key, field);
+    if (response) {
+      const existing_list = JSON.parse(response);
+      existing_list.pop();
+      return await client.hSet(key, field, JSON.stringify(existing_list));
+    } else return null;
   }
 
   async hlShift(key, field) {
-    const res = await client.hGet(key, field);
-    if (res) {
-      const list = JSON.parse(res);
-      const data = list.shift();
-      await client.hSet(key, field, JSON.stringify(list));
-      return data;
-    } else {
-      // console.log(`Field ${field} does not exist in key ${key}`);
-      return null;
-    }
+    const response = await client.hGet(key, field);
+    if (response) {
+      const existing_list = JSON.parse(response);
+      existing_list.shift();
+      return await client.hSet(key, field, JSON.stringify(existing_list));
+    } else return null;
   }
 
   async hlUnshift(key, field, data) {
-    const res = await client.hGet(key, field);
-    let new_list;
-    if (res) {
-      const list = JSON.parse(res);
-      list.unshift(data);
-      new_list = await client.hSet(key, field, JSON.stringify(list));
-    } else {
-      const list = [data]
-      new_list = await client.hSet(key, field, JSON.stringify(list));
-    }
-    // console.log(`Field ${field} value: ${data} added to key ${key} --- ${new_list}`);
-    return new_list;
+    const response = await client.hGet(key, field);
+    if (response) {
+      const existing_list = JSON.parse(response);
+      existing_list.unshift(data);
+      return await client.hSet(key, field, JSON.stringify(existing_list));
+    } else return await client.hSet(key, field, JSON.stringify([data]));
   }
 }
 

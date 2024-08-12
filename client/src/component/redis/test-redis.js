@@ -30,33 +30,27 @@ async function fetchReport(id) {
 // await fetchReport(id);
 
 const test = async () => {
-  const key = "new_test_list_3";
-  const data = { 
-    name: `name${Math.ceil(Math.random() * 100)}`, 
-    age: Math.ceil(Math.random() * 100), 
-    hobbies: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5"] 
-  };
-
-  // redis.client.HDEL(key, "name");
+  const key = "new_test_list_4";
 
   // const hset_result = await redis.client.hSet(key, "hobbies", JSON.stringify(["hobby1", "hobby2", "hobby3", "hobby4", "hobby5"]));
   // console.log(`test result hset: ${JSON.stringify(hset_result)}`);
 
-  const hget_result = await redis.client.hGet(key, "hobbies");
-  console.log(`test result hget: ${JSON.parse(hget_result)}`);
-  
-  
+  // const hget_result = await redis.client.hGet(key, "hobbies");
+  // console.log(`test result hget: ${JSON.parse(hget_result)}`);
+
   // const push_result = await redis.hlPush(key, "hobbies", `hobby${Math.ceil(Math.random() * 100)}`);
   // console.log(`test result push: ${push_result}`);
 
-  // const pop_result = await redis.hlPop(key, "name");
+  // const pop_result = await redis.hlPop(key, "hobbies");
   // console.log(`test result pop: ${pop_result}`);
 
-  // const shift_result = await redis.hlShift(key, "name"); 
+  // const shift_result = await redis.hlShift(key, "hobbies");
   // console.log(`test result shift: ${shift_result}`);
 
-  // const unshift_result = await redis.hlUnshift(key, "name", `name${Math.ceil(Math.random() * 100)}`);
+  // const unshift_result = await redis.hlUnshift(key, "hobbies", `test3`);
   // console.log(`test result unshift: ${unshift_result}`);
+
+  // redis.client.HDEL(key, "name");
   await redis.disconnect();
 };
 
