@@ -18,7 +18,7 @@ class Redis {
     await client.quit();
   }
 
-  async hlPush(key, field, data) {
+  async hl_push(key, field, data) {
     const response = await client.hGet(key, field);
     if (response) {
       const existing_list = JSON.parse(response);
@@ -27,7 +27,7 @@ class Redis {
     } else return await client.hSet(key, field, JSON.stringify([data]));
   }
 
-  async hlPop(key, field) {
+  async hl_pop(key, field) {
     const response = await client.hGet(key, field);
     if (response) {
       const existing_list = JSON.parse(response);
@@ -36,7 +36,7 @@ class Redis {
     } else return null;
   }
 
-  async hlShift(key, field) {
+  async hl_shift(key, field) {
     const response = await client.hGet(key, field);
     if (response) {
       const existing_list = JSON.parse(response);
@@ -45,7 +45,7 @@ class Redis {
     } else return null;
   }
 
-  async hlUnshift(key, field, data) {
+  async hl_unshift(key, field, data) {
     const response = await client.hGet(key, field);
     if (response) {
       const existing_list = JSON.parse(response);

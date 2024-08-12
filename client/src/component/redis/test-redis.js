@@ -1,10 +1,10 @@
-import { report_repo } from "./redis-repo.js";
 import { EntityId } from "redis-om";
+import { report_repo } from "./redis-repo.js";
 import Redis from "./redis-client.js";
 
 const redis = new Redis();
 
-const report_data = {
+const test_report_data = {
   name: `Test Report #${Math.ceil(Math.random() * 100)}`,
   status: "Passed1",
   duration: 1000,
