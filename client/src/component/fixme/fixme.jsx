@@ -24,7 +24,7 @@ const FixMe = () => {
       {fix_tags.map((tag, i) => {
         return (
           <div className="fix-tag" key={i}>
-            <button className="tag-button">Tag {tag["tag"]}</button>
+            <button className="tag-button">{tag["name"]} {tag["tag"]}</button>
             <div className="tag-content">
               {tag["values"].map((value, i) => {
                 return <a key={i}>{value}</a>;

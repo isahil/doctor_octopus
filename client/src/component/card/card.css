@@ -15,7 +15,8 @@
 .card:hover, .card:focus {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 24px 0 rgba(0, 0, 0, 0.19);
     /* Optional: Slightly reduce the size on hover/focus to enhance the depth effect */
-    transform: translateY(2.5px);
+    /* transform: translateY(2.5px); */
+    transform: scale(1.15);
 }
 
 .project-name {
