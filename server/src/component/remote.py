@@ -4,22 +4,20 @@ import json
 import os
 from src.util.s3_client import S3
 
-def get_a_s3_html_report(html):
+def get_a_s3_card_html_report(html):
     card = S3.get_a_s3_object(html)
     return card
 
 def get_all_s3_cards():
     # Call S3 to list current objects
     objects = S3.list_s3_objects()
-    # print(f"objects: {objects}")
     reports_dir = [] # list that will be sent to the client
 
     # temporary dict to store the reports
-    report_cards = {} # {folder_name: {json_report: {"object_name": object_name...}, html_report: "name.html"}}
+    report_cards = {} # { folder_name: { json_report: { "object_name": object_name... }, html_report: "name.html" } }
     
     for obj in objects:
         object_name = obj["Key"]
-        # reports_dir = object_name.split("/")[-3]
         folder_name = object_name.split("/")[-2]
         file_name = object_name.split("/")[-1]
         if folder_name not in report_cards:
@@ -52,4 +50,3 @@ def download_s3_objects(bucket_name):
         file_path = os.path.join(reports_dir, f"{folder_name}/{file_name}")
         
         S3.download_file(bucket_name, object_name, file_path)
-        # print(f"Downloaded {object_name} to ::: \n{file_path}")
