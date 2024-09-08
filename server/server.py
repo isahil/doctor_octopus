@@ -1,20 +1,25 @@
 from dotenv import load_dotenv
 load_dotenv('.env')
 import os
+import sys
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 import uvicorn
 import socketio
 import time
-from local import get_all_local_cards, get_a_local_html_report
+
+sys.path.append("src/component/")
+from local  import get_all_local_cards, get_a_local_html_report
 from remote import get_all_s3_cards, get_a_s3_html_report
 
 origins = [
     "http://localhost:3000",
     "http://localhost:8000",
 ]
+
 app = FastAPI()
+
 sio = socketio.AsyncServer(cors_allowed_origins=origins,async_mode='asgi')
 socket_app = socketio.ASGIApp(sio, socketio_path="/ws/socket.io")
 app.mount("/ws/socket.io", socket_app)
@@ -48,11 +53,6 @@ async def suite(sid, suite_name):
     time.sleep(3)
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
-@app.get("/help")
-def get_help():
-    print("Sending run commands...")
-    return [ "api", "fix", "perf", "ui", "ws"]
-
 @app.get("/cards")
 async def cards(source: str):
     print(f"source: {source}")
@@ -72,6 +72,10 @@ async def get_report(
         html_file_content = get_a_local_html_report(html)
         return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
 
+@app.get("/help")
+def get_help():
+    print("Sending run commands...")
+    return [ "api", "fix", "perf", "ui", "ws"]
 
 if __name__ == "__main__":
     uvicorn.run(socket_app, host="0.0.0.0", port=8000, lifespan="on", reload=True)

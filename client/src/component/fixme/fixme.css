@@ -25,54 +25,15 @@
     top: 0;
     left: 0;
     height: 40px;
-    background-color: #3b403c;
+    /* background-color: #e2e9e3; */
     border: none;
     cursor: pointer;
     padding: 10px;
-    /* border-bottom-right-radius: 8px; */
     margin: 10px 5px 0px 35px;
 }
 
-.order-type button {
-    background: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    
-}
-
-.types {
-    display: none;
-    position: absolute;
-    height: 40px;
-    left: 100%;
-    /* Position the options to the right of the button */
-    top: 0;
-    background-color: #f9f9f9;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.types a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.types a:hover {
-    background-color: cyan;
-    /* color: cyan; */
-}
-
-.types a:active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.order-type:hover .types {
-    display: flex;
-    /* Show options on hover */
+.order label {
+    margin-right: 15px;
 }
 
 .fix-tags {

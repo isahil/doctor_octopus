@@ -1,4 +1,4 @@
-import { socket_client } from "../wsclient.js";
+import { socket_client } from "../../../util/socket-client.js";
 import { reports } from "./reports.js";
 import { logs } from "./logs.js";
 

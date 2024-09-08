@@ -7,6 +7,7 @@ export const socket_client = async (input, terminal) => {
       path: "/ws/socket.io",
       transports: ["websocket", "polling", "flashsocket"],
     });
+
     socket.on("connect", () => console.log("connected to the WSocket server..."));
 
     socket.emit("suite", input);

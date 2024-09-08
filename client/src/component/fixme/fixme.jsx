@@ -14,10 +14,13 @@ const FixMe = () => {
     <div className="fixme">
       <div className="fixme-title">Fix Me</div>
       <div className="order-type">
-        <button>Order Type</button>
-        <div className="types">
-          <a>New</a>
-          <a>Cancel</a>
+        <div className="order">
+          <label>
+            <input type="radio" value="new" name="order"/>New
+          </label>
+          <label>
+            <input type="radio" value="cancel" name="order"/>Cancel
+          </label>
         </div>
       </div>
       <div className="fix-tags">
