@@ -41,7 +41,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       break;
     case input === "fixme":
       setShowFixMe(true);
-      terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m FixMe...\x1B[0m\r");
+      terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r");
       break;
     case test_suites.includes(input):
       terminal.write(
@@ -53,7 +53,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       terminal.write(
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can't help you with that.\x1B[0m\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Choose one from below.\x1B[0m\r"
       );
-      terminal.write(`\r\n\x1B[1;3;30m ${test_suites}\x1B[0m\r`);
+      terminal.write(`\r\n\x1B[1;3;30m      ${test_suites}\x1B[0m\r`);
       break;
   }
 };
