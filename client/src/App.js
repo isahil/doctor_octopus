@@ -35,8 +35,8 @@ function App() {
       </div>
       <div className="tech">
         <XTerm setShowFixMe={setShowFixMe}/>
-        { showFixMe && <FixMe /> } {/* Display the FixMe component when showFixMe is true */}
-        {/* <FixMe /> */} {/* Uncomment this line to display the FixMe component by default */}
+        {/* showFixMe && <FixMe /> */} {/* Display the FixMe component when showFixMe is true */}
+        { <FixMe /> } {/* Uncomment this line to display the FixMe component by default */}
       </div>
     </div>
   </div>
