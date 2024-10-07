@@ -72,19 +72,23 @@ const FixMe = () => {
           if (typeof fix_tag["values"] === "string") {
             // handle input fields display
             return (
+              <div key={i} className="fix-tag-input">
+              <label className="tag-input-label">[ {name} {tag} ]</label>
               <input
                 key={i}
                 type="text"
+                className="tag-input"
                 placeholder={name}
                 value={order[tag] || ""}
                 onChange={(event) => handleTagInput(event, tag)}
               />
+              </div>
             );
           } else {
             // handle dropdowns display
 
             return (
-              <div className="fix-tag" key={i}>
+              <div key={i} className="fix-tag">
                 <button className="tag-button" type="button">
                   [{name} {tag}] {order[tag]}
                 </button>
@@ -104,7 +108,7 @@ const FixMe = () => {
             );
           }
         })}
-        <button type="submit" onClick={(event) => handleSubmit(event)}>
+        <button type="submit" className="submit-button" onClick={(event) => handleSubmit(event)}>
           Submit
         </button>
       </form>
@@ -147,10 +151,10 @@ const FixMe = () => {
         </div>
       </div>
       {orderType === "new" && (
-        <div className="fix-tags">{displayNewOrderFixTags()}</div>
+        <div className="new-fix-tags">{displayNewOrderFixTags()}</div>
       )}
       {orderType === "cancel" && (
-        <div className="fix-tags">{displayCancelOrderFixTags()}</div>
+        <div className="cancel-fix-tags">{displayCancelOrderFixTags()}</div>
       )}
     </div>
   );

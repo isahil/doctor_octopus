@@ -9,5 +9,6 @@
   { "tag": "8", "name": "dealer", "values": [7, 8, 9] },
   { "tag": "9", "name": "client", "values": [7, 8, 9] },
   { "tag": "10", "name": "", "values": [7, 8, 9] },
-  { "tag": "11", "name": "notional", "values": "" }
+  { "tag": "11", "name": "notional", "values": "" },
+  { "tag": "12", "name": "client", "values": ""}
 ]

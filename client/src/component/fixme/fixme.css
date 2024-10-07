@@ -36,7 +36,7 @@
     margin-right: 15px;
 }
 
-.fix-tags {
+.new-fix-tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -49,10 +49,10 @@
 }
 
 .tag-button {
-    background-color: #4CAF50;
+    background-color: #2d83a2;
     color: white;
     padding: 10px;
-    border: none;
+    border: solid 1.5px;
     cursor: pointer;
     margin: 2px;
     margin-bottom: 7px;
@@ -73,6 +73,7 @@
     display: none;
     position: absolute;
     background-color: var(--octopus-gray);
+    border: solid 1.0px;
     min-width: 100%;
     /* Take up the width of .fixme */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -93,4 +94,54 @@
 
 .fix-tag:hover .tag-content {
     display: block;
+}
+
+.fix-tag-input {
+    position: relative;
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    margin: 10px 10px;
+    border: 1px solid var(--octopus-gray);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.tag-input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 5px;
+    border: 1px solid var(--octopus-gray);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+}
+
+.tag-input-label {
+    /* color: red; */
+    padding: 10px 10px;
+    margin: 5px 5px;
+    border: solid 1.5px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px 0;
+    width: 50%;
+    /* Adding depth effect */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    /* Smooth transition for click and hover effects */
+
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    /* Optional: Slightly reduce the size on hover/focus to enhance the depth effect */
+    transform: translateY(2.5px);
 }
