@@ -69,28 +69,43 @@ const FixMe = () => {
         {fixTags.map((fix_tag, i) => {
           const tag = fix_tag["tag"];
           const name = fix_tag["name"];
-          if (typeof fix_tag["values"] === "string") {
-            // handle input fields display
+          if (typeof fix_tag["values"] === "string" && !fix_tag["values"]) {
+            // if the tag value is an empty string handle input field display
             return (
-              <div key={i} className="fix-tag-input">
-              <label className="tag-input-label">[ {name} {tag} ]</label>
-              <input
-                key={i}
-                type="text"
-                className="tag-input"
-                placeholder={name}
-                value={order[tag] || ""}
-                onChange={(event) => handleTagInput(event, tag)}
-              />
+              <div key={i} className="fix-tag-input tag">
+                <label className="tag-label">
+                  {tag}
+                </label>
+                <input
+                  key={i}
+                  type="text"
+                  className="tag-input"
+                  placeholder={name}
+                  value={order[tag] || ""}
+                  onChange={(event) => handleTagInput(event, tag)}
+                />
               </div>
             );
-          } else {
-            // handle dropdowns display
-
+          } else if (
+            typeof fix_tag["values"] == "string" &&
+            fix_tag["values"]
+          ) {
+            // if the tag value has a default string handle input lable display
             return (
-              <div key={i} className="fix-tag">
+              <div key={i} className="fix-tag-default tag">
+                <label className="tag-label">
+                  [ {name} {tag} = {fix_tag["values"]} ]
+                </label>
+              </div>
+            );
+          } else if (typeof fix_tag["values"] == "object") {
+            // if the tag value is an array of values handle dropdown display
+            console.log(`tag: ${tag}, values: ${fix_tag["values"]}`);
+            return (
+              <div key={i} className="fix-tag-button tag">
+                <label className="tag-label"> {tag} </label>
                 <button className="tag-button" type="button">
-                  [{name} {tag}] {order[tag]}
+                  {name} {order[tag]}
                 </button>
                 <div className="tag-content">
                   {fix_tag["values"].map((value, j) => {
@@ -108,9 +123,15 @@ const FixMe = () => {
             );
           }
         })}
-        <button type="submit" className="submit-button" onClick={(event) => handleSubmit(event)}>
-          Submit
-        </button>
+        <div>
+          <button
+            type="submit"
+            className="submit-button"
+            onClick={(event) => handleSubmit(event)}
+          >
+            Submit
+          </button>
+        </div>
       </form>
     );
   };

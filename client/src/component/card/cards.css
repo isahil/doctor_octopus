@@ -1,6 +1,6 @@
 .cards {
     overflow: auto;
-    height: 100vh;
+    height: 130vh;
     width: 600px;
     scrollbar-color: #30363d #12161d;
     scroll-behavior: smooth;

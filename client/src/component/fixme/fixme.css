@@ -43,9 +43,34 @@
     margin: 30px 10px 10px 20px;
 }
 
-.fix-tag {
+.tag {
+    /* display: inline-block; */
+    padding: 10px;
+    margin: 10px;
+    border: solid 1.0px var(--octopus-gray);
+    width: 25%;
+    height: 100px;
+}
+
+.tag-label {
+    display: block;
+    /* padding: 10px;
+    margin: 5px; */
+    /* border: solid 1.5px; */
+    cursor: pointer;
+    /* Adding depth effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    /* Smooth transition for click and hover effects */
+}
+
+
+.fix-tag-button {
     position: relative;
     display: inline-block;
+    padding: 20px;
+    margin: 10px 10px;
+    border: solid 1.0px var(--octopus-gray);
 }
 
 .tag-button {
@@ -73,8 +98,8 @@
     display: none;
     position: absolute;
     background-color: var(--octopus-gray);
-    border: solid 1.0px;
-    min-width: 100%;
+    /* border: solid 1.0px; */
+    /* min-width: 100%; */
     /* Take up the width of .fixme */
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -92,14 +117,14 @@
     background-color: #161b22;
 }
 
-.fix-tag:hover .tag-content {
+.fix-tag-button:hover .tag-content {
     display: block;
 }
 
 .fix-tag-input {
     position: relative;
     display: inline-block;
-    width: 30%;
+    /* width: 30%; */
     padding: 20px;
     margin: 10px 10px;
     border: 1px solid var(--octopus-gray);
@@ -123,7 +148,11 @@
     /* color: red; */
     padding: 10px 10px;
     margin: 5px 5px;
-    border: solid 1.5px;
+    /* border: solid 1.5px; */
+}
+
+.fix-tag-default {
+    display: none;
 }
 
 .submit-button {
