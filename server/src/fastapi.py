@@ -1,10 +1,7 @@
-import sys
-sys.path.append("src/component/")
-sys.path.append("src/util/")
 from fastapi import APIRouter, Query
 from fastapi.responses import HTMLResponse
-from local  import get_all_local_cards, get_a_local_card_html_report
-from remote import get_all_s3_cards, get_a_s3_card_html_report
+from src.component.local  import get_all_local_cards, get_a_local_card_html_report
+from src.component.remote import get_all_s3_cards, get_a_s3_card_html_report
 
 router = APIRouter()
 

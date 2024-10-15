@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   },
   reporter: [
     ['list'],
-    ['html', { outputFolder: TEST_RESULTS_DIR}],
+    ['html', { outputFolder: TEST_RESULTS_DIR } ],
     ['json', { outputFile: `${TEST_RESULTS_DIR}report_card.json` }],
   ],
   projects: [
