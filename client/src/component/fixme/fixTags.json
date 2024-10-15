@@ -7,7 +7,7 @@
   { "tag": "22", "name": "SecurityIDSource","Required": "Y", "values": ["1", "4", "101"] },
   { "tag": "35", "name": "MsgType","Required": "Y", "values": "D" },
   { "tag": "38", "name": "OrderQty","Required": "Y", "values": "" },
-  { "tag": "40", "name": "OrdType","Required": "N", "values": "" },
+  { "tag": "40", "name": "OrdType","Required": "N", "values": "1" },
   { "tag": "44", "name": "TargetPrice","Required": "N", "values": "" },
   { "tag": "48", "name": "SecurityID","Required": "Y", "values": ""},
   { "tag": "54", "name": "Side","Required": "Y", "values": ["1", "2"] },
@@ -21,6 +21,5 @@
   { "tag": "447", "name": "PartyIDSource","Required": "Y", "values": "D" },
   { "tag": "448", "name": "PartyID","Required": "Y", "values": "test@sdet.com" },
   { "tag": "452", "name": "PartyRole","Required": "Y", "values": "11" },
-  { "tag": "6499", "name": "ApplyBrokerRestriction","Required": "N", "values": "Y" },
-  { "tag": "", "name": "","Required": "", "values": ""}
+  { "tag": "6499", "name": "ApplyBrokerRestriction","Required": "N", "values": "Y" }
 ]

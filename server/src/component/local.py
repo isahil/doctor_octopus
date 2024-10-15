@@ -1,3 +1,4 @@
+import time
 from dotenv import load_dotenv
 load_dotenv('.env')
 import json
@@ -29,6 +30,8 @@ def get_all_local_cards():
                 if file.endswith(".html"):       
                     html_file_path = os.path.join(folder, file)
                     report_card["html_report"] = str(html_file_path)
+
+                time.sleep(0.1)
         test_results.append(report_card)
 
     return test_results
