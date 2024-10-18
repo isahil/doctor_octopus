@@ -44,51 +44,45 @@
 }
 
 .tag {
-    /* display: inline-block; */
-    padding: 10px;
-    margin: 10px;
+    padding: 20px 10px;
+    margin: 10px 10px;
     border: solid 1.0px var(--octopus-gray);
     width: 25%;
-    height: 100px;
-    position: relative;
-}
-
-.tag-label {
-    display: block;
-    /* padding: 10px;
-    margin: 5px; */
-    /* border: solid 1.5px; */
-    cursor: pointer;
-    /* Adding depth effect */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    /* Smooth transition for click and hover effects */
-}
-
-
-.fix-tag-button {
+    height: 120px;
     position: relative;
     display: inline-block;
-    border: solid 1.0px var(--octopus-gray);
 }
+
+.top-label {
+    padding: 5px;
+    /* margin: 1px 5px; */
+}
+
+.bottom-label {
+    margin: 10px;
+}
+
+/* .fix-tag-button {
+    position: relative;
+    display: inline-block;
+    border: 1px solid var(--octopus-gray);
+} */
 
 .tag-button {
     background-color: #2d83a2;
     color: white;
     padding: 10px;
-    border: solid 1.5px;
+    width: 75%;
+    height: 30px;
+    border: solid 1px;
     cursor: pointer;
-    margin: 2px;
-    margin-bottom: 7px;
-    /* Adding depth effect */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     /* Smooth transition for click and hover effects */
 }
 
-
-.tag-button:hover + .tag-content,
-.tag-button:focus + .tag-content,
+.tag-button:hover+.tag-content,
+.tag-button:focus+.tag-content,
 .tag-content:hover {
     display: block;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 24px 0 rgba(0, 0, 0, 0.19);
@@ -123,31 +117,13 @@
 .fix-tag-input {
     position: relative;
     display: inline-block;
-    /* width: 30%; */
-    padding: 20px;
-    margin: 10px 10px;
-    border: 1px solid var(--octopus-gray);
-    border-radius: var(--border-radius);
-    box-sizing: border-box;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 .tag-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 5px;
-    border: 1px solid var(--octopus-gray);
-    border-radius: var(--border-radius);
-    box-sizing: border-box;
-}
-
-.tag-input-label {
-    /* color: red; */
-    padding: 10px 10px;
-    margin: 5px 5px;
-    /* border: solid 1.5px; */
+    width: 75%;
+    height: 30px;
+    background-color: white;
+    color: #2d83a2;
 }
 
 .fix-tag-default {

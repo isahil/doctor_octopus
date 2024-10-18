@@ -69,13 +69,12 @@ const FixMe = () => {
         {fixTags.map((fix_tag, i) => {
           const tag = fix_tag["tag"];
           const name = fix_tag["name"];
+
           if (typeof fix_tag["values"] === "string" && !fix_tag["values"]) {
             // if the tag value is an empty string handle input field display
             return (
               <div key={i} className="fix-tag-input tag">
-                <label className="tag-label">
-                  {tag}
-                </label>
+                <p className="top-label">{tag}</p>
                 <input
                   key={i}
                   type="text"
@@ -84,18 +83,7 @@ const FixMe = () => {
                   value={order[tag] || ""}
                   onChange={(event) => handleTagInput(event, tag)}
                 />
-              </div>
-            );
-          } else if (
-            typeof fix_tag["values"] == "string" &&
-            fix_tag["values"]
-          ) {
-            // if the tag value has a default string handle input lable display
-            return (
-              <div key={i} className="fix-tag-default tag">
-                <label className="tag-label">
-                  [ {name} {tag} = {fix_tag["values"]} ]
-                </label>
+                <p className="bottom-label">{name}</p>
               </div>
             );
           } else if (typeof fix_tag["values"] == "object") {
@@ -103,9 +91,9 @@ const FixMe = () => {
             console.log(`tag: ${tag}, values: ${fix_tag["values"]}`);
             return (
               <div key={i} className="fix-tag-button tag">
-                <label className="tag-label"> {tag} </label>
+                <p className="top-label">{tag}</p>
                 <button className="tag-button" type="button">
-                  {name} {order[tag]}
+                  {order[tag]}
                 </button>
                 <div className="tag-content">
                   {fix_tag["values"].map((value, j) => {
@@ -119,6 +107,19 @@ const FixMe = () => {
                     );
                   })}
                 </div>
+                <p className="bottom-label">{name}</p>
+              </div>
+            );
+          } else if (
+            typeof fix_tag["values"] == "string" &&
+            fix_tag["values"]
+          ) {
+            // if the tag value has a default string handle input lable display
+            return (
+              <div key={i} className="fix-tag-default tag">
+                <label className="tag-label">
+                  [ {name} {tag} = {fix_tag["values"]} ]
+                </label>
               </div>
             );
           }
