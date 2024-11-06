@@ -9,7 +9,7 @@ const FixMe = () => {
   /**
    * create a draft order on page load with default values
    * @returns draft order object with keys and values
-   * { "notional": "", "price": "", ... }
+   * { "1": "SDET_OCTAURA", "price": "", ... }
    */
   const draftOrder = () => {
     const order = {};
@@ -53,7 +53,7 @@ const FixMe = () => {
   };
 
   useEffect(() => {
-    setOrder(draftOrder());
+    setOrder(draftOrder()); // create a draft order on page load
   }, []);
 
   // for debugging purposes

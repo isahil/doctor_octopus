@@ -9,6 +9,12 @@
   --border-radius: 0px;
 }
 
+body {
+  background-color: var(--background-color);
+  font-family: 'Roboto', sans-serif;
+}
+
+
 .app-header {
   background-color: rgba(175,184,193,.2);
   position: fixed;
@@ -21,13 +27,18 @@
   font-size: calc(8px + 1vmin);
   font-size: small;
   color: rgb(250, 248, 248);
-  height: 50px;
+  height: 65px;
   z-index: 2;
 }
 
-body {
-  background-color: var(--background-color);
-  font-family: 'Roboto', sans-serif;
+.app-header h1 {
+  font-size: 20px;
+}
+
+.source p {
+  color: #eee;
+  font-size: 10px;
+  margin: 10px 0px 0 20px;
 }
 
 .source input[type="checkbox"] {
@@ -42,9 +53,9 @@ body {
               0 -1px 2px 2px hsla(0,0%,0%,.25),
               0 2px 2px 2px hsla(0,0%,100%,.75);
   cursor: pointer;
-  height: 25px;
+  height: 20px;
   padding-right: 25px;
-  width: 75px;
+  width: 65px;
   -webkit-appearance: none;
   -webkit-transition: .25s;
 }
@@ -58,8 +69,8 @@ body {
               0 0 2px hsla(0,0%,0%,.25);
   content: '';
   display: block;
-  height: 25px;
-  width: 50px;
+  height: 20px;
+  width: 45px;
 }
 
 .title {

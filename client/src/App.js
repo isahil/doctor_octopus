@@ -18,7 +18,10 @@ function App() {
     <div className="app">
       <div className="app-header">
         <div className="source">
-          <input type="checkbox" onClick={toggleSource} />
+          <label>
+            <input type="checkbox" onClick={toggleSource} />
+          </label>
+          <p className="source-label">source</p>
         </div>
         <div className="title">
           <h1>Doctor Octopus</h1>
