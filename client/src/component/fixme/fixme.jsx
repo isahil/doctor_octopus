@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./fixme.css";
-import fixTags from "./fixTags.json";
+import new_order_tags from "./fixTags.json";
 
 const FixMe = () => {
+  const [order, setOrder] = useState({});
+  const [orderType, setOrderType] = useState("new"); // new or cancel
+
   /**
-   * create an empty object with fix-tags.json file's names as keys
-   * @returns draft order object with keys' values as empty string
+   * create a draft order on page load with default values
+   * @returns draft order object with keys and values
    * { "notional": "", "price": "", ... }
    */
   const draftOrder = () => {
     const order = {};
-    fixTags.forEach((fix_tag) => {
+    new_order_tags.forEach((fix_tag) => {
       const tag = fix_tag["tag"];
-      order[tag] = "";
+      order[tag] = fix_tag["values"].length === 1 ? fix_tag["values"][0] : "";
     });
     // console.log(JSON.stringify(order));
     return order;
   };
-
-  const [order, setOrder] = useState({});
-  const [orderType, setOrderType] = useState("new"); // new or cancel
 
   /**
    * display the order type selected by the user: new or cancel
@@ -31,31 +31,35 @@ const FixMe = () => {
     setOrderType(event.target.value);
     if (event.target.value === "new") {
       setOrder(draftOrder());
-      return <div className="fix-tags">{displayNewOrderFixTags()}</div>;
+      return (
+        <div className="fix-tags">{displayNewOrderFixTags(new_order_tags)}</div>
+      );
     } else {
       return <div className="fix-tags">{displayCancelOrderFixTags()}</div>;
     }
   };
 
-  const handleTagClick = (event, tag) => {
-    console.log(event.target.innerText);
-    setOrder({ ...order, [`${tag}`]: event.target.innerText });
+  const handleTagInput = (event, tag) => {
+    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
   };
 
-  const handleTagInput = (event, tag) => {
-    console.log(event.target.value);
-    setOrder({ ...order, [`${tag}`]: event.target.value });
+  const handleRadioChange = (event, tag) => {
+    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("submitting order", order);
+    console.log("Submitting order", order);
   };
 
-  // for debugging purposes
   useEffect(() => {
-    // console.log(JSON.stringify(order));
-  }, [order]);
+    setOrder(draftOrder());
+  }, []);
+
+  // for debugging purposes
+  // useEffect(() => {
+  //   console.log(JSON.stringify(order));
+  // }, [order]);
 
   /**
    * display fix tags based on the fix-tags.json file values
@@ -63,66 +67,58 @@ const FixMe = () => {
    * if the values are array, it will display button with dropdown
    * @returns
    */
-  const displayNewOrderFixTags = () => {
+  const displayNewOrderFixTags = (tags) => {
     return (
       <form>
-        {fixTags.map((fix_tag, i) => {
+        {tags.map((fix_tag, i) => {
           const tag = fix_tag["tag"];
           const name = fix_tag["name"];
+          const values = fix_tag["values"];
+          const valuesLength = Array.isArray(values) ? values.length : 0;
+          const isEven = i % 2 === 0;
 
-          if (typeof fix_tag["values"] === "string" && !fix_tag["values"]) {
-            // if the tag value is an empty string handle input field display
-            return (
-              <div key={i} className="fix-tag-input tag">
-                <p className="top-label">{tag}</p>
-                <input
-                  key={i}
-                  type="text"
-                  className="tag-input"
-                  placeholder={name}
-                  value={order[tag] || ""}
-                  onChange={(event) => handleTagInput(event, tag)}
-                />
-                <p className="bottom-label">{name}</p>
+          return (
+            <div
+              key={i}
+              className={`fix-tag-row ${isEven ? "even-row" : "odd-row"}`}
+            >
+              <div className="tag-label">
+                <p>{tag}</p>
               </div>
-            );
-          } else if (typeof fix_tag["values"] == "object") {
-            // if the tag value is an array of values handle dropdown display
-            console.log(`tag: ${tag}, values: ${fix_tag["values"]}`);
-            return (
-              <div key={i} className="fix-tag-button tag">
-                <p className="top-label">{tag}</p>
-                <button className="tag-button" type="button">
-                  {order[tag]}
-                </button>
-                <div className="tag-content">
-                  {fix_tag["values"].map((value, j) => {
-                    return (
-                      <a
-                        key={j}
-                        onClick={(event) => handleTagClick(event, tag)}
-                      >
+              <div className="name-label">
+                <p>{name}</p>
+              </div>
+              <div className="value-label">
+                {typeof fix_tag["values"] === "string" && !fix_tag["values"] ? (
+                  // if the tag value is an empty string handle input field display
+                  <div className="tag-input">
+                    <input
+                      key={i}
+                      type="text"
+                      placeholder={name}
+                      value={order[tag] || ""}
+                      onChange={(event) => handleTagInput(event, tag)}
+                    />
+                  </div>
+                ) : (
+                  <div className="tag-radio">
+                    {fix_tag["values"].map((value, j) => (
+                      <label key={j}>
+                        <input
+                          type="radio"
+                          name={tag}
+                          value={value}
+                          checked={valuesLength === 1}
+                          onChange={(event) => handleRadioChange(event, tag)}
+                        />
                         {value}
-                      </a>
-                    );
-                  })}
-                </div>
-                <p className="bottom-label">{name}</p>
+                      </label>
+                    ))}
+                  </div>
+                )}
               </div>
-            );
-          } else if (
-            typeof fix_tag["values"] == "string" &&
-            fix_tag["values"]
-          ) {
-            // if the tag value has a default string handle input lable display
-            return (
-              <div key={i} className="fix-tag-default tag">
-                <label className="tag-label">
-                  [ {name} {tag} = {fix_tag["values"]} ]
-                </label>
-              </div>
-            );
-          }
+            </div>
+          );
         })}
         <div>
           <button
@@ -147,9 +143,9 @@ const FixMe = () => {
 
   return (
     <div className="fixme">
-      <div className="fixme-title">Fix Me</div>
-      <div className="order-type">
-        <div className="order" onClick={(event) => handleOrderType(event)}>
+      <div className="fixme-header">
+        <div className="fixme-title">Fix Me</div>
+        <div className="order-type">
           <label>
             <input
               type="radio"
@@ -173,7 +169,9 @@ const FixMe = () => {
         </div>
       </div>
       {orderType === "new" && (
-        <div className="new-fix-tags">{displayNewOrderFixTags()}</div>
+        <div className="new-fix-tags">
+          {displayNewOrderFixTags(new_order_tags)}
+        </div>
       )}
       {orderType === "cancel" && (
         <div className="cancel-fix-tags">{displayCancelOrderFixTags()}</div>
