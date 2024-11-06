@@ -1,13 +1,14 @@
 echo "Starting the FASTAPI server"
 
 OS_NAME=$(uname)
+echo "OS: $OS_NAME"
 
-if [ "$OS_NAME" = "CYGWIN" ] || [ "$OS_NAME" = "MINGW" ] || [ "$OS_NAME" = "MSYS" ] || [ "$OS_NAME" = "Windows" ]; then
-    echo "Windows .venv activation"
-    source .venv/Scripts/Activate
-else
+if [ "$OS_NAME" = "Linux" ] || [ "$OS_NAME" = "Darwin" ]; then
     echo "Linux .venv activation"
     source .venv/bin/activate
+else
+    echo "Windows .venv activation"
+    source .venv/Scripts/Activate
 fi
 
 uvicorn server:app --reload
