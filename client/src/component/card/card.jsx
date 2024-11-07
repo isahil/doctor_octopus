@@ -42,7 +42,7 @@ function Card({ source, card }) {
           Failed
           <span className="score"> {unexpected} </span>
         </a>
-        <a className="score-board skipped" style={{ color: skipped > 0 ? "#e8bb04" : "inherit" }}>
+        <a className="score-board skipped" style={{ color: skipped > 0 ? "yellow" : "inherit" }}>
           Skipped
           <span className="score"> {skipped} </span>
         </a>

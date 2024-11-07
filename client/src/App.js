@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import FixMe from "./component/fixme/fixme";
+import Runner from "./component/runner/runner.jsx";
 
 function App() {
   const [source, setSource] = React.useState("remote");
@@ -34,10 +35,10 @@ function App() {
         </div>
         <div className="tech">
           <XTerm setShowFixMe={setShowFixMe} />
+          <Runner />
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}
-          {<FixMe />}{" "}
-          {/* Uncomment this line to display the FixMe component by default */}
+          <FixMe />
         </div>
       </div>
     </div>

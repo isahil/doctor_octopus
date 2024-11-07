@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./fixme.css";
-import new_order_tags from "./fixTags.json";
+import newOrderTags from "./newTags.json"
 
 const FixMe = () => {
   const [order, setOrder] = useState({});
@@ -13,9 +13,9 @@ const FixMe = () => {
    */
   const draftOrder = () => {
     const order = {};
-    new_order_tags.forEach((fix_tag) => {
-      const tag = fix_tag["tag"];
-      order[tag] = fix_tag["values"].length === 1 ? fix_tag["values"][0] : "";
+    newOrderTags.forEach((fixTag) => {
+      const tag = fixTag["tag"];
+      order[tag] = fixTag["values"].length === 1 ? fixTag["values"][0] : "";
     });
     // console.log(JSON.stringify(order));
     return order;
@@ -32,7 +32,7 @@ const FixMe = () => {
     if (event.target.value === "new") {
       setOrder(draftOrder());
       return (
-        <div className="fix-tags">{displayNewOrderFixTags(new_order_tags)}</div>
+        <div className="fix-tags">{displayNewOrderFixTags(newOrderTags)}</div>
       );
     } else {
       return <div className="fix-tags">{displayCancelOrderFixTags()}</div>;
@@ -70,10 +70,10 @@ const FixMe = () => {
   const displayNewOrderFixTags = (tags) => {
     return (
       <form>
-        {tags.map((fix_tag, i) => {
-          const tag = fix_tag["tag"];
-          const name = fix_tag["name"];
-          const values = fix_tag["values"];
+        {tags.map((fixTag, i) => {
+          const tag = fixTag["tag"];
+          const name = fixTag["name"];
+          const values = fixTag["values"];
           const valuesLength = Array.isArray(values) ? values.length : 0;
           const isEven = i % 2 === 0;
 
@@ -89,7 +89,7 @@ const FixMe = () => {
                 <p>{name}</p>
               </div>
               <div className="value-label">
-                {typeof fix_tag["values"] === "string" && !fix_tag["values"] ? (
+                {typeof fixTag["values"] === "string" && !fixTag["values"] ? (
                   // if the tag value is an empty string handle input field display
                   <div className="tag-input">
                     <input
@@ -102,7 +102,7 @@ const FixMe = () => {
                   </div>
                 ) : (
                   <div className="tag-radio">
-                    {fix_tag["values"].map((value, j) => (
+                    {fixTag["values"].map((value, j) => (
                       <label key={j}>
                         <input
                           type="radio"
@@ -170,7 +170,7 @@ const FixMe = () => {
       </div>
       {orderType === "new" && (
         <div className="new-fix-tags">
-          {displayNewOrderFixTags(new_order_tags)}
+          {displayNewOrderFixTags(newOrderTags)}
         </div>
       )}
       {orderType === "cancel" && (

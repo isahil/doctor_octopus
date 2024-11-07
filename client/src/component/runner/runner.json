@@ -1,0 +1,32 @@
+[
+    {
+        "name": "api",
+        "apps": ["loan", "clo"],
+        "protocol": "api",
+        "suites": ["smoke", "regression", "sanity"]
+    },
+    {
+        "name": "ui",
+        "apps": ["loan", "clo"],
+        "protocol": "ui",
+        "suites": ["smoke", "regression", "sanity"]
+    },
+    {
+        "name": "db",
+        "apps": ["loan", "clo"],
+        "protocol": "db",
+        "suites": ["camel", "ingestion", "smoke"]
+    },
+    {
+        "name": "fix",
+        "apps": ["loan", "clo"],
+        "protocol": "fix",
+        "suites": ["smoke", "regression", "sanity"]
+    },
+    {
+        "name": "perf",
+        "apps": ["loan", "clo"],
+        "protocol": "perf",
+        "suites": ["smoke", "regression", "sanity"]
+    }
+]
