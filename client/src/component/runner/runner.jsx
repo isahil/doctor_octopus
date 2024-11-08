@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./runner.css";
-import protocols from "./runner.json";
+import cards from "./runner.json";
 
 const Runner = () => {
   const [suite, setSuite] = useState([]);
@@ -16,19 +16,19 @@ const Runner = () => {
         <h1>{suite[0]} {suite[1]}</h1>
       </div>
       <div className="runner-cards">
-        {protocols.map((protocol, i) => {
+        {cards.map((card, i) => {
           return (
             <div key={i} className="runner-card">
-              <h2 className="">{protocol.name} </h2>
-              <div className="suite-content">
-                {protocol.suites.map((t_suite, j) => {
+              <h2 className="">{card.name} </h2>
+              <div className="option-content">
+                {card.options.map((option, j) => {
                   return (
                     <div
                       key={j}
-                      className="suite-name"
-                      onClick={(event) => handleClick(event, protocol.name)}
+                      className="option-name"
+                      onClick={(event) => handleClick(event, card.name)}
                     >
-                      <a>{t_suite}</a>
+                      <a>{option}</a>
                     </div>
                   );
                 })}

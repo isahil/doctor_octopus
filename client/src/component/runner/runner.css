@@ -16,16 +16,14 @@
 }
 
 .runner-cards {
-    /* margin-top: 20px; */
+    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .runner-card {
-    width: 90px;
-    height: 40px;
-    margin-left: 10px;
+    width: 15%;
     border: solid 1px white;
     cursor: pointer;
 }
@@ -41,27 +39,27 @@
     /* margin-bottom: 10px; */
 }
 
-.suite-content {
+.option-content {
     display: none;
     position: absolute;
     background-color: var(--octopus-gray);
     border: solid 1.0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    width: 90px;
+    width: 85px;
 }
 
-.suite-name {
+.option-name {
     color: white;
     padding: 10px;
     display: block;
 }
 
-.suite-name:hover {
+.option-name:hover {
     background-color: #1abc9c;
 }
 
-.runner-card:hover .suite-content {
+.runner-card:hover .option-content {
     display: block;
 }
 

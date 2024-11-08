@@ -55,7 +55,7 @@ body {
   cursor: pointer;
   height: 20px;
   padding-right: 25px;
-  width: 65px;
+  width: 60px;
   -webkit-appearance: none;
   -webkit-transition: .25s;
 }
@@ -70,12 +70,12 @@ body {
   content: '';
   display: block;
   height: 20px;
-  width: 45px;
+  width: 35px;
 }
 
 .title {
   text-align: center;
-  margin: 0 650px;
+  margin: 0 630px;
 }
 .source input[type="checkbox"]:checked {
   background-position: 0 0, 35px 0;

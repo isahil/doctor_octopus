@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./fixme.css";
-import newOrderTags from "./newTags.json"
+import newOrderTags from "./data/new-order-tags.json"
 
 const FixMe = () => {
   const [order, setOrder] = useState({});
