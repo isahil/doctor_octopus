@@ -75,7 +75,7 @@ body {
 
 .title {
   text-align: center;
-  margin: 0 630px;
+  margin: 0 600px;
 }
 .source input[type="checkbox"]:checked {
   background-position: 0 0, 35px 0;
