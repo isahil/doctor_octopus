@@ -10,13 +10,13 @@ def get_a_s3_card_html_report(html):
 
 def get_all_s3_cards():
     # Call S3 to list current objects
-    objects = S3.list_s3_objects()
+    s3_objects = S3.list_s3_objects()
     reports_dir = [] # list that will be sent to the client
 
     # temporary dict to store the reports
     report_cards = {} # { folder_name: { json_report: { "object_name": object_name... }, html_report: "name.html" } }
     
-    for obj in objects:
+    for obj in s3_objects:
         object_name = obj["Key"]
         folder_name = object_name.split("/")[-2]
         file_name = object_name.split("/")[-1]
@@ -28,7 +28,7 @@ def get_all_s3_cards():
         if file_name.endswith(".html"):
             report_cards[folder_name]["html_report"] = object_name
     
-    print(f"report_cards length: {len(report_cards)}")
+    print(f"Total reports received from S3 bucket: {len(report_cards)}")
 
     for folder_name in report_cards.values():
             j_report = S3.get_a_s3_object(folder_name["json_report"]["object_name"])
@@ -38,7 +38,7 @@ def get_all_s3_cards():
     return reports_dir
 
 def download_s3_objects(bucket_name):
-    print(f"Downloading objects from {bucket_name}...")
+    print(f"Downloading objects from S3 bucket: {bucket_name}...")
     objects = S3.list_s3_objects(bucket_name)
     for obj in objects:
         object_name = obj["Key"]

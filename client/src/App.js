@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import { Terminal } from "@xterm/xterm";
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import FixMe from "./component/fixme/fixme";
-import Runner from "./component/runner/runner.jsx";
+import Lab from "./component/lab/lab.jsx";
 
 function App() {
-  const [source, setSource] = React.useState("remote");
-  const [showFixMe, setShowFixMe] = React.useState(false);
+  const [source, setSource] = useState("local");
+  const [showFixMe, setShowFixMe] = useState(false);
+  
+  const terminal = new Terminal();
 
   const toggleSource = () => {
     setSource((currentSource) =>
       currentSource === "remote" ? "local" : "remote"
     );
-    console.log("source", source);
   };
 
   return (
@@ -34,8 +36,8 @@ function App() {
           <Cards source={source} />
         </div>
         <div className="tech">
-          <XTerm setShowFixMe={setShowFixMe} />
-          <Runner />
+          <XTerm terminal={terminal} setShowFixMe={setShowFixMe} />
+          <Lab terminal={terminal}/>
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}
           <FixMe />

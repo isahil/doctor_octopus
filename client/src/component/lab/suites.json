@@ -1,13 +1,5 @@
 [
     {
-        "name": "env",
-        "options": ["qa", "dev", "uat"]
-    },
-    {
-        "name": "app",
-        "options": ["loan", "clo"]
-    },
-    {
         "name": "api",
         "options": ["smoke", "regression", "sanity"]
     },
@@ -25,6 +17,6 @@
     },
     {
         "name": "perf",
-        "options": ["smoke", "regression", "sanity"]
+        "options": ["login", "list", "inventory"]
     }
 ]

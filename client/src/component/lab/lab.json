@@ -1,0 +1,14 @@
+[
+    {
+        "name": "env",
+        "options": ["qa", "dev", "uat"]
+    },
+    {
+        "name": "app",
+        "options": ["loan", "clo"]
+    },
+    {
+        "name": "proto",
+        "options": ["api", "ui", "fix", "perf"]
+    }
+]

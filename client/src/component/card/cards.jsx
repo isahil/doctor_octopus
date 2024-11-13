@@ -8,20 +8,22 @@ const Cards = ({ source }) => {
 
   const getCards = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/cards?source=${source}`);
+      const response = await fetch(
+        `http://localhost:8000/reports?source=${source}`
+      );
       const data = await response.json();
+      console.log(`Fetched total cards: ${data.length}`);
       setCards(data);
     } catch (error) {
-      console.error('Error fetching cards data:', error);
+      console.error("Error fetching cards data:", error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect( () => {
-    getCards()
-    console.log(`There are total of ${cards.length} cards in the grid.`);
-  },[source]);
+  useEffect(() => {
+    getCards();
+  }, [source]);
 
   if (isLoading) {
     return (

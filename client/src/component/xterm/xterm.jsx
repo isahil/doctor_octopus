@@ -1,20 +1,18 @@
-import { Terminal } from "@xterm/xterm";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef , useState} from "react";
 import "./xterm.css";
 import handleCommand from "./commands/command-handler.js";
 
-const XTerm = ({ setShowFixMe }) => {
+const XTerm = ({ terminal, setShowFixMe }) => {
   const terminalRef = useRef(null);
-  const [num, setNum] = React.useState(1);
+  const [num, setNum] = useState(1);
 
   const xterm = () => {
-    const terminal = new Terminal();
     terminal.options.theme.foreground = `cyan`;
     terminal.options.cursorStyle = "underline";
     terminal.options.cursorBlink = true;
     
     terminal.open(terminalRef.current);
-    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. What can I help you with?\x1B[0m\r\n");
+    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'help' to see my options\x1B[0m\r\n");
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
     let input = "", cursor = 0;

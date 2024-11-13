@@ -8,7 +8,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node run.js"
+    "test": "node run.js",
+    "qa:loan:api": "npx playwright test --project=ui:regression"
   },
   "author": "Imran Sahil",
   "license": "ISC",

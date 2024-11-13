@@ -1,4 +1,4 @@
-.runner-component {
+.lab-component {
     border: 7px solid var(--octopus-gray);
     width: 650px;
     height: 200px;
@@ -9,30 +9,40 @@
     justify-content: center; /* Center vertically */
 }
 
-.runner-header {
-    margin-bottom: 10px;
-    text-align: center;
+.lab-title {
+    margin: 0px 0px 20px 0px;
+    padding: 0;
     color: #1abc9c;
 }
 
-.runner-cards {
+.lab-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: rgb(87, 126, 126);
+}
+
+.lab-cards {
     width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.runner-card {
+.lab-card {
     width: 15%;
+    margin-left: 15px;
     border: solid 1px white;
     cursor: pointer;
 }
 
-.runner-card:hover {
+.lab-card:hover {
     background-color: var(--octopus-gray);
 }
 
-.runner-card h2 {
+.lab-card h2 {
     text-align: center;
     color: white;
     margin-top: 5px;
@@ -59,7 +69,7 @@
     background-color: #1abc9c;
 }
 
-.runner-card:hover .option-content {
+.lab-card:hover .option-content {
     display: block;
 }
 
@@ -75,5 +85,5 @@
 
 .run-button:hover {
     background-color: #45a049;
-    transform: translateY(2.5px);
+    transform: translateY(1px);
 }

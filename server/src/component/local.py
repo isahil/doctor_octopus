@@ -4,7 +4,7 @@ load_dotenv('.env')
 import json
 import os
 
-local_dir = os.environ.get('LOCAL_DIRECTORY') # Path to test results directory
+local_dir = os.environ.get('LOCAL_DIRECTORY', "../../") # Path to test results directory
 local_test_reports_dir = os.path.join(local_dir, 'test_reports')
 
 def get_a_local_card_html_report(html):
@@ -15,8 +15,10 @@ def get_a_local_card_html_report(html):
 
 def get_all_local_cards():
     test_results = []
+    local_reports_dir = os.listdir(local_test_reports_dir)
+    print(f"Total local reports found: {len(local_reports_dir)}")
 
-    for folder in os.listdir(local_test_reports_dir):
+    for folder in local_reports_dir:
         folder_path = os.path.join(local_test_reports_dir, folder)
         report_card = {"json_report": {}, "html_report": ""}
 
@@ -31,7 +33,7 @@ def get_all_local_cards():
                     html_file_path = os.path.join(folder, file)
                     report_card["html_report"] = str(html_file_path)
 
-                time.sleep(0.1)
+                # time.sleep(0.1) # simulate slow connection
         test_results.append(report_card)
 
     return test_results
