@@ -14,9 +14,9 @@
   {
     "name": "suites",
     "options": {
-      "api": ["smoke", "regression", "api-sanity"],
-      "ui": ["ui-e2e", "regression", "ui-sanity"],
-      "fix": ["new-order", "e2e", "cancel-order"]
+      "api": ["smoke", "regression", "sanity"],
+      "ui": ["e2e", "regression"],
+      "fix": ["new-order", "cancel-order"]
     }
   }
 ]

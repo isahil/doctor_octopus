@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "node run.js",
-    "qa:loan:api": "npx playwright test --project=ui:regression"
+    "qa:loan:api:smoke": "npx playwright test --project=ui:regression"
   },
   "author": "Imran Sahil",
   "license": "ISC",
