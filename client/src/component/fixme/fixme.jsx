@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./fixme.css";
-import newOrderTags from "./data/new-order-tags.json"
+import newOrderTags from "./data/new-order-tags.json";
 
 const FixMe = () => {
   const [order, setOrder] = useState({});
   const [orderType, setOrderType] = useState("new"); // new or cancel
+  const [tagChecked, setTagChecked] = useState({});
 
   /**
    * create a draft order on page load with default values
@@ -15,7 +16,18 @@ const FixMe = () => {
     const order = {};
     newOrderTags.forEach((fixTag) => {
       const tag = fixTag["tag"];
-      order[tag] = fixTag["values"].length === 1 ? fixTag["values"][0] : "";
+
+      if (fixTag["values"].length === 1) {
+        order[tag] = fixTag["values"][0]; // set the default value if the tag has only one value for the draft order
+        
+        // set the tagChecked state to true if the tag has only one value. Check radio button by default if it has only one value
+        setTagChecked(prev => {
+          return {
+            ...prev,
+            [tag]: true,
+          };
+        });
+      } else order[tag] = ""; // set the default value to empty string if the tag has multiple values
     });
     // console.log(JSON.stringify(order));
     return order;
@@ -44,12 +56,21 @@ const FixMe = () => {
   };
 
   const handleRadioChange = (event, tag) => {
-    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
+    console.log(`Radio button clicked: ${tag} - ${event.target.value}`);
+    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.checked }));
+    setTagChecked((prev) => {
+      return {
+        ...prev,
+        // [tag]: tagChecked[tag] ? false : true // toggle the radio button from checked to unchecked and vice versa
+        [tag]: true
+      };
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitting order", order);
+    console.log(`Submitting order::: ${JSON.stringify(order)}`);
+    // TODO: send the data to the fixme server api to process
   };
 
   useEffect(() => {
@@ -74,7 +95,7 @@ const FixMe = () => {
           const tag = fixTag["tag"];
           const name = fixTag["name"];
           const values = fixTag["values"];
-          const valuesLength = Array.isArray(values) ? values.length : 0;
+          // const valuesLength = Array.isArray(values) ? values.length : 0;
           const isEven = i % 2 === 0;
 
           return (
@@ -102,13 +123,13 @@ const FixMe = () => {
                   </div>
                 ) : (
                   <div className="tag-radio">
-                    {fixTag["values"].map((value, j) => (
+                    {values.map((value, j) => (
                       <label key={j}>
                         <input
                           type="radio"
                           name={tag}
                           value={value}
-                          checked={valuesLength === 1}
+                          checked={tagChecked[tag] ? true : false}
                           onChange={(event) => handleRadioChange(event, tag)}
                         />
                         {value}

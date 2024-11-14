@@ -1,6 +1,6 @@
 .lab-component {
     border: 7px solid var(--octopus-gray);
-    width: 650px;
+    width: 675px;
     height: 200px;
     margin: 25px;
     display: flex;
@@ -47,6 +47,15 @@
     color: white;
     margin-top: 5px;
     /* margin-bottom: 10px; */
+}
+
+.lab-card.disabled {
+    background-color: #0c0b0b;
+    cursor: not-allowed;
+}
+
+.lab-card.disabled h2 {
+    color: #5f5a5a;
 }
 
 .option-content {

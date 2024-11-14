@@ -1,14 +1,22 @@
 [
-    {
-        "name": "env",
-        "options": ["qa", "dev", "uat"]
-    },
-    {
-        "name": "app",
-        "options": ["loan", "clo"]
-    },
-    {
-        "name": "proto",
-        "options": ["api", "ui", "fix", "perf"]
+  {
+    "name": "env",
+    "options": ["qa", "dev", "uat"]
+  },
+  {
+    "name": "app",
+    "options": ["loan", "clo"]
+  },
+  {
+    "name": "proto",
+    "options": ["api", "ui", "fix"]
+  },
+  {
+    "name": "suites",
+    "options": {
+      "api": ["smoke", "regression", "api-sanity"],
+      "ui": ["ui-e2e", "regression", "ui-sanity"],
+      "fix": ["new-order", "e2e", "cancel-order"]
     }
+  }
 ]
