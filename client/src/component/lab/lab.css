@@ -1,7 +1,7 @@
 .lab-component {
     border: 7px solid var(--octopus-gray);
     width: 675px;
-    height: 200px;
+    height: 250px;
     margin: 25px;
     display: flex;
     flex-direction: column;
@@ -31,8 +31,9 @@
     align-items: center;
 }
 
+/*
 .lab-card {
-    width: 15%;
+     width: 15%;
     margin-left: 15px;
     border: solid 1px white;
     cursor: pointer;
@@ -40,6 +41,29 @@
 
 .lab-card:hover {
     background-color: var(--octopus-gray);
+} */
+
+.lab-card {
+    width: 150px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0px;
+    -webkit-box-shadow: 0px 1px 3px #41baba;
+    -moz-box-shadow: 0px 1px 3px #41baba;
+    box-shadow: 0px 1px 3px #2fd648;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 9px 24px 10px 20px;
+    margin-left: 15px;
+    border: solid white 2px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+.lab-card:hover {
+    background: #094266;
+    text-decoration: none;
 }
 
 .lab-card h2 {
@@ -65,7 +89,7 @@
     border: solid 1.0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    width: 85px;
+    width: 120px;
 }
 
 .option-name {
@@ -80,6 +104,7 @@
 
 .lab-card:hover .option-content {
     display: block;
+    margin-top: 12px;
 }
 
 .run-button {

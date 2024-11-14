@@ -36,4 +36,7 @@ def get_help(
     print(f"Command executed: {result.args} | Return Code: {result.returncode}")
     print(f"STDOUT: {result}")
 
-    return result.stdout
+    if type(result.stdout) is str: print(f"Output STDOUT: {result.stdout}")
+    elif type(result.stderr) is str: print(f"Output STDERR: {result.stderr}")
+    output = result.stdout if type(result.stdout) is str else result.stderr
+    return output

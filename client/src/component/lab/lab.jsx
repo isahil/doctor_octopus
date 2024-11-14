@@ -96,7 +96,7 @@ const Lab = ({ terminal }) => {
         })}
       </div>
       <div>
-        <button className="run-button" onClick={() => handleRunClick()}>
+        <button className="submit-button" onClick={() => handleRunClick()}>
           Run
         </button>
       </div>

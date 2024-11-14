@@ -94,3 +94,33 @@ body {
 /* .tech {
   border: 1px solid salmon;
 } */
+
+.submit-button {
+  background: #2abdb1;
+  background-image: -webkit-linear-gradient(top, #2abdb1, #39a853);
+  background-image: -moz-linear-gradient(top, #2abdb1, #39a853);
+  background-image: -ms-linear-gradient(top, #2abdb1, #39a853);
+  background-image: -o-linear-gradient(top, #2abdb1, #39a853);
+  background-image: linear-gradient(to bottom, #2abdb1, #39a853);
+  -webkit-border-radius: 9;
+  -moz-border-radius: 9;
+  border: solid white 1px;
+  border-radius: 9px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 9px 24px 10px 20px;
+  text-decoration: none;
+  margin-top: 15px;
+}
+
+.submit-button:hover {
+  background: #2fad33;
+  background-image: -webkit-linear-gradient(top, #2fad33, #2fad33);
+  background-image: -moz-linear-gradient(top, #2fad33, #2fad33);
+  background-image: -ms-linear-gradient(top, #2fad33, #2fad33);
+  background-image: -o-linear-gradient(top, #2fad33, #2fad33);
+  background-image: linear-gradient(to bottom, #2fad33, #2fad33);
+  text-decoration: none;
+  transform: translateY(0.5px);
+}

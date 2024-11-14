@@ -81,7 +81,7 @@
                 {
                   "workerIndex": 0,
                   "status": "passed",
-                  "duration": 1467,
+                  "duration": 1840,
                   "errors": [],
                   "stdout": [
                     {
@@ -94,12 +94,12 @@
                       "text": "ok 1 - Google\n"
                     },
                     {
-                      "text": "  ---\n  duration_ms: 0.361708\n  type: 'suite'\n  ...\n"
+                      "text": "  ---\n  duration_ms: 0.363459\n  type: 'suite'\n  ...\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-11-13T17:49:30.964Z",
+                  "startTime": "2024-11-14T17:47:29.487Z",
                   "attachments": []
                 }
               ],
@@ -126,7 +126,7 @@
                 {
                   "workerIndex": 0,
                   "status": "failed",
-                  "duration": 1376,
+                  "duration": 2105,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mApp\u001b[27mle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mGoog\u001b[27mle\"\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mApp\u001b[27mle\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mGoog\u001b[27mle\"\u001b[39m\n    at /Users/sahil/Dev/Projects/doctor_octopus/playwright/tests/google.spec.ts:14:32",
@@ -150,7 +150,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-11-13T17:49:32.621Z",
+                  "startTime": "2024-11-14T17:47:31.663Z",
                   "attachments": [],
                   "errorLocation": {
                     "file": "/Users/sahil/Dev/Projects/doctor_octopus/playwright/tests/google.spec.ts",
@@ -191,7 +191,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-11-13T17:49:34.011Z",
+                  "startTime": "2024-11-14T17:47:33.787Z",
                   "attachments": []
                 }
               ],
@@ -227,7 +227,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2024-11-13T17:49:34.011Z",
+                  "startTime": "2024-11-14T17:47:33.787Z",
                   "attachments": []
                 }
               ],
@@ -244,8 +244,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-11-13T17:49:30.769Z",
-    "duration": 3246.7980000000002,
+    "startTime": "2024-11-14T17:47:29.285Z",
+    "duration": 4507.342000000001,
     "expected": 1,
     "skipped": 2,
     "unexpected": 1,
