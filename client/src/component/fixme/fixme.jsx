@@ -144,7 +144,7 @@ const FixMe = () => {
         <div>
           <button
             type="submit"
-            className="submit-button"
+            className="button submit-button"
             onClick={(event) => handleSubmit(event)}
           >
             Submit

@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { PlaywrightTestConfig } from "playwright/test";
  
-const { TEST_RESULTS_DIR } = process.env;
+const { TEST_REPORTS_DIR } = process.env;
 
 const config: PlaywrightTestConfig = {
   testDir: "tests",
@@ -13,8 +13,8 @@ const config: PlaywrightTestConfig = {
   },
   reporter: [
     ['list'],
-    ['html', { outputFolder: TEST_RESULTS_DIR, open: "never" } ],
-    ['json', { outputFile: `${TEST_RESULTS_DIR}report_card.json` }],
+    ['html', { outputFolder: TEST_REPORTS_DIR, open: "never" } ],
+    ['json', { outputFile: `${TEST_REPORTS_DIR}report_card.json` }],
   ],
   projects: [
     {

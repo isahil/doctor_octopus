@@ -16,11 +16,17 @@ const Lab = ({ terminal }) => {
   };
 
   const handleRunClick = async () => {
-    let command = "npm run ";
-    Object.entries(selectedOptions).forEach((entry, i) => {
-      if (i === 0) command += `${entry[1]}`;
-      else command += `:${entry[1]}`;
-    });
+    
+    // Object.entries(selectedOptions).forEach((entry, i) => {
+    //   if (i === 0) command += `${entry[1]}`;
+    //   else command += `:${entry[1]}`;
+    // });
+    const env = selectedOptions[0]
+    const app = selectedOptions[1]
+    const proto = selectedOptions[2]
+    const suite = selectedOptions[3]
+    const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
+
     terminal.write(
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
     );
@@ -68,12 +74,15 @@ const Lab = ({ terminal }) => {
           } else cardOptions = card.options;
 
           const enabled = i === 0 || selectedOptions[i - 1];
+          const selected = selectedOptions[i];
+
           return (
             <div
               key={i}
-              className={`lab-card ${
-                enabled ? "enabled" : "disabled"
-              }`}
+              className={`button lab-card-button 
+                ${enabled ? "enabled" : "disabled"}
+                ${selected ? "selected" : "not-selected"}
+              `}
             >
               <h2>{cardName} </h2>
               {enabled && (
@@ -96,7 +105,7 @@ const Lab = ({ terminal }) => {
         })}
       </div>
       <div>
-        <button className="submit-button" onClick={() => handleRunClick()}>
+        <button className="button run-button" onClick={() => handleRunClick()}>
           Run
         </button>
       </div>

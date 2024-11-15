@@ -94,17 +94,6 @@
     display: none;
 }
 
-/* .submit-button {
-    background-color: #1abc9c;;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
+.submit-button {
     margin-top: 15px;
-    width: 30%;
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-} */
-
-/* .submit-button:hover {
-    background-color: #45a049;
-    transform: translateY(2.5px);
-} */
+}

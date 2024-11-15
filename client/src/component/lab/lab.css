@@ -25,61 +25,45 @@
 }
 
 .lab-cards {
-    width: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/*
-.lab-card {
-     width: 15%;
+.lab-card-button {
     margin-left: 15px;
-    border: solid 1px white;
-    cursor: pointer;
 }
 
-.lab-card:hover {
-    background-color: var(--octopus-gray);
-} */
-
-.lab-card {
-    width: 150px;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0px;
-    -webkit-box-shadow: 0px 1px 3px #41baba;
-    -moz-box-shadow: 0px 1px 3px #41baba;
-    box-shadow: 0px 1px 3px #2fd648;
-    font-family: Georgia;
-    color: #ffffff;
-    font-size: 20px;
-    padding: 9px 24px 10px 20px;
-    margin-left: 15px;
-    border: solid white 2px;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-.lab-card:hover {
-    background: #094266;
-    text-decoration: none;
+.lab-card-button.enabled {
+    background: rgb(37, 29, 85);
+    margin-left: 10px;
 }
 
-.lab-card h2 {
+.lab-card-button.enabled:hover {
+    background: rgb(69, 55, 159);
+}
+
+.lab-card-button.selected {
+    background: rgb(69, 55, 159);
+}
+
+.lab-card-button h2 {
     text-align: center;
     color: white;
     margin-top: 5px;
-    /* margin-bottom: 10px; */
 }
 
-.lab-card.disabled {
-    background-color: #0c0b0b;
+.lab-card-button.disabled {
+    background-color: inherit;
     cursor: not-allowed;
 }
 
-.lab-card.disabled h2 {
-    color: #5f5a5a;
+.lab-card-button.disabled:hover {
+    background: none;
+}
+
+.lab-card-button.disabled h2 {
+    color: #7b7272;
 }
 
 .option-content {
@@ -89,7 +73,7 @@
     border: solid 1.0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    width: 120px;
+    width: 100px;
 }
 
 .option-name {
@@ -102,22 +86,11 @@
     background-color: #1abc9c;
 }
 
-.lab-card:hover .option-content {
+.lab-card-button:hover .option-content {
     display: block;
-    margin-top: 12px;
+    margin: 12px 0px 0px -20px;
 }
 
 .run-button {
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #1abc9c;
-    color: white;
-    /* border-radius: 3px; */
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    cursor: pointer;
-}
-
-.run-button:hover {
-    background-color: #45a049;
-    transform: translateY(1px);
 }

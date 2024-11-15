@@ -1,3 +1,4 @@
+import os
 from fastapi import APIRouter, Query
 from fastapi.responses import HTMLResponse
 from src.component.local  import get_all_local_cards, get_a_local_card_html_report
@@ -5,6 +6,7 @@ from src.component.remote import get_all_s3_cards, get_a_s3_card_html_report
 import subprocess
 
 router = APIRouter()
+local_dir = os.environ.get('LOCAL_DIRECTORY')
 
 @router.get("/reports/")
 async def get_all_reports(source: str = Query(..., title="Source Name", description="Retrieve all the HTML & JSON reports from the source", example="local/remote")
@@ -32,11 +34,10 @@ def get_help(
     command: str = Query(..., title="Execute Command", description="Command to be executed on the server", example="ls")
     ) -> str:
     # print(f"FASTAPI received command: {command}")
-    result = subprocess.run(f"cd ../playwright&& {command}", shell=True, capture_output=True, text=True)
+    result = subprocess.run(f"cd {local_dir}&& {command}", shell=True, capture_output=True, text=True)
     print(f"Command executed: {result.args} | Return Code: {result.returncode}")
-    print(f"STDOUT: {result}")
 
-    if type(result.stdout) is str: print(f"Output STDOUT: {result.stdout}")
-    elif type(result.stderr) is str: print(f"Output STDERR: {result.stderr}")
-    output = result.stdout if type(result.stdout) is str else result.stderr
+    # if (len(result.stdout) > 0): print(f"Output STDOUT: {result.stdout}")
+    # elif (len(result.stderr) > 0): print(f"Output STDERR: {result.stderr}")
+    output = result.stdout if (len(result.stdout) > 0) else result.stderr
     return output

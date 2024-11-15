@@ -4,8 +4,10 @@ load_dotenv('.env')
 import json
 import os
 
-local_dir = os.environ.get('LOCAL_DIRECTORY', "../../") # Path to test results directory
-local_test_reports_dir = os.path.join(local_dir, 'test_reports')
+local_dir = os.environ.get('LOCAL_DIRECTORY') # Path to test results directory
+test_reports_dir = os.environ.get("TEST_REPORTS_DIR")
+
+local_test_reports_dir = os.path.join(local_dir, test_reports_dir)
 
 def get_a_local_card_html_report(html):
     html_file_path = os.path.join(local_test_reports_dir, html)
