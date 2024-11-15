@@ -38,6 +38,7 @@
     margin-right: 30px;
     color: white
 }
+
 .order-type label input {
     margin-right: 5px;
 }
@@ -49,7 +50,7 @@
 .fix-tag-row {
     display: flex;
     align-items: center;
-    height: 30px;
+    height: 35px;
 }
 
 .even-row {
@@ -71,8 +72,67 @@
     color: white;
 }
 
-.tag-radio {
-    margin-right: 10px;
+.fix-tag-row .radio {
+    appearance: none;
+    background-color: #dfe1e4;
+    border-radius: 72px;
+    border-style: none;
+    flex-shrink: 0;
+    height: 20px;
+    margin: 0px 10px 0px 10px;
+    position: relative;
+    width: 30px;
+}
+
+.fix-tag-row .radio::before {
+    bottom: -6px;
+    content: "";
+    left: -6px;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+}
+
+.fix-tag-row .radio,
+.fix-tag-row .radio::after {
+    transition: all 100ms ease-out;
+}
+
+.fix-tag-row .radio::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+}
+
+.fix-tag-row input[type=checkbox] {
+    cursor: default;
+}
+
+.fix-tag-row .radio:hover {
+    background-color: #c9cbcd;
+    transition-duration: 0s;
+}
+
+.fix-tag-row .radio:checked {
+    background-color: #6cf;
+}
+
+.fix-tag-row .radio:checked::after {
+    background-color: #fff;
+    left: 13px;
+}
+
+.fix-tag-row :focus:not(.focus-visible) {
+    outline: 0;
+}
+
+.fix-tag-row .radio:checked:hover {
+    background-color: #535db3;
 }
 
 .tag-radio label input {
@@ -86,7 +146,7 @@
 .tag-input input {
     width: 50%;
     padding: 5px;
-    border: 1px solid var(--border-color);
+    border: 1px solid;
     border-radius: var(--border-radius);
 }
 

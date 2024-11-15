@@ -32,19 +32,20 @@
 
 .lab-card-button {
     margin-left: 15px;
+    width: 25%;
 }
 
 .lab-card-button.enabled {
-    background: rgb(37, 29, 85);
+    background: #6e79d6;
     margin-left: 10px;
 }
 
 .lab-card-button.enabled:hover {
-    background: rgb(69, 55, 159);
+    background: #6cf;
 }
 
 .lab-card-button.selected {
-    background: rgb(69, 55, 159);
+    background: #6cf;
 }
 
 .lab-card-button h2 {
@@ -73,7 +74,7 @@
     border: solid 1.0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    width: 100px;
+    width: 8%;
 }
 
 .option-name {
@@ -83,7 +84,7 @@
 }
 
 .option-name:hover {
-    background-color: #1abc9c;
+    background-color: black;
 }
 
 .lab-card-button:hover .option-content {

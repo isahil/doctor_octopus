@@ -6,7 +6,7 @@
   --border-color: white;
   --background-color: #15151f;
   --octopus-gray: #30363d;
-  --border-radius: 0px;
+  --border-radius: 4px;
 }
 
 body {
@@ -104,12 +104,12 @@ body {
   background-image: linear-gradient(to bottom, #13438a, #13438a);
   -webkit-border-radius: 5;
   -moz-border-radius: 5;
-  border-radius: 5px;
+  border-radius: 4px;
   font-family: Georgia;
   color: #ffffff;
   font-size: 20px;
   background: #1aba6a;
-  padding: 9px 24px 10px 20px;
+  padding: 10px 24px 10px 24px;
   border: solid white 2px;
   text-decoration: none;
   cursor: pointer;
