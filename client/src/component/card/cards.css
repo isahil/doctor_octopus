@@ -1,9 +1,6 @@
 .cards {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping if there are too many cards */
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 /* suppose to make the scrollbar always visible */

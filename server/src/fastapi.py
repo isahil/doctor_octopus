@@ -6,7 +6,7 @@ from src.component.remote import get_all_s3_cards, get_a_s3_card_html_report
 import subprocess
 
 router = APIRouter()
-local_dir = os.environ.get('LOCAL_DIRECTORY')
+local_dir = os.environ.get("LOCAL_DIRECTORY", "../../") # Path to test results directory
 
 @router.get("/reports/")
 async def get_all_reports(source: str = Query(..., title="Source Name", description="Retrieve all the HTML & JSON reports from the source", example="local/remote")
@@ -37,7 +37,7 @@ def get_help(
     result = subprocess.run(f"cd {local_dir}&& {command}", shell=True, capture_output=True, text=True)
     print(f"Command executed: {result.args} | Return Code: {result.returncode}")
 
-    # if (len(result.stdout) > 0): print(f"Output STDOUT: {result.stdout}")
-    # elif (len(result.stderr) > 0): print(f"Output STDERR: {result.stderr}")
+    if (len(result.stdout) > 0): print(f"Output STDOUT: {result.stdout}")
+    elif (len(result.stderr) > 0): print(f"Output STDERR: {result.stderr}")
     output = result.stdout if (len(result.stdout) > 0) else result.stderr
     return output

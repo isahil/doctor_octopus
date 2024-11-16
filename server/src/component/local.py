@@ -4,8 +4,8 @@ load_dotenv('.env')
 import json
 import os
 
-local_dir = os.environ.get('LOCAL_DIRECTORY') # Path to test results directory
-test_reports_dir = os.environ.get("TEST_REPORTS_DIR")
+local_dir = os.environ.get('LOCAL_DIRECTORY', "../../") # Path to test results directory
+test_reports_dir = os.environ.get("TEST_REPORTS_DIR", "test_reports")
 
 local_test_reports_dir = os.path.join(local_dir, test_reports_dir)
 

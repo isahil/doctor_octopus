@@ -28,11 +28,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .lab-card-button {
     margin-left: 15px;
-    width: 25%;
+    width: 130px;
 }
 
 .lab-card-button.enabled {
@@ -74,7 +75,7 @@
     border: solid 1.0px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    width: 8%;
+    width: 130px;
 }
 
 .option-name {
@@ -89,7 +90,7 @@
 
 .lab-card-button:hover .option-content {
     display: block;
-    margin: 12px 0px 0px -20px;
+    margin: 12px 0px 0px -26px;
 }
 
 .run-button {

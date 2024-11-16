@@ -6,7 +6,7 @@ const Lab = ({ terminal }) => {
   const [selectedOptions, setSelectedOptions] = useState({});
 
   const handleOptionClick = (index, option) => {
-    console.log(`Option clicked: ${option}`);
+    console.log(`Lab card #${index}: ${option}`);
     setSelectedOptions((prev) => {
       return {
         ...prev,
@@ -16,16 +16,13 @@ const Lab = ({ terminal }) => {
   };
 
   const handleRunClick = async () => {
-    
-    // Object.entries(selectedOptions).forEach((entry, i) => {
-    //   if (i === 0) command += `${entry[1]}`;
-    //   else command += `:${entry[1]}`;
-    // });
     const env = selectedOptions[0]
     const app = selectedOptions[1]
     const proto = selectedOptions[2]
     const suite = selectedOptions[3]
-    const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
+    // const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
+    const command = `npm run ${proto}:${suite}`;
+    console.log(`Run command: ${command}`)
 
     terminal.write(
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
@@ -43,7 +40,7 @@ const Lab = ({ terminal }) => {
       `\r\n -------------------------------------------------------------------\r\n`
     );
     // Process the response data to remove leading whitespace from each line
-    data.split("\n").map((line) => {
+    data.split("\n").forEach((line) => {
       line.trimStart();
       terminal.write(`\r\n\ ${line}\r\n`);
     });
@@ -52,6 +49,7 @@ const Lab = ({ terminal }) => {
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
 
+    console.log(`Command finished running!`)
     setSelectedOptions({}); // clear the selected options
   };
 
@@ -71,8 +69,8 @@ const Lab = ({ terminal }) => {
           const cardName = card.name;
           let cardOptions;
 
-          if(cardName === "suites" ) { // if the card is "suites", then the options are based on the previous selected options
-            cardOptions = selectedOptions[i-1] ? card["options"][selectedOptions[i-1]] : card.options;
+          if (cardName === "suites") { // if the card is "suites", then the options are based on the previous selected options
+            cardOptions = selectedOptions[i - 1] ? card["options"][selectedOptions[i - 1]] : card.options;
           } else cardOptions = card.options;
 
           const enabled = i === 0 || selectedOptions[i - 1];
@@ -81,27 +79,24 @@ const Lab = ({ terminal }) => {
           return (
             <div
               key={i}
-              className={`button lab-card-button 
-                ${enabled ? "enabled" : "disabled"}
-                ${selected ? "selected" : "not-selected"}
-              `}
+              className={`button lab-card-button ${enabled ? "enabled" : "disabled"} ${selected ? "selected" : "not-selected"}`}
             >
-              <h2>{cardName} </h2>
-              {enabled && (
-                <div className="option-content">
-                  {cardOptions.map((option, j) => {
-                    return (
-                      <div
-                        key={j}
-                        className="option-name"
-                        onClick={() => handleOptionClick(i, option)}
-                      >
-                        {option}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+              <h2>{cardName}</h2>
+                {enabled && (
+                  <div className="option-content">
+                    {cardOptions.map((option, j) => {
+                      return (
+                        <div
+                          key={j}
+                          className="option-name"
+                          onClick={() => handleOptionClick(i, option)}
+                        >
+                          {option}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
             </div>
           );
         })}

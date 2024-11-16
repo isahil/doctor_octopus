@@ -12,9 +12,11 @@ function App() {
   const terminal = new Terminal();
 
   const toggleSource = () => {
-    setSource((currentSource) =>
-      currentSource === "remote" ? "local" : "remote"
-    );
+    setSource((currentSource) => {
+      const updatedSource = currentSource === "remote" ? "local" : "remote"
+      console.log(`Toggle source: ${updatedSource}`)
+      return updatedSource
+  });
   };
 
   return (

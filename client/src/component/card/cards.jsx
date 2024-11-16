@@ -12,7 +12,7 @@ const Cards = ({ source }) => {
         `http://localhost:8000/reports?source=${source}`
       );
       const data = await response.json();
-      console.log(`Fetched total cards: ${data.length}`);
+      console.log(`Total ${source} cards: ${data.length}`);
       setCards(data);
     } catch (error) {
       console.error("Error fetching cards data:", error);
