@@ -2,11 +2,11 @@
     background-color: var(--octopus-gray);
     border-radius: var(--border-radius);
     border: 1.5px solid #30363d;
-    margin: 20px;
+    margin: 5px;
     padding: 10px;
     display: flex;
     justify-content: center;
-    width: 500px;
+    width: 580px;
     height: 150px;
     overflow: hidden;
     box-shadow: inset 1px 1px 1px 1px rgba(58, 56, 56, 0.2);

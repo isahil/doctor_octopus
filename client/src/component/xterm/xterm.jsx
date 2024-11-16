@@ -74,7 +74,7 @@ const XTerm = ({ terminal, setShowFixMe }) => {
   };
 
   return (
-    <div ref={terminalRef} id="terminal" onClick={incrementNum}></div>
+    <div ref={terminalRef} id="terminal" onClick={incrementNum} className="component"></div>
   )
 };
 

@@ -34,7 +34,7 @@ const Cards = ({ source }) => {
   }
 
   return (
-    <div>
+    <div className="cards">
       {cards.map((card, index) => (
         <Card key={index} source={source} card={card} />
       ))}

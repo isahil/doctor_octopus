@@ -164,7 +164,7 @@ const FixMe = () => {
   };
 
   return (
-    <div className="fixme">
+    <div className="fixme component">
       <div className="fixme-header">
         <div className="fixme-title">FIXME</div>
         <div className="order-type">

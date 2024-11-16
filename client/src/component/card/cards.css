@@ -1,11 +1,9 @@
 .cards {
-    overflow: auto;
-    height: 200vh;
-    width: 600px;
-    scrollbar-color: #30363d #12161d;
-    scroll-behavior: smooth;
-    margin-right: 50px;
-    overflow: auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping if there are too many cards */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 /* suppose to make the scrollbar always visible */

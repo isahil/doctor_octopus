@@ -32,10 +32,10 @@ function App() {
       </div>
 
       <div className="grid">
-        <div className="cards">
+        <div className="cards-container">
           <Cards source={source} />
         </div>
-        <div className="tech">
+        <div className="tech-container">
           <XTerm terminal={terminal} setShowFixMe={setShowFixMe} />
           <Lab terminal={terminal}/>
           {/* showFixMe && <FixMe /> */}{" "}

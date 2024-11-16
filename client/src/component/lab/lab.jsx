@@ -51,12 +51,14 @@ const Lab = ({ terminal }) => {
       `\r\n -------------------------------------------------------------------\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
+
+    setSelectedOptions({}); // clear the selected options
   };
 
   // useEffect(() => {}, [])
 
   return (
-    <div className="lab-component">
+    <div className="lab component">
       <div className="lab-title">THE LAB</div>
       <div className="lab-header">
         {Object.entries(selectedOptions).map((entry, i) => {
