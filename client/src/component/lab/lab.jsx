@@ -69,7 +69,7 @@ const Lab = ({ terminal }) => {
           const cardName = card.name;
           let cardOptions;
 
-          if (cardName === "suites") { // if the card is "suites", then the options are based on the previous selected options
+          if (cardName === "suite") { // if the card is "suite", then the options are based on the previous selected options
             cardOptions = selectedOptions[i - 1] ? card["options"][selectedOptions[i - 1]] : card.options;
           } else cardOptions = card.options;
 

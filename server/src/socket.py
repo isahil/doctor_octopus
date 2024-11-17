@@ -26,8 +26,8 @@ async def suite(sid, suite_name):
     time.sleep(1)
     await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
 
-@sio.on("fixme")
-def fixme(sid, order_data):
+@sio.on('fixme')
+async def fixme(sid, order_data):
     print(f"\tClient sent fix order: {order_data}")
     # add steps to process/send fix order to fix client
-    sio.emit('fixme', f"Server received fixme request for: {order_data}", room=sid)
+    await sio.emit('fixme', f"Server received fixme request for: {order_data}", room=sid)

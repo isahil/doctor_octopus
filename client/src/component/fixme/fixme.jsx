@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./fixme.css";
 import newOrderTags from "./data/new-order-tags.json";
+import { socket_client } from "../../util/socket-client";
 
-const FixMe = () => {
+const FixMe = ({ terminal }) => {
   /**
    * create a draft order on page load with default values
    * @returns draft order object with keys and values
    * { "1": "SDET_OCTAURA", "price": "", ... }
    */
   const draft = (tags) => {
-    console.log(`Drafting order...`);
-    // console.log(`Tags: ${JSON.stringify(tags)}`);
     const _draft = {};
     const _checked = {};
 
@@ -21,22 +20,27 @@ const FixMe = () => {
       _draft[fixtag] = "";
       if (values.length === 1) {
         const value = values[0];
-        // console.log(`Default value for ${fixtag}: ${value}`);
         _draft[fixtag] = value; // set the default value if the tag has only one value for the draft order
         _checked[fixtag] = { [value]: true };
       } else if (values.length > 1) {
         values.forEach((value) => {
           _checked[fixtag] = { [value]: false };
         });
-      } 
-      // else _draft[fixtag] = ""; // set the default value to empty string if the tag has no values
+      }
     });
-
-    console.log(`the draft order ::: ${JSON.stringify(_draft)}`);
-    console.log(`the checked state ::: ${JSON.stringify(_checked)}`);
+    // console.log(`the draft order ::: ${JSON.stringify(_draft)}`);
+    // console.log(`the checked state ::: ${JSON.stringify(_checked)}`);
 
     return { draftOrder: _draft, draftChecked: _checked };
   };
+
+
+  const { draftOrder, draftChecked } = draft(newOrderTags);
+
+  const [orderType, setOrderType] = useState("new"); // new or cancel
+  const [newOrder, setNewOrder] = useState(draftOrder);
+  const [tagChecked, setTagChecked] = useState(draftChecked);
+
 
   const handleRadioChange = (event, tag) => {
     const value = event.target.value;
@@ -59,17 +63,17 @@ const FixMe = () => {
     setNewOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log(`Submitting order::: ${JSON.stringify(newOrder)}`);
     // TODO: send the data to the fixme server api to process
+    terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
+    terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
+
+    await socket_client("fixme", newOrder, terminal); // send the order to the server
+
+    // clear the order state after submitting
+    setNewOrder(draftOrder);
   };
-
-  const { draftOrder, draftChecked } = draft(newOrderTags);
-
-  const [orderType, setOrderType] = useState("new"); // new or cancel
-  const [newOrder, setNewOrder] = useState(draftOrder);
-  const [tagChecked, setTagChecked] = useState(draftChecked);
 
   // for debugging purposes
   // useEffect(() => {

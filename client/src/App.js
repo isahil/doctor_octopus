@@ -42,7 +42,7 @@ function App() {
           <Lab terminal={terminal}/>
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}
-          <FixMe />
+          <FixMe terminal={terminal}/>
         </div>
       </div>
     </div>
