@@ -12,7 +12,7 @@
     "options": ["api", "ui", "fix"]
   },
   {
-    "name": "suites",
+    "name": "suite",
     "options": {
       "api": ["smoke", "regression", "sanity"],
       "ui": ["e2e", "regression"],

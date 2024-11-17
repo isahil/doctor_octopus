@@ -3,79 +3,73 @@ import "./fixme.css";
 import newOrderTags from "./data/new-order-tags.json";
 
 const FixMe = () => {
-  const [order, setOrder] = useState({});
-  const [orderType, setOrderType] = useState("new"); // new or cancel
-  const [tagChecked, setTagChecked] = useState({});
-
   /**
    * create a draft order on page load with default values
    * @returns draft order object with keys and values
    * { "1": "SDET_OCTAURA", "price": "", ... }
    */
-  const draftOrder = () => {
-    const order = {};
-    newOrderTags.forEach((fixTag) => {
-      const tag = fixTag["tag"];
+  const draft = (tags) => {
+    console.log(`Drafting order...`);
+    // console.log(`Tags: ${JSON.stringify(tags)}`);
+    const _draft = {};
+    const _checked = {};
 
-      if (fixTag["values"].length === 1) {
-        order[tag] = fixTag["values"][0]; // set the default value if the tag has only one value for the draft order
-        
-        // set the tagChecked state to true if the tag has only one value. Check radio button by default if it has only one value
-        setTagChecked(prev => {
-          return {
-            ...prev,
-            [tag]: true,
-          };
+    tags.forEach((tag) => {
+      const fixtag = tag["tag"];
+      const values = tag["values"];
+
+      _draft[fixtag] = "";
+      if (values.length === 1) {
+        const value = values[0];
+        // console.log(`Default value for ${fixtag}: ${value}`);
+        _draft[fixtag] = value; // set the default value if the tag has only one value for the draft order
+        _checked[fixtag] = { [value]: true };
+      } else if (values.length > 1) {
+        values.forEach((value) => {
+          _checked[fixtag] = { [value]: false };
         });
-      } else order[tag] = ""; // set the default value to empty string if the tag has multiple values
+      } 
+      // else _draft[fixtag] = ""; // set the default value to empty string if the tag has no values
     });
-    // console.log(JSON.stringify(order));
-    return order;
-  };
 
-  /**
-   * display the order type selected by the user: new or cancel
-   * @param {*} event
-   * @returns jsx for the order type selected
-   */
-  const handleOrderType = (event) => {
-    console.log(event.target.value);
-    setOrderType(event.target.value);
-    if (event.target.value === "new") {
-      setOrder(draftOrder());
-      return (
-        <div className="fix-tags">{displayNewOrderFixTags(newOrderTags)}</div>
-      );
-    } else {
-      return <div className="fix-tags">{displayCancelOrderFixTags()}</div>;
-    }
-  };
+    console.log(`the draft order ::: ${JSON.stringify(_draft)}`);
+    console.log(`the checked state ::: ${JSON.stringify(_checked)}`);
 
-  const handleTagInput = (event, tag) => {
-    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
+    return { draftOrder: _draft, draftChecked: _checked };
   };
 
   const handleRadioChange = (event, tag) => {
-    console.log(`Radio button clicked: ${tag} - ${event.target.value}`);
-    setOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.checked }));
+    const value = event.target.value;
+    console.log(`Radio button clicked: ${tag} - ${value}`);
+    setNewOrder((prevOrder) => ({ ...prevOrder, [tag]: value }));
     setTagChecked((prev) => {
+      const prevTagValue = newOrder[tag]; // store the prevously checked value to update
       return {
         ...prev,
-        // [tag]: tagChecked[tag] ? false : true // toggle the radio button from checked to unchecked and vice versa
-        [tag]: true
+        [tag]: {
+          ...prev[tag],
+          [prevTagValue]: false, // uncheck the previous value
+          [value]: !prev[tag][value], // check the new value
+        },
       };
     });
   };
 
+  const handleTagInput = (event, tag) => {
+    setNewOrder((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Submitting order::: ${JSON.stringify(order)}`);
+    console.log(`Submitting order::: ${JSON.stringify(newOrder)}`);
     // TODO: send the data to the fixme server api to process
   };
 
-  useEffect(() => {
-    setOrder(draftOrder()); // create a draft order on page load
-  }, []);
+  const { draftOrder, draftChecked } = draft(newOrderTags);
+
+  const [orderType, setOrderType] = useState("new"); // new or cancel
+  const [newOrder, setNewOrder] = useState(draftOrder);
+  const [tagChecked, setTagChecked] = useState(draftChecked);
 
   // for debugging purposes
   // useEffect(() => {
@@ -91,11 +85,10 @@ const FixMe = () => {
   const displayNewOrderFixTags = (tags) => {
     return (
       <form>
-        {tags.map((fixTag, i) => {
-          const tag = fixTag["tag"];
-          const name = fixTag["name"];
-          const values = fixTag["values"];
-          // const valuesLength = Array.isArray(values) ? values.length : 0;
+        {tags.map((tag, i) => {
+          const fixtag = tag["tag"];
+          const name = tag["name"];
+          const values = tag["values"];
           const isEven = i % 2 === 0;
 
           return (
@@ -104,21 +97,21 @@ const FixMe = () => {
               className={`fix-tag-row ${isEven ? "even-row" : "odd-row"}`}
             >
               <div className="tag-label">
-                <p>{tag}</p>
+                <p>{fixtag}</p>
               </div>
               <div className="name-label">
                 <p>{name}</p>
               </div>
               <div className="value-label">
-                {typeof fixTag["values"] === "string" && !fixTag["values"] ? (
+                {typeof tag["values"] === "string" && !tag["values"] ? (
                   // if the tag value is an empty string handle input field display
                   <div className="tag-input">
                     <input
                       key={i}
                       type="text"
                       placeholder={name}
-                      value={order[tag] || ""}
-                      onChange={(event) => handleTagInput(event, tag)}
+                      value={newOrder[fixtag] || ""}
+                      onChange={(event) => handleTagInput(event, fixtag)}
                     />
                   </div>
                 ) : (
@@ -128,10 +121,15 @@ const FixMe = () => {
                         <input
                           type="radio"
                           className="radio"
-                          name={tag}
+                          name={fixtag}
                           value={value}
-                          checked={tagChecked[tag] ? true : false}
-                          onChange={(event) => handleRadioChange(event, tag)}
+                          onChange={(event) =>
+                            handleRadioChange(event, fixtag)
+                          }
+                          checked={
+                            tagChecked[fixtag][value] === true &&
+                            newOrder[fixtag] === value
+                          }
                         />
                         {value}
                       </label>
@@ -163,6 +161,25 @@ const FixMe = () => {
     );
   };
 
+  /**
+   * display the order type selected by the user: new or cancel
+   * @param {*} event
+   * @returns jsx for the order type selected
+   */
+  const handleOrderType = (event) => {
+    const orderType = event.target.value;
+    console.log(`Order type set to: ${orderType}`);
+    setOrderType(orderType);
+    if (orderType === "new") {
+      // setOrder(draftOrder(newOrderTags));
+      return (
+        <div className="fix-tags">{displayNewOrderFixTags(newOrderTags)}</div>
+      );
+    } else {
+      return <div className="fix-tags">{displayCancelOrderFixTags()}</div>;
+    }
+  };
+
   return (
     <div className="fixme component">
       <div className="fixme-header">
@@ -174,7 +191,7 @@ const FixMe = () => {
               value="new"
               name="order"
               checked={orderType === "new"}
-              onChange={handleOrderType}
+              onChange={(event) => handleOrderType(event)}
             />
             New
           </label>
@@ -184,7 +201,7 @@ const FixMe = () => {
               value="cancel"
               name="order"
               checked={orderType === "cancel"}
-              onChange={handleOrderType}
+              onChange={(event) => handleOrderType(event)}
             />
             Cancel
           </label>

@@ -47,7 +47,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       terminal.write(
         `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Requesting ${input} Tests... \x1B[0m\r`
       );
-      await socket_client(input, terminal); // Call the WebSocket server to trigger the test suite
+      await socket_client("suite", input, terminal); // Call the WebSocket server to trigger the test suite
       break;
     default:
       terminal.write(
