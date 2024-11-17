@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap; /* Allow wrapping if there are too many cards */
     justify-content: center;
+    margin-top: 2px;
 }
 
 /* suppose to make the scrollbar always visible */

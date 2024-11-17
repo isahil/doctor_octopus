@@ -1,3 +1,7 @@
+echo "Setting up the root project directory..."
+npm install
+echo "Root project directory set up finished!"
+
 echo "Setting up the server..."
 cd server
 
@@ -21,10 +25,11 @@ fi
 pip install -r requirements.txt
 echo "Server set up finished!"
 
-cd ..
+cd ../client
 
 echo "Setting up the client..."
-cd client
-
 npm install
 echo "Client set up finished!"
+
+# cd ../playwright
+# npm install
