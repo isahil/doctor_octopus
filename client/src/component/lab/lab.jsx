@@ -27,6 +27,9 @@ const Lab = ({ terminal }) => {
     terminal.write(
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
     );
+
+    setSelectedOptions({}); // clear the selected options
+
     const response = await fetch(
       `http://localhost:8000/run-command?command=${command}`
     );
@@ -50,7 +53,6 @@ const Lab = ({ terminal }) => {
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
 
     console.log(`Command finished running!`)
-    setSelectedOptions({}); // clear the selected options
   };
 
   // useEffect(() => {}, [])

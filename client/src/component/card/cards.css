@@ -1,11 +1,12 @@
 .cards {
     display: flex;
     flex-wrap: wrap; /* Allow wrapping if there are too many cards */
+    justify-content: center;
 }
 
 /* suppose to make the scrollbar always visible */
 .cards::-webkit-scrollbar {
-    width: 5px;
+    width: 1px;
 }
 
 .cards::-webkit-scrollbar-thumb {

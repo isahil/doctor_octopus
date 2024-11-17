@@ -29,5 +29,5 @@ async def suite(sid, suite_name):
 @sio.on('fixme')
 async def fixme(sid, order_data):
     print(f"\tClient sent fix order: {order_data}")
-    # add steps to process/send fix order to fix client
-    await sio.emit('fixme', f"Server received fixme request for: {order_data}", room=sid)
+    # add steps to process/send order to the fix client
+    await sio.emit('fixme', f"Server received fixme order: {order_data}", room=sid)
