@@ -34,9 +34,9 @@ const Cards = ({ source }) => {
   }
 
   return (
-    <div className="cards">
+    <div className="cards-component">
       {cards.map((card, index) => (
-        <Card key={index} source={source} card={card} />
+        <Card key={index} source={source} card={card} index={index}/>
       ))}
     </div>
   );

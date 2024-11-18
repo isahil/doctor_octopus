@@ -1,20 +1,20 @@
-.cards {
+.cards-component {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping if there are too many cards */
+    flex-wrap: wrap; /* Allow wrapping if there are too many cards-component */
     justify-content: center;
     margin-top: 2px;
 }
 
 /* suppose to make the scrollbar always visible */
-.cards::-webkit-scrollbar {
+.cards-component::-webkit-scrollbar {
     width: 1px;
 }
 
-.cards::-webkit-scrollbar-thumb {
+.cards-component::-webkit-scrollbar-thumb {
     background-color: #30363d;
 }
 
-.cards::-webkit-scrollbar-track {
+.cards-component::-webkit-scrollbar-track {
     background-color: #12161d;
 }
 

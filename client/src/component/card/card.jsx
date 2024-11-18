@@ -1,7 +1,7 @@
 import React from "react";
 import "./card.css";
 
-function Card({ source, card }) {
+function Card({ source, card, index }) {
   const { json_report, html_report } = card;
   const { stats, config } = json_report;
   // console.log(`Stats: ${JSON.stringify(stats)} \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
@@ -26,7 +26,7 @@ function Card({ source, card }) {
   }
 
   return (
-    <div className="card">
+    <div className={`card ${index}`}>
       <div className="card-content">
         {/* <a className="project-name">{ project_name }</a> */}
         <div className="score-board-container"> 
