@@ -64,12 +64,15 @@ const FixMe = ({ terminal }) => {
   };
 
   const handleSubmit = async(event) => {
+    const time = new Date().getTime();
+    newOrder["60"] = time; // set the transaction time for the fix order
+
     event.preventDefault();
-    // TODO: send the data to the fixme server api to process
+
     terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
-    await socket_client("fixme", newOrder, terminal); // send the order to the server
+    await socket_client("fixme", newOrder, terminal); // send the order to the w.socket server
 
     // clear the order state after submitting
     setNewOrder(draftOrder);

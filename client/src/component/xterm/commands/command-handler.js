@@ -4,19 +4,13 @@ import { logs } from "./logs.js";
 
 const handleCommand = async (input, terminal, setShowFixMe) => {
   const test_suites = ["api", "fix", "perf", "ui", "ws"];
-  // terminal.write(
-  //   `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You entered: ${input}\x1B[0m\r\n`
-  // );
-  switch (true) {
-    case input === "help":
-      const response = await fetch(`http://localhost:8000/help`);
-      const data = await response.json();
-      console.log(`server api response ::: ${data}`);
 
+  switch (true) {
+    case input === "test":
       terminal.write(
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can help you with the following commands:"
       );
-      data.forEach((suite) => {
+      test_suites.forEach((suite) => {
         terminal.write(`\r\n\x1B[1;3;37m  - ${suite}\x1B[0m\r`);
       });
       break;

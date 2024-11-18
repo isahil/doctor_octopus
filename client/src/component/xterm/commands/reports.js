@@ -1,6 +1,6 @@
 
 export const reports = async (input, terminal) => {
-    const response = await fetch(`http://localhost:8000/reports`);
+    const response = await fetch(`http://localhost:8000/reports?source=local`);
     const data = await response.json();
     console.log(`server api response ::: ${data}`);
     
