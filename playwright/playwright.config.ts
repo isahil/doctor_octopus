@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
   testDir: "tests",
   // globalSetup: require.resolve("./global.setup.js"),
   timeout: 30000,
+  retries: 1,
   use: {
     browserName: 'chromium',
     headless: true,

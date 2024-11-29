@@ -1,28 +1,23 @@
 import { describe } from "node:test";
 import { expect, test } from "playwright/test";
 
-describe("Google", () => {
-  test("google test pass", async ({ page }) => {
+describe("Dummy Test Suite", () => {
+  test("Google Test Pass", async ({ page }) => {
     await page.goto("https://www.google.com/");
-    setTimeout(() => {}, 3000);
+    // setTimeout(() => {}, 3000);
     expect(await page.title()).toBe("Google");
   });
 
-  test("google test fail", async ({ page }) => {
+  test("Google Test Fail", async ({ page }) => {
     await page.goto("https://www.google.com/");
-    setTimeout(() => {}, 3000);
     expect(await page.title()).toBe("Apple");
   });
 
-  test.skip("google test skip 1", async ({ page }) => {
-    await page.goto("https://www.google.com/");
-    setTimeout(() => {}, 3000);
-    expect(await page.title()).toBe("Apple");
+  test("Flaky Test", async () => {
+    expect(Math.random() > 0.5).toBe(true);
   });
 
-  test.skip("google test skip 2", async ({ page }) => {
-    await page.goto("https://www.google.com/");
-    setTimeout(() => {}, 3000);
-    expect(await page.title()).toBe("Apple");
+  test.skip("Skipped Test", async () => {
+    expect(true).toBe(false);
   });
 });
