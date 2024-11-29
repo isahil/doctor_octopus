@@ -20,7 +20,7 @@
     gap: 10px;
     margin-bottom: 15px;
     text-align: center;
-    color: #6e79d6;;
+    color: cyan;
     font-size: 15px;
 }
 
@@ -37,16 +37,17 @@
 }
 
 .lab-card-button.enabled {
-    background: #6e79d6;
+    background: rgba(0, 255, 255, 0.605);
     margin-left: 10px;
+    color: gray;
 }
 
 .lab-card-button.enabled:hover {
-    background: #6cf;
+    background: cyan;
 }
 
 .lab-card-button.selected {
-    background: #6cf;
+    background: rgba(0, 255, 255, 0.862);
 }
 
 .lab-card-button h2 {
@@ -95,4 +96,18 @@
 
 .run-button {
     margin-top: 20px;
+}
+
+.run-button.enabled {
+    background-color: green(5, 219, 5);
+}
+
+.run-button.enabled:hover {
+    background-color: rgb(5, 219, 5);
+}
+
+.run-button.disabled {
+    background-color: inherit;
+    cursor: not-allowed;
+    color: gray;
 }

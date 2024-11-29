@@ -6,16 +6,16 @@ import FixMe from "./component/fixme/fixme";
 import Lab from "./component/lab/lab.jsx";
 
 function App() {
-  const [source, setSource] = useState("local");
-  const [showFixMe, setShowFixMe] = useState(false);
+  const [source, set_source] = useState("local");
+  const [show_fix_me, set_show_fix_me] = useState(false);
   
   const terminal = new Terminal();
 
-  const toggleSource = () => {
-    setSource((currentSource) => {
-      const updatedSource = currentSource === "remote" ? "local" : "remote"
-      console.log(`Toggle source: ${updatedSource}`)
-      return updatedSource
+  const toggle_source = () => {
+    set_source((current_source) => {
+      const updated_source = current_source === "remote" ? "local" : "remote"
+      console.log(`Toggle source: ${updated_source}`)
+      return updated_source
   });
   };
 
@@ -24,7 +24,7 @@ function App() {
       <div className="app-header">
         <div className="source">
           <label>
-            <input type="checkbox" onClick={toggleSource} />
+            <input type="checkbox" onClick={toggle_source} />
           </label>
           <p className="source-label">source</p>
         </div>
@@ -38,7 +38,7 @@ function App() {
           <Cards source={source} />
         </div>
         <div className="tech-container">
-          <XTerm terminal={terminal} setShowFixMe={setShowFixMe} />
+          <XTerm terminal={terminal} set_show_fix_me={set_show_fix_me} />
           <Lab terminal={terminal}/>
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}

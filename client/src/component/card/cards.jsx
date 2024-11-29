@@ -3,8 +3,8 @@ import Card from "./card";
 import "./cards.css";
 
 const Cards = ({ source }) => {
-  const [cards, setCards] = React.useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [cards, set_cards] = React.useState([]);
+  const [is_loading, set_is_loading] = useState(true);
 
   const getCards = async () => {
     try {
@@ -13,11 +13,11 @@ const Cards = ({ source }) => {
       );
       const data = await response.json();
       console.log(`Total ${source} cards: ${data.length}`);
-      setCards(data);
+      set_cards(data);
     } catch (error) {
       console.error("Error fetching cards data:", error);
     } finally {
-      setIsLoading(false);
+      set_is_loading(false);
     }
   };
 
@@ -25,7 +25,7 @@ const Cards = ({ source }) => {
     getCards();
   }, [source]);
 
-  if (isLoading) {
+  if (is_loading) {
     return (
       <div className="loading-screen">
         <p>Loading...</p>

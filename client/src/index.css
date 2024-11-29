@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   --border-color: white;
+  --border-thickness: 4px;
   --background-color: #15151f;
   --octopus-gray: #30363d;
   --border-radius: 4px;
@@ -94,18 +95,20 @@ body {
 
 .cards-container {
   overflow: auto;
-  height: 200vh;
+  height: 204vh;
   width: 600px;
   scrollbar-color: #30363d #12161d;
   scroll-behavior: smooth;
   margin-right: 50px;
   overflow: auto;
-  border: solid 7px var(--octopus-gray);
+  border: solid var(--border-thickness) var(--octopus-gray);
 }
 
+/* .tech-container { height: 20px;} */
+
 .tech-container .component{
-  /* border: 1px solid salmon; */
   margin-bottom: 15px;
+  border: solid var(--border-thickness) var(--octopus-gray);
 }
 
 .button {
@@ -129,6 +132,6 @@ body {
 }
 
 .button:hover {
-  background: #3aca2d;
+  /* background: #3aca2d; */
   text-decoration: none;
 }

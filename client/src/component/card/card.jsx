@@ -10,18 +10,18 @@ function Card({ source, card, index }) {
   const total_tests = expected + flaky + unexpected;
 
   const date = new Date(startTime); // Convert startTime to a Date object
-  const formattedDateTime = date.toLocaleString(); // Adjust formatting as needed
+  const formatted_date_time = date.toLocaleString(); // Adjust formatting as needed
 
-  const handleViewReportClick = async () => {
+  const handle_view_report_click = async () => {
     console.log(`Viewing html report: ${html_report}`);
     const response = await fetch(`http://localhost:8000/report?source=${source}&html=${html_report}`);
     const html_report_text = await response.text();
 
-    const newWindow = window.open("", "_blank");
-    if(newWindow){
-      newWindow.document.open();
-      newWindow.document.write(html_report_text);
-      newWindow.document.close();
+    const new_window = window.open("", "_blank");
+    if(new_window){
+      new_window.document.open();
+      new_window.document.write(html_report_text);
+      new_window.document.close();
     } else alert('Please allow popups for this website');
   }
 
@@ -51,11 +51,11 @@ function Card({ source, card, index }) {
           <span className="score"> {flaky} </span>
         </a>
         </div>
-        <button className="viewReport" onClick={handleViewReportClick}>View Report</button>
+        <button className="viewReport" onClick={handle_view_report_click}>View Report</button>
         <a className="project-name">{ project_name }</a>
         <div className="footer">
           <p className="branch">{stats.git_branch}</p>
-          <p className="time-stamp">at {formattedDateTime}</p>
+          <p className="time-stamp">at {formatted_date_time}</p>
         </div>
       </div>
     </div>

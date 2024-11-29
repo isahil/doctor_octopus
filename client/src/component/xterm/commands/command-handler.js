@@ -2,7 +2,7 @@ import { socket_client } from "../../../util/socket-client.js";
 import { reports } from "./reports.js";
 import { logs } from "./logs.js";
 
-const handleCommand = async (input, terminal, setShowFixMe) => {
+const handle_command = async (input, terminal, set_show_fix_me) => {
   const test_suites = ["api", "fix", "perf", "ui", "ws"];
 
   switch (true) {
@@ -34,7 +34,7 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
       terminal.clear();
       break;
     case input === "fixme":
-      setShowFixMe(true);
+      set_show_fix_me(true);
       terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r");
       break;
     case test_suites.includes(input):
@@ -52,4 +52,4 @@ const handleCommand = async (input, terminal, setShowFixMe) => {
   }
 };
 
-export default handleCommand;
+export default handle_command;

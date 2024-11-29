@@ -1,10 +1,10 @@
 import { useEffect, useRef , useState} from "react";
 import "./xterm.css";
-import handleCommand from "./commands/command-handler.js";
+import handle_command from "./commands/command-handler.js";
 
-const XTerm = ({ terminal, setShowFixMe }) => {
+const XTerm = ({ terminal, set_show_fix_me }) => {
   const terminalRef = useRef(null);
-  const [num, setNum] = useState(1);
+  const [num, set_num] = useState(1);
 
   const xterm = () => {
     terminal.options.theme.foreground = `cyan`;
@@ -38,7 +38,7 @@ const XTerm = ({ terminal, setShowFixMe }) => {
           break;
         case 13:
           // Enter
-          await handleCommand(input, terminal, setShowFixMe);
+          await handle_command(input, terminal, set_show_fix_me);
           terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
           input = "";
           cursor = 0;
@@ -69,7 +69,7 @@ const XTerm = ({ terminal, setShowFixMe }) => {
   }, []);
 
   const incrementNum = () => {
-    setNum(num + 1);
+    set_num(num + 1);
     console.log("xterm click #", num);
   };
 
