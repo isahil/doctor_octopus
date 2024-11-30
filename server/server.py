@@ -9,9 +9,6 @@ from src.fastapi import router as fastapi_router
 
 app = FastAPI()
 
-# local_dir = os.environ.get("LOCAL_DIRECTORY", "../../") # Path to test results directory
-# test_reports_dir = os.environ.get("TEST_REPORTS_DIR", "test_reports")
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins='*',

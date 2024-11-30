@@ -1,5 +1,6 @@
 import React from "react";
 import "./card.css";
+import { SERVER_HOST, SERVER_PORT  } from "../../index";
 
 function Card({ source, card, index }) {
   const { json_report, html_report } = card;
@@ -14,7 +15,7 @@ function Card({ source, card, index }) {
 
   const handle_view_report_click = async () => {
     console.log(`Viewing html report: ${html_report}`);
-    const response = await fetch(`http://localhost:8000/report?source=${source}&html=${html_report}`);
+    const response = await fetch(`http://${SERVER_HOST}:${SERVER_PORT}/report?source=${source}&html=${html_report}`);
     const html_report_text = await response.text();
 
     const new_window = window.open("", "_blank");

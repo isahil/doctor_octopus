@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./fixme.css";
 import new_order_tags from "./data/new-order-tags.json";
 import cancel_order_tags from "./data/cancel-order-tags.json";
@@ -58,7 +58,7 @@ const FixMe = ({ terminal }) => {
   };
 
   const handle_tag_input = (event, tag) => {
-    set_new_order((prevOrder) => ({ ...prevOrder, [tag]: event.target.value }));
+    set_new_order((prev_order) => ({ ...prev_order, [tag]: event.target.value }));
   };
 
   const handle_submit = async(event) => {

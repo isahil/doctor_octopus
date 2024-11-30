@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./lab.css";
 import lab_cards from "./lab.json";
+import { SERVER_HOST, SERVER_PORT  } from "../../index";
 
 const Lab = ({ terminal }) => {
   const [selected_options, set_selected_options] = useState({});
@@ -33,7 +34,7 @@ const Lab = ({ terminal }) => {
     set_selected_options({}); // clear the selected options
 
     const response = await fetch(
-      `http://localhost:8000/run-command?command=${command}`
+      `http://${SERVER_HOST}:${SERVER_PORT}/run-command?command=${command}`
     );
     const data = await response.json();
     // console.log(`Client received data from the server: ${data.split("\n")}`);

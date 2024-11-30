@@ -1,6 +1,7 @@
+import { SERVER_HOST, SERVER_PORT  } from "../../../index";
 
 export const reports = async (input, terminal) => {
-    const response = await fetch(`http://localhost:8000/reports?source=local`);
+    const response = await fetch(`http://${SERVER_HOST}:${SERVER_PORT}/reports?source=local`);
     const data = await response.json();
     console.log(`server api response ::: ${data}`);
     

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Card from "./card";
 import "./cards.css";
+import { SERVER_HOST, SERVER_PORT  } from "../../index";
 
 const Cards = ({ source }) => {
   const [cards, set_cards] = React.useState([]);
   const [is_loading, set_is_loading] = useState(true);
 
-  const getCards = async () => {
+  const get_cards = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/reports?source=${source}`
+        `http://${SERVER_HOST}:${SERVER_PORT}/reports?source=${source}`
       );
       const data = await response.json();
       console.log(`Total ${source} cards: ${data.length}`);
@@ -22,7 +23,7 @@ const Cards = ({ source }) => {
   };
 
   useEffect(() => {
-    getCards();
+    get_cards();
   }, [source]);
 
   if (is_loading) {

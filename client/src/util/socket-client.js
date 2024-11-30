@@ -1,9 +1,11 @@
 import { io } from "socket.io-client";
 
+import { SERVER_HOST, SERVER_PORT  } from "../index";
+
 export const socket_client = async (subscription, data, terminal) => {
     console.log("W.Socket client sending a message...");
     // Establish a WebSocket connection to your server
-    const socket = io(`http://localhost:8000`, {
+    const socket = io(`http://${SERVER_PORT}:${SERVER_HOST}`, {
       path: "/ws/socket.io",
       transports: ["websocket", "polling", "flashsocket"],
     });
