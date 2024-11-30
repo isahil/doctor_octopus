@@ -58,10 +58,13 @@ const FixMe = ({ terminal }) => {
   };
 
   const handle_tag_input = (event, tag) => {
-    set_new_order((prev_order) => ({ ...prev_order, [tag]: event.target.value }));
+    set_new_order((prev_order) => ({
+      ...prev_order,
+      [tag]: event.target.value,
+    }));
   };
 
-  const handle_submit = async(event) => {
+  const handle_submit = async (event) => {
     const time = new Date().getTime();
     new_order["60"] = time; // set the transaction time for the fix order
 
@@ -164,16 +167,19 @@ const FixMe = ({ terminal }) => {
    * @returns jsx for the order type selected
    */
   const handle_order_type = (event) => {
-    const order_type = event.target.value;
-    console.log(`Order type set to: ${order_type}`);
-    set_order_type(order_type);
-    if (order_type === "new") {
+    const order_type_before = event.target.value;
+    const order_type_new = order_type_before === "new" ? "cancel" : "new";
+    console.log(`Order type set to: ${order_type_new}`);
+    set_order_type(order_type_new);
+    if (order_type_before === "new") {
       // setOrder(draftOrder(newOrderTags));
       return (
         <div className="fix-tags">{display_fix_order(new_order_tags)}</div>
       );
     } else {
-      return <div className="fix-tags">{display_fix_order(cancel_order_tags)}</div>;
+      return (
+        <div className="fix-tags">{display_fix_order(cancel_order_tags)}</div>
+      );
     }
   };
 
@@ -182,35 +188,26 @@ const FixMe = ({ terminal }) => {
       <div className="fixme-header">
         <div className="fixme-title">FIXME</div>
         <div className="order-type">
-          <label>
+          <label className="rocker rocker-small">
             <input
-              type="radio"
-              value="new"
-              name="order"
-              checked={order_type === "new"}
-              onChange={(event) => handle_order_type(event)}
+              className="toggle-input"
+              type="checkbox"
+              value={order_type}
+              defaultChecked="true"
+              onClick={(e) => handle_order_type(e)}
             />
-            New
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="cancel"
-              name="order"
-              checked={order_type === "cancel"}
-              onChange={(event) => handle_order_type(event)}
-            />
-            Cancel
+            <span className="switch-left">O</span>
+            <span className="switch-right">X</span>
           </label>
         </div>
       </div>
       {order_type === "new" && (
-        <div className="new-fix-tags">
-          {display_fix_order(new_order_tags)}
-        </div>
+        <div className="fix-tags">{display_fix_order(new_order_tags)}</div>
       )}
       {order_type === "cancel" && (
-        <div className="cancel-fix-tags">{display_fix_order(cancel_order_tags)}</div>
+        <div className="fix-tags">
+          {display_fix_order(cancel_order_tags)}
+        </div>
       )}
     </div>
   );
