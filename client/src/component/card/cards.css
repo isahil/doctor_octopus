@@ -3,6 +3,11 @@
     flex-wrap: wrap; /* Allow wrapping if there are too many cards-component */
     justify-content: center;
     margin-top: 2px;
+    position: relative;
+}
+
+.cards-body {
+    margin-top: 21px
 }
 
 /* suppose to make the scrollbar always visible */
@@ -25,4 +30,34 @@
     height: 100vh;
     font-size: 25px;
     color: var(--octopus-gray);
+}
+
+.cards-header {
+    width: 98.5%;
+    top: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 20px;
+    background-color: #40454e;
+    color: white;
+    position: absolute;
+    margin-bottom: 10px;
+}
+
+.refresh-button {
+    background-color: #40454e;
+    color: #1abc9c;
+    border: solid 1px #707068;
+    border-radius: 4px;
+    padding: 1.5px 6px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    top: 2px;
+    right: 5px;
+    position: absolute;
+}
+
+.refresh-button:hover {
+    background-color: #1abc9c;
+    color: white;
 }

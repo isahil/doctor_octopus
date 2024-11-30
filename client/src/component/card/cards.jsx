@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./card";
 import "./cards.css";
-import { SERVER_HOST, SERVER_PORT  } from "../../index";
+import { SERVER_HOST, SERVER_PORT } from "../../index";
 
 const Cards = ({ source }) => {
   const [cards, set_cards] = React.useState([]);
@@ -36,9 +36,16 @@ const Cards = ({ source }) => {
 
   return (
     <div className="cards-component">
-      {cards.map((card, index) => (
-        <Card key={index} source={source} card={card} index={index}/>
-      ))}
+      <div className="cards-header">
+        <button onClick={get_cards} className="refresh-button">
+          refresh
+        </button>
+      </div>
+      <div className="cards-body">
+        {cards.map((card, index) => (
+          <Card key={index} source={source} card={card} index={index} />
+        ))}
+      </div>
     </div>
   );
 };

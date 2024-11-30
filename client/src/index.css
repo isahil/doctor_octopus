@@ -103,6 +103,7 @@ body {
   margin-right: 50px;
   overflow: auto;
   border: solid var(--border-thickness) var(--octopus-gray);
+  /* border-top: solid 20px var(--octopus-gray); */
 }
 
 /* .tech-container { height: 20px;} */

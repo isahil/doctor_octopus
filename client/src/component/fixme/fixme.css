@@ -114,7 +114,7 @@
 }
 
 .fix-tag-row .radio:hover {
-    background-color: #c9cbcd;
+    background-color: #1abc9c;
     transition-duration: 0s;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .fix-tag-row .radio:checked:hover {
-    background-color: #535db3;
+    background-color: #1abc9c;
 }
 
 .tag-radio label input {
@@ -140,7 +140,7 @@
 }
 
 .tag-input {
-    color: #2d83a2;
+    color: #1abc9c;
 }
 
 .tag-input input {
@@ -148,6 +148,10 @@
     padding: 5px;
     border: 1px solid;
     border-radius: var(--border-radius);
+    color: #1abc9c;
+    text-align: center;
+    font-weight: bold;
+    background-color: rgb(236, 231, 231);
 }
 
 .fix-tag-default {
@@ -156,4 +160,8 @@
 
 .submit-button {
     margin-top: 15px;
+}
+
+.submit-button:hover {
+    background-color: #1abc9c;
 }

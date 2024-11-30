@@ -103,7 +103,7 @@
 }
 
 .run-button.enabled:hover {
-    background-color: rgb(5, 219, 5);
+    background-color: #1abc9c;
 }
 
 .run-button.disabled {

@@ -1,8 +1,7 @@
 .card {
     background-color: var(--octopus-gray);
-    border-radius: var(--border-radius);
     border: 1.5px solid #30363d;
-    margin: 5px;
+    margin: 5px 0px 5px 0px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -14,9 +13,7 @@
 
 .card:hover, .card:focus {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 24px 0 rgba(0, 0, 0, 0.19);
-    /* Optional: Slightly reduce the size on hover/focus to enhance the depth effect */
-    /* transform: translateY(2.5px); */
-    transform: scale(1.15);
+    transform: scale(1.02);
 }
 
 .project-name {
