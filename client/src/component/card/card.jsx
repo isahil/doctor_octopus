@@ -54,7 +54,7 @@ function Card({ source, card, index }) {
         </div>
         <button className="viewReport" onClick={handle_view_report_click}>View Report</button>
         <a className="project-name">{ project_name }</a>
-        <div className="footer">
+        <div className="card-footer">
           <p className="branch">{stats.git_branch}</p>
           <p className="time-stamp">at {formatted_date_time}</p>
         </div>

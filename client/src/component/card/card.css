@@ -90,7 +90,7 @@
     margin: 3px;
 }
 
-.footer {
+.card-footer {
     display: flex;
     justify-content: right;
     align-items: center;

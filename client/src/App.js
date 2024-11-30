@@ -4,19 +4,20 @@ import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import FixMe from "./component/fixme/fixme";
 import Lab from "./component/lab/lab.jsx";
+import Footer from "./component/footer/footer.jsx";
 
 function App() {
   const [source, set_source] = useState("local");
   const [show_fix_me, set_show_fix_me] = useState(false);
-  
+
   const terminal = new Terminal();
 
   const toggle_source = () => {
     set_source((current_source) => {
-      const updated_source = current_source === "remote" ? "local" : "remote"
-      console.log(`Toggle source: ${updated_source}`)
-      return updated_source
-  });
+      const updated_source = current_source === "remote" ? "local" : "remote";
+      console.log(`Toggle source: ${updated_source}`);
+      return updated_source;
+    });
   };
 
   return (
@@ -39,11 +40,14 @@ function App() {
         </div>
         <div className="tech-container">
           <XTerm terminal={terminal} set_show_fix_me={set_show_fix_me} />
-          <Lab terminal={terminal}/>
+          <Lab terminal={terminal} />
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}
-          <FixMe terminal={terminal}/>
+          <FixMe terminal={terminal} />
         </div>
+      </div>
+      <div className="footer-container">
+        <Footer />
       </div>
     </div>
   );

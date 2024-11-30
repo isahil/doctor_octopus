@@ -8,6 +8,7 @@
   --background-color: #15151f;
   --octopus-gray: #30363d;
   --border-radius: 4px;
+  --header-footer-color: rgba(175,184,193,.2);
 }
 
 body {
@@ -18,11 +19,11 @@ body {
 
 
 .app-header {
-  background-color: rgba(175,184,193,.2);
+  background-color: var(--header-footer-color);
   position: fixed;
+  width: 100%;
   top: 0;
   border-bottom: 1px solid var(--border-color);
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
