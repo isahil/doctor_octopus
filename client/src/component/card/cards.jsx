@@ -37,9 +37,12 @@ const Cards = ({ source }) => {
   return (
     <div className="cards-component">
       <div className="cards-header">
-        <button onClick={get_cards} className="refresh-button">
-          refresh
-        </button>
+        <img
+          src="/img/refresh.png"
+          alt="refresh"
+          className="refresh-button"
+          onClick={get_cards}
+        />
       </div>
       <div className="cards-body">
         {cards.map((card, index) => (
