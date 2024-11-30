@@ -17,7 +17,6 @@ body {
   margin-top: 75px;
 }
 
-
 .app-header {
   background-color: var(--header-footer-color);
   position: fixed;
@@ -62,6 +61,7 @@ body {
   -webkit-appearance: none;
   -webkit-transition: .25s;
 }
+
 .source input[type="checkbox"]:after {
   background-color: #eee;
   background-image: -webkit-linear-gradient(hsla(0,0%,100%,.1), hsla(0,0%,0%,.1));
@@ -87,7 +87,7 @@ body {
   padding-right: 0;
 }
 
-.grid {
+.app-grid {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -98,7 +98,7 @@ body {
   overflow: auto;
   height: 204vh;
   width: 600px;
-  scrollbar-color: #30363d #12161d;
+  scrollbar-color: #30363d;
   scroll-behavior: smooth;
   margin-right: 50px;
   overflow: auto;

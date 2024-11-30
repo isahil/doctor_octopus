@@ -34,7 +34,7 @@ function App() {
         </div>
       </div>
 
-      <div className="grid">
+      <div className="app-grid">
         <div className="cards-container">
           <Cards source={source} />
         </div>
@@ -46,7 +46,7 @@ function App() {
           <FixMe terminal={terminal} />
         </div>
       </div>
-      <div className="footer-container">
+      <div className="app-footer">
         <Footer />
       </div>
     </div>
