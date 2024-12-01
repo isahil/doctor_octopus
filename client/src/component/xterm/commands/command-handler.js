@@ -1,9 +1,10 @@
 import { socket_client } from "../../../util/socket-client.js";
-import { reports } from "./reports.js";
 import { logs } from "./logs.js";
+import commands from "./commands.json";
 
 const handle_command = async (input, terminal, set_show_fix_me) => {
-  const test_suites = ["api", "fix", "perf", "ui", "ws"];
+  const command_exists = Object.keys(commands).includes(input);
+  const test_suites = Object.keys(commands.test.suites);
 
   switch (true) {
     case input === "test":
@@ -14,21 +15,8 @@ const handle_command = async (input, terminal, set_show_fix_me) => {
         terminal.write(`\r\n\x1B[1;3;37m  - ${suite}\x1B[0m\r`);
       });
       break;
-    case input === "ls":
-      terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You can see the following directories:\r\n 1. reports\r\n 2. logs\x1B[0m\r\n"
-      );
-      break;
-    case input === "reports":
-      await reports(input, terminal);
-      break;
     case input === "logs":
       await logs(input, terminal);
-      break;
-    case input === "pwd":
-      terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in the root directory.\x1B[0m\r"
-      );
       break;
     case input === "clear":
       terminal.clear();
@@ -37,9 +25,10 @@ const handle_command = async (input, terminal, set_show_fix_me) => {
       set_show_fix_me(true);
       terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r");
       break;
-    case test_suites.includes(input):
+    case command_exists:
+      const description = commands[input].description;
       terminal.write(
-        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Requesting ${input} Tests... \x1B[0m\r`
+        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m ${description} \x1B[0m\r`
       );
       await socket_client("suite", input, terminal); // Call the WebSocket server to trigger the test suite
       break;

@@ -11,6 +11,11 @@
   --header-footer-color: rgba(175,184,193,.2);
 }
 
+.title {
+  text-align: center;
+  margin: 0 600px;
+}
+
 body {
   background-color: var(--background-color);
   font-family: 'Roboto', sans-serif;
@@ -74,11 +79,6 @@ body {
   display: block;
   height: 20px;
   width: 35px;
-}
-
-.title {
-  text-align: center;
-  margin: 0 600px;
 }
 
 .source input[type="checkbox"]:checked {

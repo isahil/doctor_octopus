@@ -30,7 +30,7 @@ async def get_a_report(
         return HTMLResponse(content=html_file_content, status_code=200, media_type="text/html")
 
 @router.get("/run-command/")
-def get_help(
+def run_command(
     command: str = Query(..., title="Execute Command", description="Command to be executed on the server", example="ls")
     ) -> str:
     # print(f"FASTAPI received command: {command}")
