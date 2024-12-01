@@ -1,6 +1,6 @@
 import { useEffect, useRef , useState} from "react";
 import "./xterm.css";
-import handle_command from "./commands/command-handler.js";
+import command_handler from "./commands/handler.js";
 
 const XTerm = ({ terminal, set_show_fix_me }) => {
   const terminalRef = useRef(null);
@@ -38,7 +38,7 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
           break;
         case 13:
           // Enter
-          await handle_command(input, terminal, set_show_fix_me);
+          await command_handler(input, terminal, set_show_fix_me);
           terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
           input = "";
           cursor = 0;

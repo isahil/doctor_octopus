@@ -2,7 +2,7 @@ import { socket_client } from "../../../util/socket-client.js";
 import { logs } from "./logs.js";
 import commands from "./commands.json";
 
-const handle_command = async (input, terminal, set_show_fix_me) => {
+const command_handler = async (input, terminal, set_show_fix_me) => {
   const command_exists = Object.keys(commands).includes(input);
   const test_suites = Object.keys(commands.test.suites);
 
@@ -41,4 +41,4 @@ const handle_command = async (input, terminal, set_show_fix_me) => {
   }
 };
 
-export default handle_command;
+export default command_handler;
