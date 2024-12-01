@@ -1,6 +1,5 @@
 .lab {
     border: 7px solid var(--octopus-gray);
-    width: 675px;
     height: 250px;
     display: flex;
     flex-direction: column;

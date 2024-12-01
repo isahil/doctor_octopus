@@ -1,4 +1,3 @@
-import os
 from dotenv import load_dotenv
 load_dotenv('.env')
 import uvicorn
@@ -23,3 +22,7 @@ app.mount("/ws/socket.io", socket_io)
 
 if __name__ == "__main__":
     uvicorn.run(socket_io, host="0.0.0.0", port=8000, lifespan="on", reload=True)
+
+# "author": "Imran Sahil"
+# "github": "https://github.com/isahil/doctor-octopus.git"
+# "description": "A simple chat application using FastAPI and Socket.IO"

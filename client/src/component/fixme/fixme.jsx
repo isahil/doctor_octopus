@@ -65,10 +65,10 @@ const FixMe = ({ terminal }) => {
   };
 
   const handle_submit = async (event) => {
-    const time = new Date().getTime();
-    new_order["60"] = time; // set the transaction time for the fix order
-
     event.preventDefault();
+
+    // const time = new Date().getTime(); // let server side set the time?
+    // new_order["60"] = time; // set the transaction time for the fix order
 
     terminal.write(`Submitting order: ${JSON.stringify(new_order)}\r\n`);
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
@@ -193,11 +193,11 @@ const FixMe = ({ terminal }) => {
               className="toggle-input"
               type="checkbox"
               value={order_type}
-              defaultChecked="true"
+              // defaultChecked="true"
               onClick={(e) => handle_order_type(e)}
             />
-            <span className="switch-left">O</span>
-            <span className="switch-right">X</span>
+            <span className="switch-left">X</span>
+            <span className="switch-right">O</span>
           </label>
         </div>
       </div>

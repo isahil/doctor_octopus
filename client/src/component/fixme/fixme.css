@@ -6,8 +6,6 @@
     border-radius: var(--border-radius);
     text-align: center;
     padding: 10px;
-    /* margin: 25px; */
-    max-width: 675px;
     height: auto;
     position: relative;
 }
@@ -106,7 +104,7 @@
 .order-type .switch-right {
     right: 0.5em;
     bottom: 0;
-    background-color: #bd5757;
+    background-color: #1abc9c;
     color: #fff;
 }
 
@@ -132,7 +130,7 @@
 }
 
 .order-type input:checked+.switch-left {
-    background-color: #1abc9c;
+    background-color: #bd5757;
     color: #fff;
     bottom: 0px;
     left: 0.5em;
@@ -176,20 +174,6 @@
 .order-type input:checked:focus+.switch-left+.switch-right {
     color: #333;
 }
-
-
-/* .order-type label {
-    margin-right: 30px;
-    color: white
-}
-
-.order-type label input {
-    margin-right: 5px;
-}
-
-.order label {
-    margin-right: 15px;
-} */
 
 .fix-tag-row {
     display: flex;

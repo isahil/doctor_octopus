@@ -1,7 +1,7 @@
 {
-  "name": "doctor_octopus",
+  "name": "doctor-octopus",
   "version": "1.0.0",
-  "description": "doctor octopus app",
+  "description": "doctor-octopus app",
   "main": "index.js",
   "scripts": {
     "start": "cd client && npm run build && cd .. && concurrently \"cd client && npm start\" \"cd server && sh start.sh\"",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/isahil/doctor_octopus.git"
+    "url": "git+https://github.com/isahil/doctor-octopus.git"
   },
   "author": "Imran Sahil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/isahil/doctor_octopus/issues"
+    "url": "https://github.com/isahil/doctor-octopus/issues"
   },
-  "homepage": "https://github.com/isahil/doctor_octopus#readme",
+  "homepage": "https://github.com/isahil/doctor-octopus#readme",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.606.0",
     "concurrently": "^8.2.2"
