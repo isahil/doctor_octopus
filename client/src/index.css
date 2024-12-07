@@ -13,7 +13,7 @@
 
 .title {
   text-align: center;
-  margin: 0 600px;
+  margin: 0px 0px 0px 510px;
 }
 
 body {
@@ -30,7 +30,6 @@ body {
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
-  justify-content: center;
   font-size: calc(8px + 1vmin);
   font-size: small;
   color: rgb(250, 248, 248);
@@ -43,9 +42,9 @@ body {
 }
 
 .source p {
-  color: #eee;
+  color: cyan;
   font-size: 10px;
-  margin: 10px 0px 0 20px;
+  margin: 7px 0px 0px 85px;
 }
 
 .source input[type="checkbox"] {
@@ -62,6 +61,7 @@ body {
   cursor: pointer;
   height: 20px;
   padding-right: 25px;
+  margin: 10px 0px 0px 70px;
   width: 60px;
   -webkit-appearance: none;
   -webkit-transition: .25s;

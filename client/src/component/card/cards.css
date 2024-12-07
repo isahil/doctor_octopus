@@ -33,7 +33,7 @@
 }
 
 .cards-header {
-    width: 100%;
+    width: 92.5%;
     top: 0;
     padding: 15px 20px;
     background-color: black;
@@ -46,9 +46,9 @@
     width: 18px;
     cursor: pointer;
     top: 5px;
-    right: 5px;
+    left: 5px;
     position: absolute;
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .refresh-button:hover {
