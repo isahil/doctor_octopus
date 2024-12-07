@@ -7,6 +7,9 @@ const Cards = ({ source }) => {
   const [cards, set_cards] = React.useState([]);
   const [is_loading, set_is_loading] = useState(true);
 
+  /**
+   * fetch cards data from the FASTAPI server. TODO: Implement the WebSocket subscription logic
+   */
   const get_cards = async () => {
     try {
       const response = await fetch(
@@ -18,13 +21,13 @@ const Cards = ({ source }) => {
     } catch (error) {
       console.error("Error fetching cards data:", error);
     } finally {
-      set_is_loading(false);
+      set_is_loading(false); // set loading to false after the fetch request completes
     }
   };
 
   useEffect(() => {
     get_cards();
-  }, [source]);
+  }, [source]); // fetch cards data when the source changes
 
   if (is_loading) {
     return (

@@ -9,11 +9,11 @@ def get_a_s3_card_html_report(html):
     return card
 
 def get_all_s3_cards():
-    # Call S3 to list current objects
+    ''' get all report cards from the S3 bucket's each object'''
     s3_objects = S3.list_s3_objects()
     reports_dir = [] # list that will be sent to the client
 
-    # temporary dict to store the reports
+    # temporary dictionary to store the reports
     report_cards = {} # { folder_name: { json_report: { "object_name": object_name... }, html_report: "name.html" } }
     
     for obj in s3_objects:
@@ -38,6 +38,7 @@ def get_all_s3_cards():
     return reports_dir
 
 def download_s3_objects(bucket_name):
+    ''' download all objects from the S3 bucket '''
     print(f"Downloading objects from S3 bucket: {bucket_name}...")
     objects = S3.list_s3_objects(bucket_name)
     for obj in objects:

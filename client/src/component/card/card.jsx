@@ -6,12 +6,12 @@ function Card({ source, card, index }) {
   const { json_report, html_report } = card;
   const { stats, config } = json_report;
   // console.log(`Stats: ${JSON.stringify(stats)} \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
-  const { expected, flaky, skipped, unexpected, startTime } = stats;
-  const project_name = config.projects[0].id; // Get the project name for the report
+  const { expected, flaky, skipped, unexpected, startTime } = stats; // scoreboard values to display
+  const project_name = config.projects[0].id; // get the project name for the card title
   const total_tests = expected + flaky + unexpected;
 
-  const date = new Date(startTime); // Convert startTime to a Date object
-  const formatted_date_time = date.toLocaleString(); // Adjust formatting as needed
+  const date = new Date(startTime); // convert startTime to a Date object
+  const formatted_date_time = date.toLocaleString(); // adjust formatting as needed
 
   const handle_view_report_click = async () => {
     console.log(`Viewing html report: ${html_report}`);
@@ -20,7 +20,7 @@ function Card({ source, card, index }) {
     );
     const html_report_text = await response.text();
 
-    const new_window = window.open("", "_blank");
+    const new_window = window.open("", "_blank"); // open a new window to display the clicked report
     if (new_window) {
       new_window.document.open();
       new_window.document.write(html_report_text);
@@ -31,7 +31,6 @@ function Card({ source, card, index }) {
   return (
     <div className={`card ${index}`}>
       <div className="card-content">
-        {/* <a className="project-name">{ project_name }</a> */}
         <div className="score-board-container ">
           <div className="score-board all">
             All

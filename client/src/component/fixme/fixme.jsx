@@ -40,6 +40,11 @@ const FixMe = ({ terminal }) => {
   const [new_order, set_new_order] = useState(draft_order);
   const [tag_checked, set_tag_checked] = useState(draft_checked);
 
+  /**
+   * handle radio button change event for fix tag with an array of values
+   * @param {*} event radio button click event
+   * @param {*} tag fix tag value
+   */
   const handle_radio_change = (event, tag) => {
     const value = event.target.value;
     console.log(`Radio button clicked: ${tag} - ${value}`);
@@ -97,7 +102,8 @@ const FixMe = ({ terminal }) => {
           const fix_tag = tag["tag"];
           const name = tag["name"];
           const values = tag["values"];
-          const is_even = i % 2 === 0; // for row styling
+          const values_type = typeof values; // type of values decide if the row should display radio buttons or an input field
+          const is_even = i % 2 === 0; // for row styling. even and odd rows have different background colors
 
           return (
             <div
@@ -111,7 +117,7 @@ const FixMe = ({ terminal }) => {
                 <p>{name}</p>
               </div>
               <div className="value-label">
-                {typeof tag["values"] === "string" && !tag["values"] ? (
+                {values_type === "string" && !tag["values"] ? (
                   // if the tag value is an empty string handle input field display
                   <div className="tag-input">
                     <input

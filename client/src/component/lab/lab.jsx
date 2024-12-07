@@ -1,13 +1,14 @@
 import { useState } from "react";
 import "./lab.css";
 import lab_cards from "./lab.json";
-import { SERVER_HOST, SERVER_PORT  } from "../../index";
+import { SERVER_HOST, SERVER_PORT } from "../../index";
 
 const Lab = ({ terminal }) => {
-  const [selected_options, set_selected_options] = useState({});
-  const last_cards_index = lab_cards.length - 1;
+  const [selected_options, set_selected_options] = useState({}); // store the selected options
+  const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
 
   const handle_option_click = (index, option) => {
+    // update the option selected for the card so the next card can be enabled
     console.log(`Lab card #${index}: ${option}`);
     set_selected_options((prev) => {
       return {
@@ -31,7 +32,7 @@ const Lab = ({ terminal }) => {
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
     );
 
-    set_selected_options({}); // clear the selected options
+    set_selected_options({}); // clear the selected options after command execution on the server
 
     const response = await fetch(
       `http://${SERVER_HOST}:${SERVER_PORT}/run-command?command=${command}`
@@ -45,7 +46,8 @@ const Lab = ({ terminal }) => {
     terminal.write(
       `\r\n -------------------------------------------------------------------\r\n`
     );
-    // Process the response data to remove leading whitespace from each line
+
+    // process the response data to remove leading whitespace from each line
     data.split("\n").forEach((line) => {
       line.trimStart();
       terminal.write(`\r\n\ ${line}\r\n`);
@@ -71,25 +73,26 @@ const Lab = ({ terminal }) => {
 
       <div className="lab-cards">
         {lab_cards.map((card, i) => {
+          // iterate through the lab cards and render them with dropdown options
           const card_name = card.name;
           let card_options;
 
           if (card_name === "suite") {
-            // if the card is "suite", then the options are based on the previous selected options
+            // if the card is "suite", then the options are based on the previous selected option. "api", "ui", "fix" have different suite options
             card_options = selected_options[i - 1]
               ? card["options"][selected_options[i - 1]]
               : card.options;
           } else card_options = card.options;
 
-          const enabled = i === 0 || selected_options[i - 1];
-          const selected = selected_options[i];
+          const enabled = i === 0 || selected_options[i - 1]; // enable the card if the previous card has been selected
+          const selected = selected_options[i]; // check if the card has been selected
 
           return (
             <div
               key={i}
               className={`button lab-card-button ${
-                enabled ? "enabled" : "disabled"
-              } ${selected ? "selected" : "not-selected"}`}
+                enabled ? "enabled" : "disabled" // enable the card if the previous card has been selected
+              } ${selected ? "selected" : "not-selected"}`} // check if the card has been selected
             >
               <h2>{card_name}</h2>
               {enabled && (
@@ -112,7 +115,12 @@ const Lab = ({ terminal }) => {
         })}
       </div>
       <div>
-        <button className={`button run-button ${selected_options[last_cards_index] ? 'enabled' : 'disabled'}`} onClick={handle_run_click}>
+        <button
+          className={`button run-button ${
+            selected_options[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
+          }`}
+          onClick={handle_run_click}
+        >
           Run
         </button>
       </div>

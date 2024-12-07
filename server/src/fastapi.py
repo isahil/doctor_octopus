@@ -6,11 +6,12 @@ from src.component.remote import get_all_s3_cards, get_a_s3_card_html_report
 import subprocess
 
 router = APIRouter()
-local_dir = os.environ.get("LOCAL_DIRECTORY", "../../") # Path to test results directory
+local_dir = os.environ.get("LOCAL_DIRECTORY", "../../") # path to the local test results directory
 
 @router.get("/reports/")
 async def get_all_reports(source: str = Query(..., title="Source Name", description="Retrieve all the HTML & JSON reports from the source", example="local/remote")
     ) -> list:
+    ''' get report cards based on the source requested '''
     print(f"Report Source: {source}")
     if source == "remote":
         return get_all_s3_cards()
@@ -33,7 +34,8 @@ async def get_a_report(
 def run_command(
     command: str = Query(..., title="Execute Command", description="Command to be executed on the server", example="ls")
     ) -> str:
-    # print(f"FASTAPI received command: {command}")
+    ''' run a command on the server'''
+    print(f"FASTAPI received command: {command}")
     result = subprocess.run(f"cd {local_dir}&& {command}", shell=True, capture_output=True, text=True)
     print(f"Command executed: {result.args} | Return Code: {result.returncode}")
 
