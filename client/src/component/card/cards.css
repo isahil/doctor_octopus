@@ -36,9 +36,10 @@
     width: 100%;
     top: 0;
     padding: 15px 20px;
-    background-color: #40454e;
+    background-color: black;
     position: absolute;
     margin-bottom: 10px;
+    border: 1px solid var(--octopus-gray); /* Neon green border */
 }
 
 .refresh-button {
@@ -47,6 +48,7 @@
     top: 5px;
     right: 5px;
     position: absolute;
+    margin-right: 5px;
 }
 
 .refresh-button:hover {

@@ -32,47 +32,47 @@ function Card({ source, card, index }) {
     <div className={`card ${index}`}>
       <div className="card-content">
         {/* <a className="project-name">{ project_name }</a> */}
-        <div className="score-board-container">
-          <a className="score-board all">
+        <div className="score-board-container ">
+          <div className="score-board all">
             All
             <span className="score"> {total_tests} </span>
-          </a>
-          <a
+          </div>
+          <div
             className="score-board pass"
             style={{ color: expected > 0 ? "#2fd711" : "inherit" }}
           >
             Passed
             <span className="score"> {expected} </span>
-          </a>
-          <a
+          </div>
+          <div
             className="score-board fail"
             style={{ color: unexpected > 0 ? "red" : "inherit" }}
           >
             Failed
             <span className="score"> {unexpected} </span>
-          </a>
-          <a
-            className="score-board skipped"
-            style={{ color: skipped > 0 ? "yellow" : "inherit" }}
-          >
-            Skipped
-            <span className="score"> {skipped} </span>
-          </a>
-          <a
+          </div>
+          <div
             className="score-board flaky"
             style={{ color: flaky > 0 ? "yellow" : "inherit" }}
           >
             Flaky
             <span className="score"> {flaky} </span>
-          </a>
+          </div>
+          <div
+            className="score-board skipped"
+            style={{ color: skipped > 0 ? "yellow" : "inherit" }}
+          >
+            Skipped
+            <span className="score"> {skipped} </span>
+          </div>
+          <button className="score-board" onClick={handle_view_report_click}>
+            View
+          </button>
         </div>
-        <button className="viewReport" onClick={handle_view_report_click}>
-          View Report
-        </button>
-        <a className="project-name">{project_name}</a>
+        <span className="project-name">{project_name}</span>
         <div className="card-footer">
-          <p className="branch">{stats.git_branch}</p>
-          <p className="time-stamp">at {formatted_date_time}</p>
+          <span className="branch">{stats.git_branch}</span>
+          <span className="time-stamp">@ {formatted_date_time}</span>
         </div>
       </div>
     </div>

@@ -97,7 +97,7 @@ body {
 .cards-container {
   overflow: auto;
   height: 204vh;
-  width: 600px;
+  width: 650px;
   scrollbar-color: #30363d;
   scroll-behavior: smooth;
   margin-right: 50px;
