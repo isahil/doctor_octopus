@@ -85,9 +85,7 @@ const FixMe = ({ terminal }) => {
   };
 
   // for debugging purposes
-  // useEffect(() => {
-  //   console.log(JSON.stringify(order));
-  // }, [order]);
+  // useEffect(() => { console.log(JSON.stringify(order)) }, [order]);
 
   /**
    * display fix tags based on the fix-tags.json file values

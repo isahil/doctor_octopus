@@ -1,22 +1,13 @@
-import { useState } from "react";
+// import { useState } from "react";
 import "./lab.css";
 import lab_cards from "./lab.json";
 import { SERVER_HOST, SERVER_PORT } from "../../index";
+import { useLabOptions, useHandleOptionClick } from "./lab-context";
 
 const Lab = ({ terminal }) => {
-  const [selected_options, set_selected_options] = useState({}); // store the selected options
+  const selected_options = useLabOptions(); // LabOptionsContext that store the selected options state
+  const { handle_option_click, clear_selected_options } = useHandleOptionClick(); // HandleOptionClickContext that store the function to handle the dd option click
   const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
-
-  const handle_option_click = (index, option) => {
-    // update the option selected for the card so the next card can be enabled
-    console.log(`Lab card #${index}: ${option}`);
-    set_selected_options((prev) => {
-      return {
-        ...prev,
-        [index]: option,
-      };
-    });
-  };
 
   const handle_run_click = async () => {
     // data to send in the request query
@@ -32,7 +23,7 @@ const Lab = ({ terminal }) => {
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
     );
 
-    set_selected_options({}); // clear the selected options after command execution on the server
+    clear_selected_options();
 
     const response = await fetch(
       `http://${SERVER_HOST}:${SERVER_PORT}/run-command?command=${command}`
@@ -50,7 +41,7 @@ const Lab = ({ terminal }) => {
     // process the response data to remove leading whitespace from each line
     data.split("\n").forEach((line) => {
       line.trimStart();
-      terminal.write(`\r\n\ ${line}\r\n`);
+      terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
       `\r\n -------------------------------------------------------------------\r\n`
@@ -67,6 +58,7 @@ const Lab = ({ terminal }) => {
       <div className="lab-title">THE LAB</div>
       <div className="lab-header">
         {Object.entries(selected_options).map((entry, i) => {
+          // header displaying the selected options
           return <h1 key={i}>{entry[1]}</h1>;
         })}
       </div>

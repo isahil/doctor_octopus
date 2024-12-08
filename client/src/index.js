@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import config from './index.json';
+import LabProvider from "./component/lab/lab-context";
 
 // process.env.SERVER_HOST="";
 // process.env.SERVER_PORT="";
@@ -25,7 +26,9 @@ root.render(
   // <React.StrictMode> // This is causing the terminal to render twice
   <>
     <div className="body">
-      <App />
+      <LabProvider>
+        <App />
+      </LabProvider>
     </div>
   </>
   // </React.StrictMode>
