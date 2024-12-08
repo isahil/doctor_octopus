@@ -4,7 +4,7 @@ import command_handler from "./commands/handler.js";
 
 const XTerm = ({ terminal, set_show_fix_me }) => {
   const terminalRef = useRef(null);
-  const [num, set_num] = useState(1);
+  const [num, setNum] = useState(1);
 
   const xterm = () => {
     terminal.options.theme.foreground = `cyan`;
@@ -12,11 +12,11 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
     terminal.options.cursorBlink = true;
     
     terminal.open(terminalRef.current);
-    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to see my options\x1B[0m\r\n");
+    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive session\x1B[0m\r\n");
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
     let input = "", cursor = 0;
-    terminal.onData(async (data) => {
+    terminal.onData((data) => {
       const ascii_code = data.charCodeAt(0);
       // console.log(`input ASCII code: ${ascii_code}`);
       switch (ascii_code) {
@@ -38,7 +38,7 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
           break;
         case 13:
           // Enter
-          await command_handler(input, terminal, set_show_fix_me);
+          command_handler(input, terminal, set_show_fix_me);
           terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
           input = "";
           cursor = 0;
@@ -69,7 +69,7 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
   }, []);
 
   const incrementNum = () => {
-    set_num(num + 1);
+    setNum(num + 1);
     console.log("xterm click #", num);
   };
 

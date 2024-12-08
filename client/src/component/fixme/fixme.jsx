@@ -37,9 +37,10 @@ const FixMe = ({ terminal }) => {
 
   const { draft_order, draft_checked } = draft(new_order_tags);
 
-  const [order_type, set_order_type] = useState("new"); // new or cancel
-  const [new_order, set_new_order] = useState(draft_order);
-  const [tag_checked, set_tag_checked] = useState(draft_checked);
+  const [ orderType, setOrderType ] = useState("new"); // new or cancel
+  const [ newOrder, setNewOrder ] = useState(draft_order);
+  const [ tag_checked, setTagChecked]  = useState(draft_checked);
+  const { selectedOptions } = useLabOptions();
 
   /**
    * handle radio button change event for fix tag with an array of values
@@ -49,9 +50,9 @@ const FixMe = ({ terminal }) => {
   const handle_radio_change = (event, tag) => {
     const value = event.target.value;
     console.log(`Radio button clicked: ${tag} - ${value}`);
-    set_new_order((prev_order) => ({ ...prev_order, [tag]: value }));
-    set_tag_checked((prev) => {
-      const prev_tag_value = new_order[tag]; // store the prevously checked value to update
+    setNewOrder((prev_order) => ({ ...prev_order, [tag]: value }));
+    setTagChecked((prev) => {
+      const prev_tag_value = newOrder[tag]; // store the prevously checked value to update
       return {
         ...prev,
         [tag]: {
@@ -64,7 +65,7 @@ const FixMe = ({ terminal }) => {
   };
 
   const handle_tag_input = (event, tag) => {
-    set_new_order((prev_order) => ({
+    setNewOrder((prev_order) => ({
       ...prev_order,
       [tag]: event.target.value,
     }));
@@ -76,22 +77,19 @@ const FixMe = ({ terminal }) => {
     // const time = new Date().getTime(); // let server side set the time?
     // new_order["60"] = time; // set the transaction time for the fix order
 
-    terminal.write(`Submitting order: ${JSON.stringify(new_order)}\r\n`);
+    terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
-    await socket_client("fixme", new_order, terminal); // send the order to the w.socket server
+    await socket_client("fixme", newOrder, terminal); // send the order to the w.socket server
 
     // clear the order state after submitting
-    set_new_order(draft_order);
+    setNewOrder(draft_order);
   };
 
   // for debugging purposes
   // useEffect(() => { console.log(JSON.stringify(order)) }, [order]);
 
-  const fix_options = useLabOptions();
-  console.log(`Selected options: ${JSON.stringify(fix_options)}`);
-  const fix_suite = fix_options[3];
-  console.log(`Selected fix suite: ${fix_suite}`);
+  const fix_suite = selectedOptions[3];
 
   /**
    * display fix tags based on the fix-tags.json file values
@@ -128,7 +126,7 @@ const FixMe = ({ terminal }) => {
                       key={i}
                       type="text"
                       placeholder={name}
-                      value={new_order[fix_tag] || ""}
+                      value={newOrder[fix_tag] || ""}
                       onChange={(event) => handle_tag_input(event, fix_tag)}
                     />
                   </div>
@@ -146,7 +144,7 @@ const FixMe = ({ terminal }) => {
                           }
                           checked={
                             tag_checked[fix_tag][value] === true &&
-                            new_order[fix_tag] === value
+                            newOrder[fix_tag] === value
                           }
                         />
                         {value}
@@ -180,7 +178,7 @@ const FixMe = ({ terminal }) => {
     const order_type_before = event.target.value;
     const order_type_new = order_type_before === "new" ? "cancel" : "new";
     console.log(`Order type set to: ${order_type_new}`);
-    set_order_type(order_type_new);
+    setOrderType(order_type_new);
     if (order_type_before === "new") {
       // setOrder(draftOrder(newOrderTags));
       return (
@@ -202,7 +200,7 @@ const FixMe = ({ terminal }) => {
             <input
               className="toggle-input"
               type="checkbox"
-              value={order_type}
+              value={orderType}
               // defaultChecked="true"
               onClick={(e) => handle_order_type(e)}
             />
@@ -211,10 +209,10 @@ const FixMe = ({ terminal }) => {
           </label>
         </div>
       </div>
-      {order_type === "new" && (
+      {orderType === "new" && (
         <div className="fix-tags">{display_fix_order(new_order_tags)}</div>
       )}
-      {order_type === "cancel" && (
+      {orderType === "cancel" && (
         <div className="fix-tags">
           {display_fix_order(cancel_order_tags)}
         </div>

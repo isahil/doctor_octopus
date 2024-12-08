@@ -1,20 +1,19 @@
-// import { useState } from "react";
 import "./lab.css";
 import lab_cards from "./lab.json";
 import { SERVER_HOST, SERVER_PORT } from "../../index";
-import { useLabOptions, useHandleOptionClick } from "./lab-context";
+import { useLabOptions, useOptionsUpdate } from "./lab-context";
 
 const Lab = ({ terminal }) => {
-  const selected_options = useLabOptions(); // LabOptionsContext that store the selected options state
-  const { handle_option_click, clear_selected_options } = useHandleOptionClick(); // HandleOptionClickContext that store the function to handle the dd option click
+  const { selectedOptions } = useLabOptions(); // LabOptionsContext that store the selected options state
+  const { update_options_handler, clear_selected_options } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
   const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
 
   const handle_run_click = async () => {
     // data to send in the request query
-    const env = selected_options[0];
-    const app = selected_options[1];
-    const proto = selected_options[2];
-    const suite = selected_options[3];
+    const env = selectedOptions[0];
+    const app = selectedOptions[1];
+    const proto = selectedOptions[2];
+    const suite = selectedOptions[3];
     // const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
     const command = `npm run ${proto}:${suite}`;
     console.log(`Run command: ${command}`);
@@ -57,7 +56,7 @@ const Lab = ({ terminal }) => {
     <div className="lab component">
       <div className="lab-title">THE LAB</div>
       <div className="lab-header">
-        {Object.entries(selected_options).map((entry, i) => {
+        {Object.entries(selectedOptions).map((entry, i) => {
           // header displaying the selected options
           return <h1 key={i}>{entry[1]}</h1>;
         })}
@@ -66,18 +65,18 @@ const Lab = ({ terminal }) => {
       <div className="lab-cards">
         {lab_cards.map((card, i) => {
           // iterate through the lab cards and render them with dropdown options
-          const card_name = card.name;
+          const card_name = card.key;
           let card_options;
 
           if (card_name === "suite") {
             // if the card is "suite", then the options are based on the previous selected option. "api", "ui", "fix" have different suite options
-            card_options = selected_options[i - 1]
-              ? card["options"][selected_options[i - 1]]
+            card_options = selectedOptions[i - 1]
+              ? card["options"][selectedOptions[i - 1]]
               : card.options;
           } else card_options = card.options;
 
-          const enabled = i === 0 || selected_options[i - 1]; // enable the card if the previous card has been selected
-          const selected = selected_options[i]; // check if the card has been selected
+          const enabled = i === 0 || selectedOptions[i - 1]; // enable the card if the previous card has been selected
+          const selected = selectedOptions[i]; // check if the card has been selected
 
           return (
             <div
@@ -94,7 +93,7 @@ const Lab = ({ terminal }) => {
                       <div
                         key={j}
                         className="option-name"
-                        onClick={() => handle_option_click(i, option)}
+                        onClick={() => update_options_handler(i, option)}
                       >
                         {option}
                       </div>
@@ -109,7 +108,7 @@ const Lab = ({ terminal }) => {
       <div>
         <button
           className={`button run-button ${
-            selected_options[2] !== "fix" && selected_options[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
+            selectedOptions[2] !== "fix" && selectedOptions[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
           }`}
           onClick={handle_run_click}
         >

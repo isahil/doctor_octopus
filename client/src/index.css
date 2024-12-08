@@ -102,8 +102,6 @@ body {
   scroll-behavior: smooth;
   margin-right: 50px;
   overflow: auto;
-  /* border: solid var(--border-thickness) var(--octopus-gray);
-  border-top: none; */
 }
 
 /* .tech-container { height: 20px;} */
@@ -133,6 +131,13 @@ body {
 }
 
 .button.enabled:hover {
-  border: solid white 2px;
+  border: solid white var(--border-thickness);
   text-decoration: none;
+}
+
+.button.disabled {
+  background: none;
+  border: solid var(--octopus-gray) var(--border-thickness);
+  color: gray;
+  cursor: not-allowed;
 }

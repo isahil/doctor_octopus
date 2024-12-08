@@ -276,7 +276,7 @@
     padding: 5px;
     border: 1px solid;
     border-radius: var(--border-radius);
-    color: #1abc9c;
+    color: black;
     text-align: center;
     font-weight: bold;
     background-color: rgb(236, 231, 231);
@@ -290,9 +290,6 @@
     margin-top: 15px;
 }
 
-.submit-button.disabled {
-    background: none;
-    border: solid red 0.25px;
-    color: white;
-    cursor: not-allowed;
+.submit-button.enabled:hover {
+    transform: scale(1.2);
 }

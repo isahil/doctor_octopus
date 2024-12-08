@@ -4,8 +4,8 @@ import "./cards.css";
 import { SERVER_HOST, SERVER_PORT } from "../../index";
 
 const Cards = ({ source }) => {
-  const [cards, set_cards] = React.useState([]);
-  const [is_loading, set_is_loading] = useState(true);
+  const [cards, setCards] = React.useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   /**
    * fetch cards data from the FASTAPI server. TODO: Implement the WebSocket subscription logic
@@ -17,11 +17,11 @@ const Cards = ({ source }) => {
       );
       const data = await response.json();
       console.log(`Total ${source} cards: ${data.length}`);
-      set_cards(data);
+      setCards(data);
     } catch (error) {
       console.error("Error fetching cards data:", error);
     } finally {
-      set_is_loading(false); // set loading to false after the fetch request completes
+      setIsLoading(false); // set loading to false after the fetch request completes
     }
   };
 
@@ -29,7 +29,7 @@ const Cards = ({ source }) => {
     get_cards();
   }, [source]); // fetch cards data when the source changes
 
-  if (is_loading) {
+  if (isLoading) {
     return (
       <div className="loading-screen">
         <p>Loading...</p>

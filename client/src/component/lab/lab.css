@@ -97,12 +97,6 @@
     margin-top: 20px;
 }
 
-.run-button.enabled {
-    background-color: green(5, 219, 5);
-}
-
-.run-button.disabled {
-    background-color: inherit;
-    cursor: not-allowed;
-    color: gray;
+.run-button.enabled:hover {
+    transform: scale(1.2);
 }

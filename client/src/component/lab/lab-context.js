@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import React from "react";
 
 const LabOptionsContext = React.createContext();
-const HandleOptionClickContext = React.createContext();
+const OptionsUpdateContext = React.createContext();
 
 /**
  * custom hooks for handling the lab options context/state
@@ -16,8 +16,8 @@ export const useLabOptions = () => {
  * custom hooks for handling the option click context/state
  * @returns {Object} context for handle_option_click - function to handle the dd option click
  */
-export const useHandleOptionClick = () => {
-  return useContext(HandleOptionClickContext);
+export const useOptionsUpdate = () => {
+  return useContext(OptionsUpdateContext);
 };
 
 /**
@@ -26,26 +26,28 @@ export const useHandleOptionClick = () => {
  * @returns 
  */
 const LabProvider = ({ children }) => {
-  const [selected_options, set_selected_options] = useState({}); // store the selected options
+  const [selectedOptions, setSelectedOptions] = useState({}); // store the selected options
+  const [currentOptionIndex, setCurrentOptionIndex] = useState(0); // store the selected option index for interactive move
 
-  const handle_option_click = (index, option) => {
+  const update_options_handler = (index, option) => {
     // update the option selected for the card so the next card can be enabled
     console.log(`Lab card #${index}: ${option}`);
-    set_selected_options((prev) => ({
+    setSelectedOptions((prev) => ({
       ...prev,
       [index]: option,
     }));
+    setCurrentOptionIndex(index);
   };
 
   const clear_selected_options = () => {
-    set_selected_options({});
+    setSelectedOptions({});
   };
 
   return (
-    <LabOptionsContext.Provider value={ selected_options }>
-      <HandleOptionClickContext.Provider value={{ handle_option_click, clear_selected_options }}>
+    <LabOptionsContext.Provider value={{ selectedOptions, currentOptionIndex }}>
+      <OptionsUpdateContext.Provider value={{ update_options_handler, clear_selected_options }}>
         { children }
-      </HandleOptionClickContext.Provider>
+      </OptionsUpdateContext.Provider>
     </LabOptionsContext.Provider>
   );
 };
