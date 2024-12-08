@@ -101,10 +101,6 @@
     background-color: green(5, 219, 5);
 }
 
-.run-button.enabled:hover {
-    background-color: #1abc9c;
-}
-
 .run-button.disabled {
     background-color: inherit;
     cursor: not-allowed;

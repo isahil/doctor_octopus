@@ -3,6 +3,7 @@ import "./fixme.css";
 import new_order_tags from "./data/new-order-tags.json";
 import cancel_order_tags from "./data/cancel-order-tags.json";
 import { socket_client } from "../../util/socket-client";
+import { useLabOptions } from "../lab/lab-context";
 
 const FixMe = ({ terminal }) => {
   /**
@@ -87,6 +88,11 @@ const FixMe = ({ terminal }) => {
   // for debugging purposes
   // useEffect(() => { console.log(JSON.stringify(order)) }, [order]);
 
+  const fix_options = useLabOptions();
+  console.log(`Selected options: ${JSON.stringify(fix_options)}`);
+  const fix_suite = fix_options[3];
+  console.log(`Selected fix suite: ${fix_suite}`);
+
   /**
    * display fix tags based on the fix-tags.json file values
    * if the values are string, it will display input field
@@ -155,7 +161,7 @@ const FixMe = ({ terminal }) => {
         <div>
           <button
             type="submit"
-            className="button submit-button"
+            className={`button submit-button ${fix_suite == "client" ? "enabled" : "disabled"}`}
             onClick={handle_submit}
           >
             Submit

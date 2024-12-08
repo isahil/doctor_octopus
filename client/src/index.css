@@ -114,7 +114,6 @@ body {
 }
 
 .button {
-  background: #13438a;
   background-image: -webkit-linear-gradient(top, #13438a, #13438a);
   background-image: -moz-linear-gradient(top, #13438a, #13438a);
   background-image: -ms-linear-gradient(top, #13438a, #13438a);
@@ -133,7 +132,7 @@ body {
   cursor: pointer;
 }
 
-.button:hover {
-  background-color: #1abc9c;
+.button.enabled:hover {
+  border: solid white 2px;
   text-decoration: none;
 }

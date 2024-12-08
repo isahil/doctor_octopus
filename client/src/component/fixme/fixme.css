@@ -289,3 +289,10 @@
 .submit-button {
     margin-top: 15px;
 }
+
+.submit-button.disabled {
+    background: none;
+    border: solid red 0.25px;
+    color: white;
+    cursor: not-allowed;
+}

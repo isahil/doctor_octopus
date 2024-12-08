@@ -109,7 +109,7 @@ const Lab = ({ terminal }) => {
       <div>
         <button
           className={`button run-button ${
-            selected_options[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
+            selected_options[2] !== "fix" && selected_options[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
           }`}
           onClick={handle_run_click}
         >
