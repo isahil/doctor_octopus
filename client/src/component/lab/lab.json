@@ -1,18 +1,22 @@
 [
   {
-    "name": "env",
+    "key": "env",
+    "description": "Test Environment to run the test suite in",
     "options": ["qa", "dev", "uat"]
   },
   {
-    "name": "app",
+    "key": "app",
+    "description": "Application to run the test suite for",
     "options": ["loan", "clo"]
   },
   {
-    "name": "proto",
+    "key": "proto",
+    "description": "Protocol to run the test suite with",
     "options": ["api", "ui", "fix"]
   },
   {
-    "name": "suite",
+    "key": "suite",
+    "description": "Test suite to run for the given protocol",
     "options": {
       "api": ["smoke", "regression", "sanity"],
       "ui": ["e2e", "regression"],

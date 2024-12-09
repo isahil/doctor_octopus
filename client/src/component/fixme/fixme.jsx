@@ -39,7 +39,7 @@ const FixMe = ({ terminal }) => {
 
   const [ orderType, setOrderType ] = useState("new"); // new or cancel
   const [ newOrder, setNewOrder ] = useState(draft_order);
-  const [ tag_checked, setTagChecked]  = useState(draft_checked);
+  const [ tagChecked, setTagChecked ]  = useState(draft_checked);
   const { selectedOptions } = useLabOptions();
 
   /**
@@ -143,7 +143,7 @@ const FixMe = ({ terminal }) => {
                             handle_radio_change(event, fix_tag)
                           }
                           checked={
-                            tag_checked[fix_tag][value] === true &&
+                            tagChecked[fix_tag][value] === true &&
                             newOrder[fix_tag] === value
                           }
                         />
@@ -159,7 +159,7 @@ const FixMe = ({ terminal }) => {
         <div>
           <button
             type="submit"
-            className={`button submit-button ${fix_suite == "client" ? "enabled" : "disabled"}`}
+            className={`button submit-button ${fix_suite === "client" ? "enabled" : "disabled"}`}
             onClick={handle_submit}
           >
             Submit
