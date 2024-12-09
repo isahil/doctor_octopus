@@ -40,6 +40,9 @@ export const command_handler = ({
       );
       terminal.write(`\r\n\x1B[1;3;36m options - ${JSON.stringify(current_options)}\x1B[0m\r`);
       break;
+    case input === "pwd":
+      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in Doctor Octopus' Home...Directory\x1B[0m\r");
+      break;
     case input === "logs":
       logs(input, terminal);
       break;

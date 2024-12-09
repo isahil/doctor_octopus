@@ -7,6 +7,10 @@
     justify-content: center; /* Center vertically */
 }
 
+.lab.component.enabled {
+    border: 1px solid cyan;
+}
+
 .lab-title {
     margin: 0px 0px 20px 0px;
     padding: 0;

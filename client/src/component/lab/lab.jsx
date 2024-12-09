@@ -6,11 +6,15 @@ const Lab = ({ terminal }) => {
   const { selectedOptions } = useLabOptions(); // LabOptionsContext that store the selected options state
   const { update_options_handler, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
   const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
-
-  // useEffect(() => {}, [])
+  const run_button_enabled =
+    selectedOptions[2] !== "fix" && selectedOptions[last_cards_index]; // enable the run button if the last card has been selected
 
   return (
-    <div className="lab component">
+    <div
+      className={`lab component ${
+        run_button_enabled ? "enabled" : "disabled" // enable the run button if the last card has been selected
+      }`}
+    >
       <div className="lab-title">THE LAB</div>
       <div className="lab-header">
         {Object.entries(selectedOptions).map((entry, i) => {
@@ -65,7 +69,7 @@ const Lab = ({ terminal }) => {
       <div>
         <button
           className={`button run-button ${
-            selectedOptions[2] !== "fix" && selectedOptions[last_cards_index] ? "enabled" : "disabled" // enable the run button if the last card has been selected
+            run_button_enabled ? "enabled" : "disabled" // enable the run button if the last card has been selected
           }`}
           onClick={() => handle_run_click(terminal)}
         >
