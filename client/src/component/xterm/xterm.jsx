@@ -1,21 +1,26 @@
-import { useEffect, useRef , useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import "./xterm.css";
-import command_handler from "./commands/handler.js";
+import { useOptionsUpdate } from "../lab/lab-context";
+import { command_handler } from "./commands/handler.js";
 
-const XTerm = ({ terminal, set_show_fix_me }) => {
+const XTerm = ({ terminal, setShowFixMe }) => {
   const terminalRef = useRef(null);
   const [num, setNum] = useState(1);
+  const { update_options_handler, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
 
   const xterm = () => {
     terminal.options.theme.foreground = `cyan`;
     terminal.options.cursorStyle = "underline";
     terminal.options.cursorBlink = true;
-    
+
     terminal.open(terminalRef.current);
-    terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive session\x1B[0m\r\n");
+    terminal.write(
+      "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive session\x1B[0m\r\n"
+    );
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
-    let input = "", cursor = 0;
+    let input = "",
+      cursor = 0;
     terminal.onData((data) => {
       const ascii_code = data.charCodeAt(0);
       // console.log(`input ASCII code: ${ascii_code}`);
@@ -38,7 +43,13 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
           break;
         case 13:
           // Enter
-          command_handler(input, terminal, set_show_fix_me);
+          command_handler({
+            terminal,
+            input,
+            setShowFixMe,
+            update_options_handler,
+            handle_run_click,
+          });
           terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
           input = "";
           cursor = 0;
@@ -74,8 +85,13 @@ const XTerm = ({ terminal, set_show_fix_me }) => {
   };
 
   return (
-    <div ref={terminalRef} id="terminal" onClick={incrementNum} className="component"></div>
-  )
+    <div
+      ref={terminalRef}
+      id="terminal"
+      onClick={incrementNum}
+      className="component"
+    ></div>
+  );
 };
 
 export default XTerm;

@@ -1,44 +1,70 @@
-import { socket_client } from "../../../util/socket-client.js";
 import { logs } from "./logs.js";
-import commands from "./commands.json";
+import LabSettings from "../../lab/lab.json";
+import { interactive_mode } from "./interactive.js";
 
-const command_handler = async (input, terminal, set_show_fix_me) => {
-  const command_exists = Object.keys(commands).includes(input);
-  const test_suites = Object.keys(commands.test.suites);
+let interactiveMode = false;
 
+export const command_handler = ({
+  terminal,
+  input,
+  setShowFixMe,
+  update_options_handler,
+  handle_run_click,
+}) => {
   switch (true) {
     case input === "test":
+      interactiveMode = true; // enable interactive mode
       terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can help you with the following commands:"
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for each command 'key' below in order.\x1B[0m\r"
       );
-      test_suites.forEach((suite) => {
-        terminal.write(`\r\n\x1B[1;3;37m  - ${suite}\x1B[0m\r`);
+
+      LabSettings.forEach((setting) => {
+        terminal.write(`\r\n\x1B[1;3;36m key - ${setting.key}\x1B[0m\r`);
+        terminal.write(`\r\n\x1B[1;3;32m - ${setting.description}\x1B[0m\r`);
+        terminal.write(
+          `\r\n\x1B[1;3;37m options - ${JSON.stringify(
+            setting.options
+          )}\x1B[0m\r`
+        );
       });
+      terminal.write(
+        `\r\n\x1B[1;3;36m ------------------------------------------ \x1B[0m\r`
+      );
+
+      // start with the first setting in the LabSettings array in interactive mode. the output will be passed to the interactive_mode function next time the user enters
+      const current_setting = LabSettings[0];
+      const current_key = current_setting.key;
+      const current_options = current_setting.options;
+      terminal.write(
+        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for [${current_key}]\x1B[0m\r`
+      );
+      terminal.write(`\r\n\x1B[1;3;36m options - ${JSON.stringify(current_options)}\x1B[0m\r`);
       break;
     case input === "logs":
-      await logs(input, terminal);
+      logs(input, terminal);
       break;
     case input === "clear":
       terminal.clear();
       break;
     case input === "fixme":
-      set_show_fix_me(true);
-      terminal.write("\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r");
-      break;
-    case command_exists:
-      const description = commands[input].description;
+      setShowFixMe(true);
       terminal.write(
-        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m ${description} \x1B[0m\r`
+        "\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r"
       );
-      await socket_client("suite", input, terminal); // Call the WebSocket server to trigger the test suite
       break;
     default:
-      terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can't help you with that.\x1B[0m\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Choose one from below.\x1B[0m\r"
-      );
-      terminal.write(`\r\n\x1B[1;3;30m      ${test_suites}\x1B[0m\r`);
+      console.log(`default :::: interactiveMode: ${interactiveMode}`);
+      if (interactiveMode)
+        interactive_mode({
+          terminal,
+          input,
+          update_options_handler,
+          handle_run_click,
+        });
+      else
+        terminal.write(
+          "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m I can't help you with that. Type 'test' for help.\x1B[0m\r"
+        );
       break;
   }
 };
-
-export default command_handler;

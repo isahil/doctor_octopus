@@ -37,9 +37,9 @@ const FixMe = ({ terminal }) => {
 
   const { draft_order, draft_checked } = draft(new_order_tags);
 
-  const [ orderType, setOrderType ] = useState("new"); // new or cancel
-  const [ newOrder, setNewOrder ] = useState(draft_order);
-  const [ tagChecked, setTagChecked ]  = useState(draft_checked);
+  const [orderType, setOrderType] = useState("new"); // new or cancel
+  const [newOrder, setNewOrder] = useState(draft_order);
+  const [tagChecked, setTagChecked] = useState(draft_checked);
   const { selectedOptions } = useLabOptions();
 
   /**
@@ -90,6 +90,7 @@ const FixMe = ({ terminal }) => {
   // useEffect(() => { console.log(JSON.stringify(order)) }, [order]);
 
   const fix_suite = selectedOptions[3];
+  const fixme_enabled = ["client", "dealer"].includes(fix_suite);
 
   /**
    * display fix tags based on the fix-tags.json file values
@@ -159,7 +160,9 @@ const FixMe = ({ terminal }) => {
         <div>
           <button
             type="submit"
-            className={`button submit-button ${fix_suite === "client" ? "enabled" : "disabled"}`}
+            className={`button submit-button ${
+              fix_suite === "client" ? "enabled" : "disabled"
+            }`}
             onClick={handle_submit}
           >
             Submit
@@ -192,7 +195,9 @@ const FixMe = ({ terminal }) => {
   };
 
   return (
-    <div className="fixme component">
+    <div
+      className={`fixme component ${fixme_enabled ? "enabled" : "disabled"}`}
+    >
       <div className="fixme-header">
         <div className="fixme-title">FIXME</div>
         <div className="order-type">
@@ -213,9 +218,7 @@ const FixMe = ({ terminal }) => {
         <div className="fix-tags">{display_fix_order(new_order_tags)}</div>
       )}
       {orderType === "cancel" && (
-        <div className="fix-tags">
-          {display_fix_order(cancel_order_tags)}
-        </div>
+        <div className="fix-tags">{display_fix_order(cancel_order_tags)}</div>
       )}
     </div>
   );
