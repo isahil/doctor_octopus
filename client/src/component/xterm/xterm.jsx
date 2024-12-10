@@ -6,7 +6,7 @@ import { command_handler } from "./commands/handler.js";
 const XTerm = ({ terminal, setShowFixMe }) => {
   const terminalRef = useRef(null);
   const [num, setNum] = useState(1);
-  const { update_options_handler, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
+  const { update_options_handler, clear_selected_options, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
 
   const xterm = () => {
     terminal.options.theme.foreground = `cyan`;
@@ -15,7 +15,7 @@ const XTerm = ({ terminal, setShowFixMe }) => {
 
     terminal.open(terminalRef.current);
     terminal.write(
-      "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive session\x1B[0m\r\n"
+      "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive mode.\x1B[0m\r\n"
     );
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
@@ -48,6 +48,7 @@ const XTerm = ({ terminal, setShowFixMe }) => {
             input,
             setShowFixMe,
             update_options_handler,
+            clear_selected_options,
             handle_run_click,
           });
           terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);

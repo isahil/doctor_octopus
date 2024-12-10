@@ -213,6 +213,7 @@ const FixMe = ({ terminal }) => {
             <span className="switch-right">O</span>
           </label>
         </div>
+        <span className={`order-type-label ${orderType === "new" ? "new" : "cancel"}`}>{orderType}</span>
       </div>
       {orderType === "new" && (
         <div className="fix-tags">{display_fix_order(new_order_tags)}</div>

@@ -2,27 +2,28 @@ import { logs } from "./logs.js";
 import LabSettings from "../../lab/lab.json";
 import { interactive_mode } from "./interactive.js";
 
-let interactiveMode = false;
+let interactive_mode_status = false;
 
 export const command_handler = ({
   terminal,
   input,
   setShowFixMe,
   update_options_handler,
+  clear_selected_options,
   handle_run_click,
 }) => {
   switch (true) {
     case input === "test":
-      interactiveMode = true; // enable interactive mode
+      interactive_mode_status = true; // enable interactive mode
       terminal.write(
-        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for each command 'key' below in order.\x1B[0m\r"
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for each command 'key' below in sequence.\x1B[0m\r"
       );
 
       LabSettings.forEach((setting) => {
-        terminal.write(`\r\n\x1B[1;3;36m key - ${setting.key}\x1B[0m\r`);
+        terminal.write(`\r\n\x1B[1;3;36m key = ${setting.key}\x1B[0m\r`);
         terminal.write(`\r\n\x1B[1;3;32m - ${setting.description}\x1B[0m\r`);
         terminal.write(
-          `\r\n\x1B[1;3;37m options - ${JSON.stringify(
+          `\r\n\x1B[1;3;37m options = ${JSON.stringify(
             setting.options
           )}\x1B[0m\r`
         );
@@ -36,12 +37,19 @@ export const command_handler = ({
       const current_key = current_setting.key;
       const current_options = current_setting.options;
       terminal.write(
-        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for [${current_key}]\x1B[0m\r`
+        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m enter a value for [${current_key}]\x1B[0m\r`
       );
-      terminal.write(`\r\n\x1B[1;3;36m options - ${JSON.stringify(current_options)}\x1B[0m\r`);
+      terminal.write(
+        `\r\n\x1B[1;3;36m options = ${JSON.stringify(current_options)}\x1B[0m\r`
+      );
       break;
     case input === "pwd":
-      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in Doctor Octopus' Home...Directory\x1B[0m\r");
+      terminal.write(
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m You are in Doctor Octopus' Home... Directory. \x1B[0m\r"
+      );
+      break;
+    case input === "ls":
+      terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;36m Los Santos? \x1B[0m\r");
       break;
     case input === "logs":
       logs(input, terminal);
@@ -55,9 +63,15 @@ export const command_handler = ({
         "\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r"
       );
       break;
+    case input === "exit":
+      interactive_mode_status = false; // disable interactive mode
+      terminal.write(
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m exiting interactive mode ta ta...\x1B[0m\r"
+      );
+      clear_selected_options();
+      break;
     default:
-      console.log(`default :::: interactiveMode: ${interactiveMode}`);
-      if (interactiveMode)
+      if (interactive_mode_status)
         interactive_mode({
           terminal,
           input,

@@ -16,14 +16,31 @@
 
 .fixme-header {
     margin-bottom: 30px;
+    height: 55px;
     border-bottom: gray 1px solid;
     padding: 0;
+    position: relative;
 }
 
 .fixme-title {
     margin: 0px 0px 20px 0px;
     padding: 0;
     color: #1abc9c;
+}
+
+.order-type-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+}
+
+.order-type-label.new {
+    color: #1abc9c;
+}
+
+.order-type-label.cancel{
+    color: #bd5757;
 }
 
 .order-type {
