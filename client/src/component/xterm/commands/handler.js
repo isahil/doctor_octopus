@@ -16,6 +16,9 @@ export const command_handler = ({
     case input === "test":
       interactive_mode_status = true; // enable interactive mode
       terminal.write(
+        "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m .......\x1B[0m\r"
+      );
+      terminal.write(
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Enter value for each command 'key' below in sequence.\x1B[0m\r"
       );
 
@@ -29,7 +32,7 @@ export const command_handler = ({
         );
       });
       terminal.write(
-        `\r\n\x1B[1;3;36m ------------------------------------------ \x1B[0m\r`
+        `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ON ] ------------------- \x1B[0m\r\n`
       );
 
       // start with the first setting in the LabSettings array in interactive mode. the output will be passed to the interactive_mode function next time the user enters
@@ -67,6 +70,9 @@ export const command_handler = ({
       interactive_mode_status = false; // disable interactive mode
       terminal.write(
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m exiting interactive mode ta ta...\x1B[0m\r"
+      );
+      terminal.write(
+        `\r\n ----------------- [ interactive mode: OFF ] ------------------- \r\n`
       );
       clear_selected_options();
       break;

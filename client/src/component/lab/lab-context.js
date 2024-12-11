@@ -67,7 +67,7 @@ const LabProvider = ({ children }) => {
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Server response below\r\n`
     );
     terminal.write(
-      `\r\n -------------------------------------------------------------------\r\n`
+      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ON ] ------------------- \x1B[0m\r\n`
     );
 
     // process the response data to remove leading whitespace from each line
@@ -76,7 +76,7 @@ const LabProvider = ({ children }) => {
       terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
-      `\r\n -------------------------------------------------------------------\r\n`
+      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ON ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
 
