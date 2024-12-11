@@ -81,7 +81,7 @@ const LabProvider = ({ children }) => {
       terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
-      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ${interactive} ] ------------------- \x1B[0m\r\n`
+      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ${interactive ? "ON" : "OFF"} ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
 
