@@ -47,7 +47,7 @@ const LabProvider = ({ children }) => {
     setSelectedOptions({});
   };
 
-  const handle_run_click = async ({ terminal }) => {
+  const handle_run_click = async ({ terminal, interactive = false }) => {
     // data to send in the request query
     const env = selectedOptions[0];
     const app = selectedOptions[1];
@@ -72,7 +72,7 @@ const LabProvider = ({ children }) => {
       `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Server response below\r\n`
     );
     terminal.write(
-      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ON ] ------------------- \x1B[0m\r\n`
+      `\r\n\x1B[1;3;36m -------------------------------------------------------------- \x1B[0m\r\n`
     );
 
     // process the response data to remove leading whitespace from each line
@@ -81,7 +81,7 @@ const LabProvider = ({ children }) => {
       terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
-      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ON ] ------------------- \x1B[0m\r\n`
+      `\r\n\x1B[1;3;36m ----------------- [ interactive mode: ${interactive} ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
 
