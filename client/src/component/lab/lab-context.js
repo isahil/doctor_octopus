@@ -29,20 +29,25 @@ export const useOptionsUpdate = () => {
 const LabProvider = ({ children }) => {
   const [selectedOptions, setSelectedOptions] = useState({}); // store the selected options
 
-  const update_options_handler = (index, option) => {
+  const update_options_handler = (option_index, option_value) => {
     // update the option selected for the card so the next card can be enabled
-    console.log(`Lab card #${index}: ${option}`);
-    setSelectedOptions((prev) => ({
-      ...prev,
-      [index]: option,
-    }));
+    console.log(`Lab card #${option_index}: ${option_value}`);
+    setSelectedOptions((prev_options) => {
+      let updated_options = {}, index = 0 // update/reset the selected options upto the current card index
+      while(index < option_index) {
+        updated_options[index] = prev_options[index]
+        index++
+      }
+      updated_options[option_index] = option_value;
+      return updated_options;
+    });
   };
 
   const clear_selected_options = () => {
     setSelectedOptions({});
   };
 
-  const handle_run_click = async (terminal) => {
+  const handle_run_click = async ({ terminal }) => {
     // data to send in the request query
     const env = selectedOptions[0];
     const app = selectedOptions[1];

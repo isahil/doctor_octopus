@@ -72,7 +72,7 @@ export const command_handler = ({
         "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m exiting interactive mode ta ta...\x1B[0m\r"
       );
       terminal.write(
-        `\r\n ----------------- [ interactive mode: OFF ] ------------------- \r\n`
+        `\r\n\x1B[1;3;31m  ----------------- [ interactive mode: OFF ] ------------------- \x1B[0m\r\n`
       );
       clear_selected_options();
       break;
