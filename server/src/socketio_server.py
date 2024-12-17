@@ -19,7 +19,7 @@ client_count = 0
 async def connect(sid, environ):
     global client_count
     client_count += 1
-    print(f"\tConnected to socket client... [{sid}] | Clients connected: {client_count}")
+    print(f"\tConnected to client... [{sid}] | Clients connected: {client_count}")
     await sio.emit('message', 'Hello from the FASTAPI W.S. server!', room=sid)
 
 @sio.on('disconnect')
