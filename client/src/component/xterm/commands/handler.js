@@ -62,6 +62,10 @@ export const command_handler = ({
       break;
     case input === "fixme":
       setShowFixMe(true);
+      update_options_handler(0, "qa")
+      update_options_handler(1, "loan")
+      update_options_handler(2, "fix")
+      update_options_handler(3, "client")
       terminal.write(
         "\r\x1B[1;3;32m Doc:\x1B[1;3;37m Starting FixMe App...\x1B[0m\r"
       );

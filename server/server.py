@@ -3,12 +3,12 @@ load_dotenv('.env') # Load environment variables from .env file
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.socket import socket_io
+from src.socketio_server import socketio_app
 from src.fastapi import router as fastapi_router
 
-app = FastAPI()
+fastapi_app = FastAPI()
 
-app.add_middleware(
+fastapi_app.add_middleware(
     CORSMiddleware,
     allow_origins='*',
     allow_credentials=True,
@@ -16,12 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(fastapi_router)
+fastapi_app.include_router(fastapi_router)
 
-app.mount("/ws/socket.io", socket_io)
+fastapi_app.mount("/ws/socket.io", socketio_app)
 
 if __name__ == "__main__":
-    uvicorn.run(socket_io, host="0.0.0.0", port=8000, lifespan="on", reload=True)
+    uvicorn.run(socketio_app, host="0.0.0.0", port=8000, lifespan="on", reload=True)
 
 # "author": "Imran Sahil"
 # "github": "https://github.com/isahil/doctor-octopus.git"

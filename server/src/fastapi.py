@@ -1,9 +1,9 @@
 import os
+import subprocess
 from fastapi import APIRouter, Query
 from fastapi.responses import HTMLResponse
 from src.component.local  import get_all_local_cards, get_a_local_card_html_report
 from src.component.remote import get_all_s3_cards, get_a_s3_card_html_report
-import subprocess
 
 router = APIRouter()
 local_dir = os.environ.get("LOCAL_DIRECTORY", "../../") # path to the local test results directory

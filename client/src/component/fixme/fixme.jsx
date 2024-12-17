@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./fixme.css";
 import new_order_tags from "./data/new-order-tags.json";
 import cancel_order_tags from "./data/cancel-order-tags.json";
-import { socket_client } from "../../util/socket-client";
+import { socketio_client } from "../../util/socketio-client";
 import { useLabOptions } from "../lab/lab-context";
 
 const FixMe = ({ terminal }) => {
@@ -80,7 +80,7 @@ const FixMe = ({ terminal }) => {
     terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
-    await socket_client("fixme", newOrder, terminal); // send the order to the w.socket server
+    await socketio_client("fixme", newOrder, terminal); // send the order to the w.socket server
 
     // clear the order state after submitting
     setNewOrder(draft_order);

@@ -53,8 +53,7 @@ const LabProvider = ({ children }) => {
     const app = selectedOptions[1];
     const proto = selectedOptions[2];
     const suite = selectedOptions[3];
-    // const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
-    const command = `npm run ${proto}:${suite}`;
+    const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
     console.log(`Run command: ${command}`);
 
     terminal.write(
@@ -84,8 +83,6 @@ const LabProvider = ({ children }) => {
       `\r\n\x1B[1;3;93m ----------------- [ ${interactive ? "interactive mode: ON" : ""} ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
-
-    console.log(`Command finished running!`);
   };
 
   return (
