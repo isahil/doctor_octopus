@@ -28,18 +28,9 @@ async def disconnect(sid):
     client_count -= 1
     print(f"\tDisconnected from socket client... [{sid}] | Clients connected: {client_count}")
 
-@sio.on('suite')
-async def suite(sid, suite_name):
-    print(f"\tClient sent request to run test suite: {suite_name}")
-    await sio.emit('suite', f"server received trigger request for: {suite_name}", room=sid)
-    await sio.emit('suite', f"{suite_name} test suite is running...", room=sid)
-    time.sleep(1)
-    await sio.emit('suite', f"{suite_name} test suite passed!", room=sid)
-
 @sio.on('fixme')
 async def fixme(sid, order_data):
     print(f"\tW.Socket client sent fix order: {order_data}")
     # add steps to process/send order to the fix client
     # return order_data
     await fix_client.connect(sid, order_data)
-    # await sio.emit('fixme', f"Server received fixme order: {order_data}", room=sid)

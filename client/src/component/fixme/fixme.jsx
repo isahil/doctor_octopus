@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./fixme.css";
 import new_order_tags from "./data/new-order-tags.json";
 import cancel_order_tags from "./data/cancel-order-tags.json";
-import { socketio_client } from "../../util/socketio-client";
+import { useSocketIO } from "../../util/socketio-context";
 import { useLabOptions } from "../lab/lab-context";
 
 const FixMe = ({ terminal }) => {
@@ -41,6 +41,7 @@ const FixMe = ({ terminal }) => {
   const [newOrder, setNewOrder] = useState(draft_order);
   const [tagChecked, setTagChecked] = useState(draft_checked);
   const { selectedOptions } = useLabOptions();
+  const { sio } = useSocketIO()
 
   /**
    * handle radio button change event for fix tag with an array of values
@@ -74,13 +75,15 @@ const FixMe = ({ terminal }) => {
   const handle_submit = async (event) => {
     event.preventDefault();
 
-    // const time = new Date().getTime(); // let server side set the time?
-    // new_order["60"] = time; // set the transaction time for the fix order
-
     terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
-    await socketio_client("fixme", newOrder, terminal); // send the order to the w.socket server
+    sio.emit("fixme", newOrder) // send the order to the w.socket server
+
+    sio.on("fixme", (data) => {
+      console.log("W.Socket server: ", data);
+      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: \r\n`);
+    });
 
     // clear the order state after submitting
     setNewOrder(draft_order);
