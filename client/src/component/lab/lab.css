@@ -46,11 +46,11 @@
 }
 
 .lab-card-button.enabled:hover {
-    background: cyan;
+    background: #1abc9c;
 }
 
 .lab-card-button.selected {
-    background: rgba(0, 255, 255, 0.862);
+    background: #1abc9c;
 }
 
 .lab-card-button h2 {

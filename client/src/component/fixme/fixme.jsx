@@ -73,16 +73,15 @@ const FixMe = ({ terminal }) => {
   };
 
   const handle_submit = async (event) => {
-    event.preventDefault();
+    terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Submitting order: ${JSON.stringify(newOrder)}\r\n`);
 
-    terminal.write(`Submitting order: ${JSON.stringify(newOrder)}\r\n`);
-    terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
+    event.preventDefault();
 
     sio.emit("fixme", newOrder) // send the order to the w.socket server
 
     sio.on("fixme", (data) => {
       console.log("W.Socket server: ", data);
-      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: \r\n`);
+      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: ${data} \r\n`);
     });
 
     // clear the order state after submitting
@@ -166,7 +165,7 @@ const FixMe = ({ terminal }) => {
             className={`button submit-button ${
               fix_suite === "client" ? "enabled" : "disabled"
             }`}
-            onClick={handle_submit}
+            onClick={(event) => handle_submit(event)}
           >
             Submit
           </button>
