@@ -1,4 +1,3 @@
-import { logs } from "./logs.js";
 import LabSettings from "../../lab/lab.json";
 import { interactive_mode } from "./interactive.js";
 
@@ -53,9 +52,6 @@ export const command_handler = ({
       break;
     case input === "ls":
       terminal.write("\r\n\x1B[1;3;32m Doc:\x1B[1;3;36m Los Santos? \x1B[0m\r");
-      break;
-    case input === "logs":
-      logs(input, terminal);
       break;
     case input === "clear":
       terminal.clear();

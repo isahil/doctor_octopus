@@ -27,7 +27,7 @@ class FixClient():
             message = f"Message : {timeout}"
             if broadcast is True:
                 print(f"Broadcasting: {message}")
-                await self.sio.emit('fixme', message)
+                await self.sio.emit('fixme-client', message)
             timeout -= 1
             time.sleep(1)
 

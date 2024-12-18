@@ -15,9 +15,10 @@ const Lab = () => {
     selectedOptions[2] !== "fix" && selectedOptions[last_cards_index]; // enable the run button if the last card has been selected
 
   if (selectedOptions[2] === "fix" && selectedOptions[3]) {
+    // if the selected option is "fix" and the last card has been selected, then enable the websocket listener
     console.log(`FixMe w.s. listener enabled`);
-    sio.on("fixme", (data) => {
-      // console.log("w.s. server: ", data);
+    sio.on("fixme-client", (data) => {
+      console.log("w.s. server: ", data);
       terminal.write(
         `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m ${data} \r\n`
       );

@@ -10,6 +10,7 @@ origins = [
 sio = socketio.AsyncServer(cors_allowed_origins=origins,async_mode='asgi')
 socketio_app = socketio.ASGIApp(sio, socketio_path="/ws/socket.io")
 fix_client = FixClient(env="qa", app="fix", fix_side="client", timeout=30, broadcast=True, sio=sio)
+fix_dealer = FixClient(env="qa", app="fix", fix_side="dealer", timeout=30, broadcast=True, sio=sio)
 
 __all__ = ["socketio_app", "sio", "fix_client"]
 
@@ -28,9 +29,14 @@ async def disconnect(sid):
     client_count -= 1
     print(f"\tDisconnected from socket client... [{sid}] | Clients connected: {client_count}")
 
-@sio.on('fixme')
-async def fixme(sid, order_data):
+@sio.on('fixme-client')
+async def fixme_client(sid, order_data):
     print(f"\tW.Socket client sent fix order: {order_data}")
-    # add steps to process/send order to the fix client
-    # return order_data
+    # add steps to process/send order to the fix client session
     await fix_client.connect(sid, order_data)
+
+@sio.on('fixme-dealer')
+async def fixme_dealer(sid, axe_data):
+    print(f"\tW.Socket client sent fix axe upload: {axe_data}")
+    # add steps to process/send axe to the fix dealer session
+    await fix_dealer.connect(sid, axe_data)
