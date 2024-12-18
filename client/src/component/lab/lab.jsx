@@ -1,14 +1,28 @@
 import "./lab.css";
 import lab_cards from "./lab.json";
 import { useLabOptions, useOptionsUpdate } from "./lab-context";
+import { useSocketIO } from "../../util/socketio-context";
+import { useTerminal } from "../xterm/terminal-context";
 
 const Lab = () => {
   const { selectedOptions } = useLabOptions(); // LabOptionsContext that store the selected options state
   const { update_options_handler, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
-  
+  const { sio } = useSocketIO();
+  const { terminal } = useTerminal();
+
   const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
   const run_button_enabled =
     selectedOptions[2] !== "fix" && selectedOptions[last_cards_index]; // enable the run button if the last card has been selected
+
+  if (selectedOptions[2] === "fix" && selectedOptions[3]) {
+    console.log(`FixMe w.s. listener enabled`);
+    sio.on("fixme", (data) => {
+      // console.log("w.s. server: ", data);
+      terminal.write(
+        `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m ${data} \r\n`
+      );
+    });
+  }
 
   return (
     <div

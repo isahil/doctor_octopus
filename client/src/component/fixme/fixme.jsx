@@ -75,17 +75,10 @@ const FixMe = () => {
   };
 
   const handle_submit = async (event) => {
+    event.preventDefault();
     terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Submitting order: ${JSON.stringify(newOrder)}\r\n`);
 
-    event.preventDefault();
-
-    sio.emit("fixme", newOrder) // send the order to the w.socket server
-
-    sio.on("fixme", (data) => {
-      console.log("W.Socket server: ", data);
-      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S: ${data} \r\n`);
-    });
-
+    sio.emit("fixme", newOrder) // send the order to the w.s. server
     // clear the order state after submitting
     setNewOrder(draft_order);
   };
