@@ -4,8 +4,10 @@ import new_order_tags from "./data/new-order-tags.json";
 import cancel_order_tags from "./data/cancel-order-tags.json";
 import { useSocketIO } from "../../util/socketio-context";
 import { useLabOptions } from "../lab/lab-context";
+import { useTerminal } from "../xterm/terminal-context";
 
-const FixMe = ({ terminal }) => {
+const FixMe = () => {
+  const { terminal } = useTerminal();
   /**
    * create a draft order on page load with default values
    * @returns draft order object with keys and values
@@ -81,7 +83,7 @@ const FixMe = ({ terminal }) => {
 
     sio.on("fixme", (data) => {
       console.log("W.Socket server: ", data);
-      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: ${data} \r\n`);
+      terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S: ${data} \r\n`);
     });
 
     // clear the order state after submitting

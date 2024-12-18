@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Terminal } from "@xterm/xterm";
 import Cards from "./component/card/cards";
 import XTerm from "./component/xterm/xterm";
 import FixMe from "./component/fixme/fixme";
@@ -9,8 +8,6 @@ import Footer from "./component/footer/footer.jsx";
 function App() {
   const [source, set_source] = useState("local");
   const [showFixMe, setShowFixMe ] = useState(false);
-
-  const terminal = new Terminal();
 
   const toggle_source = () => {
     set_source((current_source) => {
@@ -39,11 +36,11 @@ function App() {
           <Cards source={source} />
         </div>
         <div className="tech-container">
-          <XTerm terminal={terminal} setShowFixMe={setShowFixMe} />
-          <Lab terminal={terminal} />
+          <XTerm setShowFixMe={setShowFixMe} />
+          <Lab />
           {/* showFixMe && <FixMe /> */}{" "}
           {/* Display the FixMe component when showFixMe is true */}
-          <FixMe terminal={terminal} />
+          <FixMe />
         </div>
       </div>
       <div className="app-footer">

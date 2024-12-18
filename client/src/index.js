@@ -6,6 +6,7 @@ import "./index.css";
 import config from "./index.json";
 import LabProvider from "./component/lab/lab-context";
 import SocketIOProvider from "./util/socketio-context";
+import TerminalProvider from "./component/xterm/terminal-context.js";
 
 export const { SERVER_HOST, SERVER_PORT } = config;
 console.log(`Server host: ${SERVER_HOST} | Server port: ${SERVER_PORT}`);
@@ -17,9 +18,11 @@ root.render(
   <>
     <div className="body">
       <SocketIOProvider>
-        <LabProvider>
-          <App />
-        </LabProvider>
+        <TerminalProvider>
+          <LabProvider>
+            <App />
+          </LabProvider>
+        </TerminalProvider>
       </SocketIOProvider>
     </div>
   </>

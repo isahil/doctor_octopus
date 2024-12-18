@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import React from "react";
 import { SERVER_HOST, SERVER_PORT } from "../../index";
+import { useTerminal } from "../xterm/terminal-context";
+import { useSocketIO } from "../../util/socketio-context";
 
 const LabOptionsContext = React.createContext();
 const OptionsUpdateContext = React.createContext();
@@ -28,26 +30,37 @@ export const useOptionsUpdate = () => {
  */
 const LabProvider = ({ children }) => {
   const [selectedOptions, setSelectedOptions] = useState({}); // store the selected options
+  const { terminal } = useTerminal();
+  // const { sio } = useSocketIO();
 
   const update_options_handler = (option_index, option_value) => {
     // update the option selected for the card so the next card can be enabled
     console.log(`Lab card #${option_index}: ${option_value}`);
     setSelectedOptions((prev_options) => {
-      let updated_options = {}, index = 0 // update/reset the selected options upto the current card index
-      while(index < option_index) {
-        updated_options[index] = prev_options[index]
-        index++
+      let updated_options = {},
+        index = 0; // update/reset the selected options upto the current card index
+      while (index < option_index) {
+        updated_options[index] = prev_options[index];
+        index++;
       }
       updated_options[option_index] = option_value;
       return updated_options;
     });
+
+    // if(selectedOptions[2] === "fix" && selectedOptions[3]) {
+    //   console.log("FixMe selected");
+    //   sio.on("fixme", (data) => {
+    //     console.log("W.Socket server: ", data);
+    //     terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: ${data} \r\n`);
+    //   });
+    // }
   };
 
   const clear_selected_options = () => {
     setSelectedOptions({});
   };
 
-  const handle_run_click = async ({ terminal, interactive = false }) => {
+  const handle_run_click = async ({ interactive = false }) => {
     // data to send in the request query
     const env = selectedOptions[0];
     const app = selectedOptions[1];
@@ -80,7 +93,9 @@ const LabProvider = ({ children }) => {
       terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
-      `\r\n\x1B[1;3;93m ----------------- [ ${interactive ? "interactive mode: ON" : ""} ] ------------------- \x1B[0m\r\n`
+      `\r\n\x1B[1;3;93m ----------------- [ ${
+        interactive ? "interactive mode: ON" : ""
+      } ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
   };

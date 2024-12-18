@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { Terminal } from "@xterm/xterm";
 import "./xterm.css";
 import { useOptionsUpdate } from "../lab/lab-context";
 import { command_handler } from "./commands/handler.js";
+import { useTerminal } from "./terminal-context.js";
 
-const XTerm = ({ terminal, setShowFixMe }) => {
+const XTerm = ({ setShowFixMe }) => {
   const terminalRef = useRef(null);
   const [num, setNum] = useState(1);
   const { update_options_handler, clear_selected_options, handle_run_click } = useOptionsUpdate(); // HandleOptionClickContext that store the function to handle the dd option click
-
-  const xterm = () => {
+  const { setTerminal } = useTerminal(); // TerminalContext that store the terminal object
+  
+  const xterm = (terminal) => {
     terminal.options.theme.foreground = `cyan`;
     terminal.options.cursorStyle = "underline";
     terminal.options.cursorBlink = true;
@@ -77,8 +80,11 @@ const XTerm = ({ terminal, setShowFixMe }) => {
   };
 
   useEffect(() => {
-    xterm();
-  }, []);
+    const terminal = new Terminal();
+    setTerminal(terminal);
+
+    xterm(terminal);
+  }, [setTerminal]);
 
   const incrementNum = () => {
     setNum(num + 1);
