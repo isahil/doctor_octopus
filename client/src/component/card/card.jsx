@@ -4,10 +4,12 @@ import { SERVER_HOST, SERVER_PORT } from "../../index";
 
 function Card({ source, card, index }) {
   const { json_report, html_report } = card;
-  const { stats, config } = json_report;
+  const { stats, suites } = json_report;
   // console.log(`Stats: ${JSON.stringify(stats)} \n${html_report.length === 0 ? "No HTML Report" : "Yes HTML Report"}`);
   const { expected, flaky, skipped, unexpected, startTime } = stats; // scoreboard values to display
-  const project_name = config.projects[0].id; // get the project name for the card title
+  const project_name = suites[0].specs[0] // check if the suite is a spec or a suite. TODO: Need to figure out the logic
+    ? suites[0].specs[0].tests[0].projectId
+    : suites[0].suites[0].specs[0].tests[0].projectId; // get the project name for the card title
   const total_tests = expected + flaky + unexpected;
 
   const date = new Date(startTime); // convert startTime to a Date object
@@ -59,7 +61,7 @@ function Card({ source, card, index }) {
           </div>
           <div
             className="score-board skipped"
-            style={{ color: skipped > 0 ? "yellow" : "inherit" }}
+            style={{ color: skipped > 0 ? "orange" : "inherit" }}
           >
             Skipped
             <span className="score"> {skipped} </span>

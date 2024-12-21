@@ -13,16 +13,19 @@ const Lab = () => {
   const last_cards_index = lab_cards.length - 1; // index of the last card is used to enable the "Run" button
   const run_button_enabled =
     selectedOptions[2] !== "fix" && selectedOptions[last_cards_index]; // enable the run button if the last card has been selected
+  const proto = selectedOptions[2]
+  const suite = selectedOptions[3]
 
-  if (selectedOptions[2] === "fix" && selectedOptions[3]) {
-    // if the selected option is "fix" and the last card has been selected, then enable the websocket listener
-    console.log(`FixMe w.s. listener enabled`);
-    sio.on("fixme-client", (data) => {
+  if (proto === "fix" && suite) {
+    // if the selected option is "fix" and the last card has been selected, then enable the websocket listener for the respective fixme session.
+    const subscription = `fixme-${suite}`;
+    sio.on(subscription, (data) => {
       console.log("w.s. server: ", data);
       terminal.write(
         `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m ${data} \r\n`
       );
     });
+    console.log(`${subscription} w.s. listener enabled`);
   }
 
   return (

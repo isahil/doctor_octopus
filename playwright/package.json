@@ -9,7 +9,12 @@
   },
   "scripts": {
     "test": "node run.js",
-    "api:smoke": "npm test"
+    "api:smoke": "npm test api:smoke",
+    "api:sanity": "npm test api:sanity",
+    "api:regression": "npm test api:regression",
+    "ui:smoke": "npm test ui:smoke",
+    "ui:sanity": "npm test ui:sanity",
+    "ui:regression": "npm test ui:regression"
   },
   "author": "Imran Sahil",
   "license": "ISC",

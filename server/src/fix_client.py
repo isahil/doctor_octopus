@@ -14,7 +14,7 @@ class FixClient():
         self.broadcast = kwargs.get('broadcast', False)
         self.sio = kwargs.get('sio', None)
     
-    async def connect(self, sid, order_data):
+    async def connect(self):
         env = self.env
         app = self.app
         fix_side = self.fix_side
@@ -30,5 +30,10 @@ class FixClient():
                 await self.sio.emit('fixme-client', message)
             timeout -= 1
             time.sleep(1)
+    
+    async def submit_order(self, order_data):
+        print(f"submitting order: {order_data}")
+        await self.sio.emit('fixme-client', order_data)
+        return order_data
 
 __name__ == "__main__" and FixClient(env="dev", app="fix", fix_side="dealer", timeout=10)

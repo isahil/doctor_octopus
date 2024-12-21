@@ -1,7 +1,6 @@
 echo "Setting up the root project directory..."
 npm install
 echo "Root project directory set up finished!"
-
 echo "Setting up the server..."
 cd server
 

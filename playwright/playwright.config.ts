@@ -15,12 +15,37 @@ const config: PlaywrightTestConfig = {
   reporter: [
     ['list'],
     ['html', { outputFolder: TEST_REPORTS_DIR, open: "never" } ],
-    ['json', { outputFile: `${TEST_REPORTS_DIR}report_card.json` }],
+    ['json', { outputFile: `${TEST_REPORTS_DIR}/report.json` }],
   ],
   projects: [
     {
+      name: 'api:smoke',
+      testMatch: 'test.spec.ts',
+      use: { browserName: 'chromium'}
+    },
+    {
+      name: 'api:sanity',
+      testMatch: 'test.spec.ts',
+      use: { browserName: 'chromium'}
+    },
+    {
+      name: 'api:regression',
+      testMatch: 'test.spec.ts',
+      use: { browserName: 'chromium'}
+    },
+    {
+      name: 'ui:smoke',
+      testMatch: 'test.spec.ts',
+      use: { browserName: 'chromium'}
+    },
+    {
+      name: 'ui:sanity',
+      testMatch: 'test.spec.ts',
+      use: { browserName: 'chromium'}
+    },
+    {
       name: 'ui:regression',
-      testMatch: 'google.spec.ts',
+      testMatch: 'test.spec.ts',
       use: { browserName: 'chromium'}
     }
   ]

@@ -1,4 +1,3 @@
-import time
 from dotenv import load_dotenv
 load_dotenv('.env')
 import json
@@ -24,7 +23,7 @@ def get_all_local_cards():
 
     for folder in local_reports_dir:
         folder_path = os.path.join(local_test_reports_dir, folder)
-        report_card = {"json_report": {}, "html_report": ""} # initialize report card with 2 properties needed for the client
+        report_card = {"json_report": {}, "html_report": ""} # initialize report card with 2 properties needed for the frontend
 
         if os.path.isdir(folder_path):
             for file in os.listdir(folder_path):
@@ -39,5 +38,5 @@ def get_all_local_cards():
 
                 # time.sleep(0.1) # simulate slow connection
         test_results.append(report_card)
-
-    return test_results
+    sorted_test_results = sorted(test_results, key=lambda x: x["json_report"]["stats"]["startTime"], reverse=True)
+    return sorted_test_results

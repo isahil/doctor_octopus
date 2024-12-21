@@ -4,6 +4,7 @@ import "./xterm.css";
 import { useOptionsUpdate } from "../lab/lab-context";
 import { command_handler } from "./commands/handler.js";
 import { useTerminal } from "./terminal-context.js";
+import { FitAddon } from '@xterm/addon-fit';
 
 const XTerm = ({ setShowFixMe }) => {
   const terminalRef = useRef(null);
@@ -16,9 +17,13 @@ const XTerm = ({ setShowFixMe }) => {
     terminal.options.cursorStyle = "underline";
     terminal.options.cursorBlink = true;
 
+    const fitAddon = new FitAddon(); // FitAddon to fit the terminal to the container
+    terminal.loadAddon(fitAddon);
     terminal.open(terminalRef.current);
+    fitAddon.fit();
+
     terminal.write(
-      "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the interactive mode.\x1B[0m\r\n"
+      "\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Hi, I'm\x1B[1;3;32m Doctor Octopus\x1B[1;3;37m. Type 'test' to start the Interactive Mode.\x1B[0m\r\n"
     );
     terminal.write(`\x1B[1;3;31m You\x1B[0m $ `);
 
@@ -81,6 +86,9 @@ const XTerm = ({ setShowFixMe }) => {
 
   useEffect(() => {
     const terminal = new Terminal();
+    const fitAddon = new FitAddon();
+    terminal.loadAddon(fitAddon);
+    fitAddon.fit();
     setTerminal(terminal);
 
     xterm(terminal);

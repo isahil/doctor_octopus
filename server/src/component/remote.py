@@ -1,8 +1,6 @@
-from dotenv import load_dotenv
-load_dotenv('.env')
 import json
 import os
-from src.util.s3_client import S3
+from src.util.s3 import S3
 
 def get_a_s3_card_html_report(html):
     card = S3.get_a_s3_object(html)

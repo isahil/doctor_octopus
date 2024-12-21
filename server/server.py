@@ -1,9 +1,10 @@
+# This is the entry point of the server application
 from dotenv import load_dotenv
-load_dotenv('.env') # Load environment variables from .env file
+load_dotenv('.env') # load environment variables from .env file
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.socketio_server import socketio_app
+from src.socketio import socketio_app
 from src.fastapi import router as fastapi_router
 
 fastapi_app = FastAPI()

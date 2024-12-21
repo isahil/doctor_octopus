@@ -31,7 +31,7 @@ export const useOptionsUpdate = () => {
 const LabProvider = ({ children }) => {
   const [selectedOptions, setSelectedOptions] = useState({}); // store the selected options
   const { terminal } = useTerminal();
-  // const { sio } = useSocketIO();
+  const { sio } = useSocketIO();
 
   const update_options_handler = (option_index, option_value) => {
     // update the option selected for the card so the next card can be enabled
@@ -47,36 +47,38 @@ const LabProvider = ({ children }) => {
       return updated_options;
     });
 
-    // if(selectedOptions[2] === "fix" && selectedOptions[3]) {
-    //   console.log("FixMe selected");
-    //   sio.on("fixme", (data) => {
-    //     console.log("W.Socket server: ", data);
-    //     terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: ${data} \r\n`);
-    //   });
-    // }
+    if(selectedOptions[2] === "fix" && selectedOptions[3]) {
+      console.log("FixMe selected");
+      sio.on("fixme", (data) => {
+        console.log("W.Socket server: ", data);
+        terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m W.S. Server: ${data} \r\n`);
+      });
+    }
   };
 
   const clear_selected_options = () => {
     setSelectedOptions({});
   };
 
-  const handle_run_click = async ({ interactive = false }) => {
+  const handle_run_click = async (interactive = false) => {
     // data to send in the request query
     const env = selectedOptions[0];
     const app = selectedOptions[1];
     const proto = selectedOptions[2];
     const suite = selectedOptions[3];
-    const command = `ENVIRONMENT=${env} PRODUCT=${app} npm run ${proto}:${suite}`;
-    console.log(`Run command: ${command}`);
+    const command = { environment: env, app: app, proto: proto, suite: suite };
+    console.log(`Run command: ${JSON.stringify(command)}`);
 
     terminal.write(
-      `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Sending command to the server: '${command}'\r\n`
+      `\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m Executing command on the server ⫷⫷⫷⫷⫷  ${JSON.stringify(command)}  ⫸⫸⫸⫸⫸\r\n`
     );
+
+    terminal.write(`\r\n\x1B[1;3;32m Doc:\x1B[1;3;37m   ▁▁▂▃▄▅▆▇██▇▆▅▄▃▂▁▁   \r\n`)
 
     clear_selected_options();
 
     const response = await fetch(
-      `http://${SERVER_HOST}:${SERVER_PORT}/run-command?command=${command}`
+      `http://${SERVER_HOST}:${SERVER_PORT}/run-command?command=${JSON.stringify(command)}`
     );
     const data = await response.json();
 
@@ -93,8 +95,8 @@ const LabProvider = ({ children }) => {
       terminal.write(`\r\n ${line}\r\n`);
     });
     terminal.write(
-      `\r\n\x1B[1;3;93m ----------------- [ ${
-        interactive ? "interactive mode: ON" : ""
+      `\r\n\x1B[1;3;93m ----------------- [ Interactive Mode: ${
+        interactive ? "ON" : "OFF"
       } ] ------------------- \x1B[0m\r\n`
     );
     terminal.write(`\r\n\x1B[1;3;31m You\x1B[0m $ `);
